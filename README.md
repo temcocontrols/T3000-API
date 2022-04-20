@@ -1,4 +1,4 @@
-# T3000_API
+# T3000 API
 T3000 API, online storage of building dbs and hvac applications
 This is the API for interacting with the database. 
 
