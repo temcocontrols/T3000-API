@@ -1,11 +1,11 @@
-# T3000OnlineDatabase_API
-T3000 database, online storage of building dbs and hvac applications
+# T3000_API
+T3000 API, online storage of building dbs and hvac applications
 This is the API for interacting with the database. 
 
 For the full deocumentation check [the web documentation](https://temcocontrols-app-lib-docs.netlify.app)
 ## Architecture Overview
 
-The backend server exposes the GraphQL API. The API is written in TypeScript and does not have a user interface of its own. It maintains its state in a PostgreSQL database using Prisma ORM.
+The backend server exposes the GraphQL API. The API is written in TypeScript. It maintains its state in a PostgreSQL database using Prisma ORM.
 
 
 ## GraphQL
