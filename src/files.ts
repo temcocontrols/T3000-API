@@ -13,7 +13,7 @@ module.exports = function (fastify, opts, done) {
   fastify.post('/file', async (req, reply) => {
     // before_upload_checks
     const user = await getUserFromRequest(req, reply)
-    
+
     if (user.role !== 'ADMIN')
       throw reply.code(401).type('text/plain').send('permission denied!')
     // upload_permission_check_end
@@ -21,11 +21,9 @@ module.exports = function (fastify, opts, done) {
     const data = await req.file()
     if (!data || !data.file) throw new Error('No file to upload')
     const fileName = data.fields?.name?.value || data.filename
-    const filePath = req.query?.path
-      ? `${req.query.path}`
-      : ''
+    const filePath = req.query?.path ? `${req.query.path}` : ''
 
-      const uploadPath = "public/"+filePath
+    const uploadPath = 'public/' + filePath
     const uniqueFileName = await uniqueFilePath(uploadPath, fileName)
     let fileMeta
     if (Object.keys(data.fields).length > 4) {
@@ -43,14 +41,17 @@ module.exports = function (fastify, opts, done) {
     }
     try {
       if (!fs.existsSync(uploadPath)) {
-        fs.mkdirSync(uploadPath, {recursive: true})
+        fs.mkdirSync(uploadPath, { recursive: true })
       }
-      await pump(data.file, fs.createWriteStream(uploadPath+'/'+uniqueFileName))
+      await pump(
+        data.file,
+        fs.createWriteStream(uploadPath + '/' + uniqueFileName),
+      )
       return prisma.file.create({
         data: {
           name: fileName,
           mimeType: data.mimetype,
-          path: filePath+'/'+uniqueFileName,
+          path: filePath + '/' + uniqueFileName,
           size: data.file?.bytesRead || null,
           meta: fileMeta,
         },
@@ -64,39 +65,39 @@ module.exports = function (fastify, opts, done) {
   fastify.get('/file/*', async (req, reply) => {
     if (!req.params['*'])
       throw reply.code(404).type('text/plain').send('Not found!')
-    const pathParsed = path.parse(req.params['*'])
-    if (
-      (req.query?.w || req.query?.h) &&
-      [
-        '.png',
-        '.jpg',
-        '.jpeg',
-        '.gif',
-        '.bmp',
-        '.svg',
-        '.webp',
-        '.tif',
-        '.tiff',
-      ].includes(pathParsed?.ext.toLowerCase())
-    ) {
-      const object = await getImageSize(req, reply)
-      reply.type('image/'+pathParsed?.ext.toLowerCase())
-      return reply.send(object?.Body)
+    const pathParsed = path.parse('public/' + req.params['*'])
+    const isImage = [
+      '.png',
+      '.jpg',
+      '.jpeg',
+      '.gif',
+      '.bmp',
+      '.svg',
+      '.webp',
+      '.tif',
+      '.tiff',
+    ].includes(pathParsed?.ext.toLowerCase())
+
+    if ((req.query?.w || req.query?.h) && isImage) {
+      const stream = await getImageSize(req, reply)
+      reply.type('image/' + pathParsed?.ext.toLowerCase().substring(1))
+      return reply.send(stream)
     }
     let stream
     if (fs.existsSync(req.params['*'])) {
-      stream = fs.createReadStream(req.params['*']);
+      stream = fs.createReadStream(req.params['*'])
     }
-    
+
     /* reply.type(stream.ContentType)
     reply.headers({
       'Content-Length': stream.ContentLength,
       'Content-Encoding': stream.ContentEncoding,
     }) */
     // reply.type('image/png')
-    reply.type('image/'+pathParsed?.ext.toLowerCase().substring(1))
+    if (isImage) {
+      reply.type('image/' + pathParsed?.ext.toLowerCase().substring(1))
+    }
     reply.send(stream)
-    
   })
   done()
 }
@@ -109,7 +110,7 @@ async function getImageSize(req, reply) {
     ['cover', 'contain', 'fill', 'inside', 'outside'].includes(req.query?.fit)
       ? req.query?.fit
       : null
-  let filePath = `thumbnails/${req.params['*']}`
+  let filePath = `public/thumbnails/${req.params['*']}`
   if (width || height) {
     const thumbName =
       (width ? `w-${width}` : '') +
@@ -119,66 +120,22 @@ async function getImageSize(req, reply) {
   }
   let stream
   if (fs.existsSync(filePath)) {
-    stream = fs.createReadStream(filePath);
+    stream = fs.createReadStream(filePath)
   } else {
-    if (fs.existsSync(req.params['*'])) {
-      stream = fs.createReadStream(req.params['*']);
+    const pathParsed = path.parse('public/thumbnails/' + req.params['*'])
+    console.log(pathParsed.dir)
+    if (!fs.existsSync('public/thumbnails/' + req.params['*'])) {
+      fs.mkdirSync('public/thumbnails/' + req.params['*'], { recursive: true })
+    }
+    if (fs.existsSync('public/' + req.params['*'])) {
+      stream = fs.createReadStream('public/' + req.params['*'])
+      let transform = sharp()
+      const options = fit ? { fit } : undefined
+      transform = transform.resize(width, height, options)
+      return stream.pipe(transform)
     } else {
       throw new Error("Couldn't get the original image to resize!")
     }
   }
   return stream
-  /* const object = await getObjectByKey(filePath).catch(async (err) => {
-    if (err.name === 'NoSuchKey') {
-      const originalObject = await getObjectByKey(req.params['*']).catch(
-        (err) => {
-          console.error("Couldn't get the original image to resize!")
-          throw err
-        },
-      )
-      if (!originalObject.ContentType.startsWith('image')) {
-        return originalObject
-      }
-      let transform = sharp()
-      const options = fit ? { fit } : undefined
-      transform = transform.resize(width, height, options)
-      const originalImage = originalObject?.Body as Readable
-      const target = {
-        Bucket: process.env.S3_BUCKET_NAME,
-        Key: filePath,
-        Body: originalImage.pipe(transform),
-        ContentType: originalObject.ContentType,
-        ContentEncoding: originalObject.ContentEncoding,
-      }
-
-      try {
-       const parallelUploads3 = new Upload({
-          client: s3,
-          params: target,
-        })
-
-        await parallelUploads3.done()
-        return await getObjectByKey(filePath) 
-      } catch (e) {
-        console.log(e)
-        throw new Error('get image failed!')
-      }
-    }
-    throw err
-  })
-
-  return object */
-}
-
-async function getObjectByKey(key) {
-  /* const getObject = new GetObjectCommand({
-    Bucket: process.env.S3_BUCKET_NAME,
-    Key: key,
-  })
-  return await s3.send(getObject).then(
-    (obj) => obj,
-    (err) => {
-      throw err
-    },
-  ) */
 }
