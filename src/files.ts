@@ -65,7 +65,9 @@ module.exports = function (fastify, opts, done) {
   fastify.get('/file/*', async (req, reply) => {
     if (!req.params['*'])
       throw reply.code(404).type('text/plain').send('Not found!')
-    const pathParsed = path.parse('public/' + req.params['*'])
+
+    const filePath = 'public/' + req.params['*']
+    const pathParsed = path.parse(filePath)
     const isImage = [
       '.png',
       '.jpg',
@@ -84,16 +86,10 @@ module.exports = function (fastify, opts, done) {
       return reply.send(stream)
     }
     let stream
-    if (fs.existsSync(req.params['*'])) {
-      stream = fs.createReadStream(req.params['*'])
+    if (fs.existsSync(filePath)) {
+      stream = fs.createReadStream(filePath)
     }
 
-    /* reply.type(stream.ContentType)
-    reply.headers({
-      'Content-Length': stream.ContentLength,
-      'Content-Encoding': stream.ContentEncoding,
-    }) */
-    // reply.type('image/png')
     if (isImage) {
       reply.type('image/' + pathParsed?.ext.toLowerCase().substring(1))
     }
@@ -122,8 +118,6 @@ async function getImageSize(req, reply) {
   if (fs.existsSync(filePath)) {
     stream = fs.createReadStream(filePath)
   } else {
-    const pathParsed = path.parse('public/thumbnails/' + req.params['*'])
-    console.log(pathParsed.dir)
     if (!fs.existsSync('public/thumbnails/' + req.params['*'])) {
       fs.mkdirSync('public/thumbnails/' + req.params['*'], { recursive: true })
     }
@@ -132,9 +126,11 @@ async function getImageSize(req, reply) {
       let transform = sharp()
       const options = fit ? { fit } : undefined
       transform = transform.resize(width, height, options)
-      return stream.pipe(transform)
+      const stream2 = stream.pipe(transform)
+      stream2.pipe(fs.createWriteStream(filePath))
+      return stream2
     } else {
-      throw new Error("Couldn't get the original image to resize!")
+      throw new Error("Image not found!")
     }
   }
   return stream
