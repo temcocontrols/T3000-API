@@ -6,7 +6,7 @@ export function getUserFromRequest(req, reply) {
       const userId = 1
       return { id: userId, role: userRole }
     } else {
-      reply.clearCookie('access-key', {
+      reply.clearCookie('access_key', {
         path: '/',
         httpOnly: true,
         secure: true,
