@@ -41,7 +41,7 @@ export const projectQueries = {
       return ctx.prisma.project.findMany(args)
     },
   },
-  projectFirst: {
+  /* projectFirst: {
     extensions: {
       model: 'Project',
       op: 'findFirst',
@@ -59,7 +59,7 @@ export const projectQueries = {
     async resolve(_root, args, ctx: AppContext) {
       return ctx.prisma.project.findFirst(args)
     },
-  },
+  }, */
   projectsCount: {
     extensions: {
       model: 'Project',
@@ -79,7 +79,7 @@ export const projectQueries = {
       return ctx.prisma.project.count(args)
     },
   },
-  projectsAggregate: {
+  /* projectsAggregate: {
     extensions: {
       model: 'Project',
       op: 'aggregate',
@@ -96,5 +96,5 @@ export const projectQueries = {
     async resolve(_root, args, ctx: AppContext) {
       return ctx.prisma.project.aggregate(args)
     },
-  },
+  }, */
 }

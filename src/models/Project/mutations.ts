@@ -55,7 +55,7 @@ export const projectMutations = {
       return ctx.prisma.project.delete(args)
     },
   },
-  upsertProject: {
+  /* upsertProject: {
     extensions: {
       model: 'Project',
       op: 'upsertOne',
@@ -104,7 +104,7 @@ export const projectMutations = {
     async resolve(_root, args, ctx: AppContext) {
       return ctx.prisma.project.updateMany(args)
     },
-  },
+  }, */
   deleteProjects: {
     extensions: {
       model: 'Project',
