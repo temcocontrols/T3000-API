@@ -20,7 +20,7 @@ export async function createContext(req, reply?): Promise<Context> {
   return {
     prisma,
     // add_context_items
-    user: await getUserFromRequest(req, reply),
+    user: getUserFromRequest(req, reply),
     fns,
   }
 }
