@@ -1,15 +1,15 @@
 import { GraphQLBoolean, GraphQLNonNull, GraphQLString } from 'graphql'
 
 export const authMutations = {
-  loginByAccessKey: {
+  login: {
     extensions: { allowRoles: ['UNAUTHORIZED'] },
     type: new GraphQLNonNull(GraphQLBoolean),
     args: {
-      access_token: { type: new GraphQLNonNull(GraphQLString) },
+      access_key: { type: new GraphQLNonNull(GraphQLString) },
     },
     async resolve(_root, args, ctx) {
-      if (args.access_token === process.env.ACCESS_KEY) {
-        ctx.reply.setCookie('access-key', String(args.access_token), {
+      if (args.access_key === process.env.ACCESS_KEY) {
+        ctx.reply.setCookie('access-key', String(args.access_key), {
           path: '/',
           httpOnly: true,
           secure: true,

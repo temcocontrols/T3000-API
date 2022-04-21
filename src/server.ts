@@ -3,11 +3,12 @@ import mercurius from 'mercurius'
 import { applyMiddleware } from 'graphql-middleware'
 import { schema as mainSchema } from './schema'
 import { createContext } from './context'
-import { prismaSelect /* , subscriptionsMiddleware */ } from './middlewares'
+import { prismaSelect, auth /* , subscriptionsMiddleware */ } from './middlewares'
 import { NoIntrospection } from './common/noIntrospection'
 
 const schemaWithMiddlewares = applyMiddleware(
   mainSchema,
+  auth,
   prismaSelect,
   // subscriptionsMiddleware,
   // add_middlewares
