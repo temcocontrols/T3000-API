@@ -9,7 +9,7 @@ export const authMutations = {
     },
     async resolve(_root, args, ctx) {
       if (args.access_key === process.env.ACCESS_KEY) {
-        ctx.reply.setCookie('access-key', String(args.access_key), {
+        ctx.reply.setCookie('access_key', String(args.access_key), {
           path: '/',
           httpOnly: true,
           secure: true,
@@ -34,7 +34,7 @@ export const authMutations = {
 }
 
 function logout(reply) {
-  reply.clearCookie('access-key', {
+  reply.clearCookie('access_key', {
     path: '/',
     httpOnly: true,
     secure: true,
