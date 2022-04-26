@@ -1,12 +1,13 @@
 # T3000 API
-T3000 API, online storage of building dbs and hvac applications
+
+T3000 API, a storage of building dbs and hvac applications
 This is the API for interacting with the database. 
 
-For the full deocumentation check [the web documentation](https://temcocontrols-app-lib-docs.netlify.app)
+For the full documentation check [the web documentation](https://temcocontrols-app-lib-docs.netlify.app)
+
 ## Architecture Overview
 
-The backend server exposes the GraphQL API. The API is written in TypeScript. It maintains its state in a PostgreSQL database using Prisma ORM.
-
+This API will work as a middleware between the client and the controllers in your system so the client will interact with it to send commands to the controllers, The API is written in TypeScript. It maintains its state in a PostgreSQL database using Prisma ORM using GraphQL query language.
 
 ## GraphQL
 
@@ -16,27 +17,25 @@ To learn more about GraphQL language and its concepts, see the official [GraphQL
 
 The API endpoint is available at `/graphql/` and requires queries to be submitted using HTTP `POST` method and the `application/json` content type.
 
-Using the GraphQL API allows you to query and modify all of the data in an efficient and flexible manner. The API provides both types of operations:
-
-- Public (related to the customers and normal users)
-- Private (related to the administration side)
+Using the GraphQL API allows you to query and modify all of the data in an efficient and flexible manner.
 
 Here's an example query to fetch apps:
 
 ```graphql
 {
-  apps {
+  projects {
     name
   }
 }
 ```
 
 Response:
+
 ```json
 {
   "data": {
-    "apps": {
-      "name": "App 1"
+    "projects": {
+      "name": "Project 1"
     }
   }
 }
