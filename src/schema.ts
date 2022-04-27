@@ -38,6 +38,7 @@ import { fileMutations } from './models/mutations'
 */
 import { authMutations, authQueries } from './auth'
 import { GraphQLSchema, GraphQLObjectType } from 'graphql'
+import { programCustomMutations } from './resolvers/programCustomMutations'
 
 export const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
@@ -64,6 +65,7 @@ export const schema = new GraphQLSchema({
     fields: {
       // merge_the_mutation_fields_here
       ...projectMutations,
+      ...programCustomMutations,
       /*  
       ...buildingMutations,
       ...deviceMutations,
