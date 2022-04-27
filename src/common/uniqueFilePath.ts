@@ -5,8 +5,8 @@ export const uniqueFilePath = async (filePath, fileName, index = 0) => {
   let ext = pathParsed.ext
   let fileNameWithoutExt = `${pathParsed.dir}/${pathParsed.name}`
   let fullFileName = index ? `${fileNameWithoutExt}-${index}${ext}` : fileName
-  
-  if (!fs.existsSync(filePath+'/'+fullFileName)) {
+
+  if (!fs.existsSync(filePath + '/' + fullFileName)) {
     return fullFileName
   }
 

@@ -38,6 +38,9 @@ export const Program = new GraphQLObjectType({
     executionTime: {
       type: new GraphQLNonNull(GraphQLInt),
     },
+    sourceCode: {
+      type: GraphQLString,
+    },
     binaryArray: {
       type: GraphQLString,
     },
@@ -78,6 +81,7 @@ export const ProgramGroupByOutputType = new GraphQLObjectType({
     autoManual: { type: AutoManual },
     size: { type: GraphQLInt },
     executionTime: { type: GraphQLInt },
+    sourceCode: { type: GraphQLString },
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
@@ -101,6 +105,7 @@ export const ProgramCountAggregateOutputType = new GraphQLObjectType({
     autoManual: { type: GraphQLInt },
     size: { type: GraphQLInt },
     executionTime: { type: GraphQLInt },
+    sourceCode: { type: GraphQLInt },
     binaryArray: { type: GraphQLInt },
     createdAt: { type: GraphQLInt },
     updatedAt: { type: GraphQLInt },
@@ -142,6 +147,7 @@ export const ProgramMinAggregateOutputType = new GraphQLObjectType({
     autoManual: { type: AutoManual },
     size: { type: GraphQLInt },
     executionTime: { type: GraphQLInt },
+    sourceCode: { type: GraphQLString },
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
@@ -160,6 +166,7 @@ export const ProgramMaxAggregateOutputType = new GraphQLObjectType({
     autoManual: { type: AutoManual },
     size: { type: GraphQLInt },
     executionTime: { type: GraphQLInt },
+    sourceCode: { type: GraphQLString },
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },

@@ -181,6 +181,7 @@ model Program {
   autoManual    AutoManual
   size          Int?
   executionTime Int        @default(0)
+  sourceCode    String?
   binaryArray   String?
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt

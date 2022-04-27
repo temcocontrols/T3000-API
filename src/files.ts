@@ -12,7 +12,7 @@ import { getUserFromRequest } from './common/getUserFromRequest'
 module.exports = function (fastify, opts, done) {
   fastify.post('/file', async (req, reply) => {
     // before_upload_checks
-    const user = await getUserFromRequest(req, reply)
+    const user = getUserFromRequest(req, reply)
 
     if (user.role !== 'ADMIN')
       throw reply.code(401).type('text/plain').send('permission denied!')

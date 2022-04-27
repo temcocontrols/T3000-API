@@ -3,7 +3,10 @@ import mercurius from 'mercurius'
 import { applyMiddleware } from 'graphql-middleware'
 import { schema as mainSchema } from './schema'
 import { createContext } from './context'
-import { prismaSelect, auth /* , subscriptionsMiddleware */ } from './middlewares'
+import {
+  prismaSelect,
+  auth /* , subscriptionsMiddleware */,
+} from './middlewares'
 import { NoIntrospection } from './common/noIntrospection'
 
 const schemaWithMiddlewares = applyMiddleware(
@@ -12,7 +15,6 @@ const schemaWithMiddlewares = applyMiddleware(
   prismaSelect,
   // subscriptionsMiddleware,
   // add_middlewares
-
 )
 const app = fastify()
 
@@ -30,7 +32,7 @@ async function start() {
     schema: schemaWithMiddlewares,
     context: createContext,
     graphiql: process.env.INTROSPECTIONS === 'on',
-   /*  subscription: {
+    /*  subscription: {
       context: (_, req) => {
         return createContext(req)
       },

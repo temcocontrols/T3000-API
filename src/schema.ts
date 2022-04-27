@@ -64,7 +64,8 @@ export const schema = new GraphQLSchema({
     fields: {
       // merge_the_mutation_fields_here
       ...projectMutations,
-     /*  ...buildingMutations,
+      /*  
+      ...buildingMutations,
       ...deviceMutations,
       ...scheduleMutations,
       ...holidayMutations,
@@ -74,7 +75,8 @@ export const schema = new GraphQLSchema({
       ...variableMutations,
       ...outputMutations,
       ...inputMutations,
-      ...fileMutations, */
+      ...fileMutations, 
+      */
       ...authMutations,
     },
   }),

@@ -5,7 +5,7 @@ export const auth = async (resolve, root, args, context, info) => {
       !['login', 'logout'].includes(info.fieldName) &&
       context.user?.role === 'UNAUTHORIZED'
     ) {
-        throw new Error("Unauthorized!")
+      throw new Error('Unauthorized!')
     }
   }
 

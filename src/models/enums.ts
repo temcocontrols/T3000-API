@@ -183,6 +183,7 @@ export const ProgramScalarFieldEnum = new GraphQLEnumType({
     autoManual: { value: 'autoManual' },
     size: { value: 'size' },
     executionTime: { value: 'executionTime' },
+    sourceCode: { value: 'sourceCode' },
     binaryArray: { value: 'binaryArray' },
     createdAt: { value: 'createdAt' },
     updatedAt: { value: 'updatedAt' },

@@ -42,7 +42,8 @@
     "node-cache": "^5.1.2",
     "node-fetch": "^2.6.6",
     "pluralize": "^8.0.0",
-    "sharp": "^0.30.3"
+    "sharp": "^0.30.3",
+    "t3000-interpretor": "file:t3000-interpretor"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.55",
