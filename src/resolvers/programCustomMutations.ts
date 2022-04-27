@@ -8,7 +8,7 @@ import { AppContext } from '../context'
 import { programEncode } from 't3000-interpretor'
 
 const compileProgramPayload = new GraphQLObjectType({
-  name: 'ProgramMinAggregateOutputType',
+  name: 'CompileProgramPayload',
   fields: () => ({
     errorCode: { type: GraphQLInt },
     encodeArray: { type: GraphQLString },
