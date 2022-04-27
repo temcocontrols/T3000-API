@@ -24,14 +24,19 @@ Napi::Object Init(Napi::Env env, Napi::Object exports)
 
 NODE_API_MODULE(greet, Init) */
 
-Napi::Number encode_program(const Napi::CallbackInfo &info)
+Napi::Object encode_program(const Napi::CallbackInfo &info)
 {
     Napi::Env env = info.Env();
 
     std::string code = info[0].ToString();
     encode_str * result = Encode_function((char*)code.c_str());
 
-    return Napi::Number::New(env, result->errorcode);
+    Napi::Object res = Napi::Object::New(env);
+    res.Set("errorcode", result->errorcode);
+    res.Set("encode_array", result->encode_array);
+    res.Set("encode_message", result->encode_message);
+
+    return res;
 }
 
 // callback eethod when module is registered with Hode.js
