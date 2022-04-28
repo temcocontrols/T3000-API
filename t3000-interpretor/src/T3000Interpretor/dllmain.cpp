@@ -999,7 +999,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	//For Test
 	_tcscpy_s(ptr_panel.vars[3].label, "VARIAB");
-	//ptr_panel.vars[3].label = "VARIAB";
+	//ptr_panel.vars[3].label = (char*)"VARIAB";
 
 
 	renumvar = 1;
@@ -1024,7 +1024,7 @@ char mycode[2000];
 //char editbuf[1024] = {"10 REM Test123456789\r\n20 ENABLE OUT8"};//Pass
 //extern char editbuf[25000];
 //char editbuf[1024] = {"10 REM TestEnable\r\n20 ENABLE 0-OUT1\r\n30 DISABLE 0-OUT2"};
-char* intervaltotext_old(char* textbuf, long seconds, unsigned minutes, unsigned hours, char* c = ":");
+char* intervaltotext_old(char* textbuf, long seconds, unsigned minutes, unsigned hours, char* c = (char*)":");
 char mesbuf[1024];
 char mycomment[1024] = { "AAAAAAAAAAAA" };
 int my_lengthcode = 0;
@@ -1190,7 +1190,7 @@ encode_str* Encode_Program( char * input_text )
 			for (k = 0; k < index_go_to; k++)
 			{
 				for (j = 0; j < lline; j++)
-					if ((go_to[k].line == i + 1) && line_table[j].line == go_to[k].go_to)
+					if ((go_to[k].line == (unsigned int)i + 1) && line_table[j].line == go_to[k].go_to)
 						break;
 				if (j != lline)
 				{
@@ -1388,7 +1388,7 @@ char* intervaltotext_old(char* textbuf, long seconds, unsigned minutes, unsigned
 	if (seconds < 10) {
 		strcpy(textbuffer++, "0");        /* add the leading zero ##:##:0# */
 	}
-	sprintf(textbuffer, "%d", seconds);
+	sprintf(textbuffer, "%lu", seconds);
 
 	if (textbuf) strcpy(textbuf, buf);
 	return(buf);
@@ -2312,7 +2312,7 @@ int get_token(void)
 
 } 		 /* end of the get_token function  */
 
-#define Srt '\`'
+#define Srt '`'
 /* return true if c is a space or a tab*/
 bool iswhite(char c)
 {
@@ -2779,7 +2779,7 @@ void sntx_err(int err, int err_true)
 		memcpy(pmes, " in line ", 9);
 		pmes += strlen(pmes);
 		if (err == TOOBIG)
-			sprintf(pmes, "%d", long_line_value);
+			sprintf(pmes, "%lu", long_line_value);
 		else
 			sprintf(pmes, "%d", line_value);
 		pmes += strlen(pmes);
@@ -5069,7 +5069,7 @@ void parse2_then_else()
 		line_table[lline - 1].go_to = 1;
 		go_to[index_go_to].line = lline;
 		go_to[index_go_to++].go_to = value;
-		write_cod(GOTOIF, 1, 0, "", value, 0, "", 0, 0, "", 0);
+		write_cod(GOTOIF, 1, 0, (char*)"", value, 0, (char*)"", 0, 0, (char*)"", 0);
 		get_token();
 		//fance t--;
 		then_else = 0;
@@ -6637,7 +6637,7 @@ char* desassembler_program( char * input_code, decode_str* decodestr)
 			/*									desexpr();
 												buf += strlen(buf);
 			*/
-			sprintf(buf, "%d", lval / 1000);
+			sprintf(buf, "%lu", lval / 1000);
 			buf += strlen(buf);
 			strcpy(buf, " , ");
 			buf += strlen(buf);
@@ -7064,7 +7064,7 @@ int desvar(void)
 					{
 						if ((long)f == f && (f<1000000 && f>-1000000)) //原始的;  但是 有问题; （long）f 一直不等于f
 						{
-							sprintf(buf, "%d", (long)f);
+							sprintf(buf, "%lu", (long)f);
 						}
 						else
 						{
@@ -7210,9 +7210,9 @@ int pointtotext(char* buf, Point_Net* point)
 	//{
 	//	buf[0] = 0;
 	//}
-	ptr_panel.info[0].name = "OUT";
-	ptr_panel.info[1].name = "IN";
-	ptr_panel.info[2].name = "VAR";
+	ptr_panel.info[0].name = (char*)"OUT";
+	ptr_panel.info[1].name = (char*)"IN";
+	ptr_panel.info[2].name = (char*)"VAR";
 
 	//if((point->panel == point->sub_panel) && (point->panel == Station_NUM))
 	//{
@@ -7831,8 +7831,8 @@ void Init_table_bank()
 	ptr_panel.table_bank[UNIT] = MAX_UNITS;
 	ptr_panel.table_bank[USER_NAME] = MAX_PASSW;
 
-	ptr_panel.info[1].name = "IN";
-	ptr_panel.info[0].name = "OUT";
+	ptr_panel.info[1].name = (char*)"IN";
+	ptr_panel.info[0].name = (char*)"OUT";
 }
 
 void init_info_table(void)
@@ -7847,179 +7847,179 @@ void init_info_table(void)
 		case OUT:
 			ptr_panel.info[i].address = (char*)ptr_panel.outputs;
 			ptr_panel.info[i].str_size = sizeof(Str_out_point);
-			ptr_panel.info[i].name = "OUT";
+			ptr_panel.info[i].name = (char*)"OUT";
 			ptr_panel.info[i].max_points = MAX_OUTS;
 			break;
 		case IN:
 			ptr_panel.info[i].address = (char*)ptr_panel.inputs;
 			ptr_panel.info[i].str_size = sizeof(Str_in_point);
-			ptr_panel.info[i].name = "IN";
+			ptr_panel.info[i].name = (char*)"IN";
 			ptr_panel.info[i].max_points = MAX_INS;
 			break;
 		case VAR:
 			ptr_panel.info[i].address = (char*)ptr_panel.vars;
 			ptr_panel.info[i].str_size = sizeof(Str_variable_point);
-			ptr_panel.info[i].name = "VAR";
+			ptr_panel.info[i].name = (char*)"VAR";
 			ptr_panel.info[i].max_points = MAX_VARS;
 			break;
 		case CON:
 			ptr_panel.info[i].address = (char*)ptr_panel.controllers;
 			ptr_panel.info[i].str_size = sizeof(Str_controller_point);
-			ptr_panel.info[i].name = "PID";
+			ptr_panel.info[i].name = (char*)"PID";
 			ptr_panel.info[i].max_points = MAX_PIDS;
 			break;
 		case WR:
 			ptr_panel.info[i].address = (char*)ptr_panel.weekly_routines;
 			ptr_panel.info[i].str_size = sizeof(Str_weekly_routine_point);
-			ptr_panel.info[i].name = "SCH";
+			ptr_panel.info[i].name = (char*)"SCH";
 			ptr_panel.info[i].max_points = MAX_SCHS;
 			break;
 		case AR:
 			ptr_panel.info[i].address = (char*)ptr_panel.annual_routines;
 			ptr_panel.info[i].str_size = sizeof(Str_annual_routine_point);
-			ptr_panel.info[i].name = "HOL";
+			ptr_panel.info[i].name = (char*)"HOL";
 			ptr_panel.info[i].max_points = MAX_HOLS;
 			break;
 		case PRG:
 			ptr_panel.info[i].address = (char*)ptr_panel.programs;
 			ptr_panel.info[i].str_size = sizeof(Str_program_point);
-			ptr_panel.info[i].name = "PRG";
+			ptr_panel.info[i].name = (char*)"PRG";
 			ptr_panel.info[i].max_points = MAX_PRGS;
 			break;
 		case TBL:
 			ptr_panel.info[i].address = (char*)ptr_panel.analog_mon;
 			ptr_panel.info[i].str_size = sizeof(Str_monitor_point);
-			ptr_panel.info[i].name = "TBL";
+			ptr_panel.info[i].name = (char*)"TBL";
 			ptr_panel.info[i].max_points = MAX_TABS;
 
 #ifdef Fance_enable
 			info[i].address = (char*)custom_tab;
 			info[i].str_size = sizeof(Str_tbl_point);
-			info[i].name = "TBL";
+			info[i].name = (char*)"TBL";
 			info[i].max_points = MAX_TABS;
 #endif
 			break;
 		case DMON:
 			ptr_panel.info[i].address = (char*)ptr_panel.analog_mon;
 			ptr_panel.info[i].str_size = sizeof(Str_monitor_point);
-			ptr_panel.info[i].name = "DMON";
+			ptr_panel.info[i].name = (char*)"DMON";
 			ptr_panel.info[i].max_points = MAX_TABS;
 			break;
 		case AMON:
 			ptr_panel.info[i].address = (char*)ptr_panel.analog_mon;
 			ptr_panel.info[i].str_size = sizeof(Str_monitor_point);
-			ptr_panel.info[i].name = "AMON";
+			ptr_panel.info[i].name = (char*)"AMON";
 			ptr_panel.info[i].max_points = MAX_ANALM;
 			break;
 		case GRP:
 			ptr_panel.info[i].address = (char*)ptr_panel.control_groups;
 			ptr_panel.info[i].str_size = sizeof(Control_group_point);
-			ptr_panel.info[i].name = "GRP";
+			ptr_panel.info[i].name = (char*)"GRP";
 			ptr_panel.info[i].max_points = MAX_GRPS;
 			break;
 		case AY:
 			ptr_panel.info[i].address = (char*)ptr_panel.arrays;
 			ptr_panel.info[i].str_size = sizeof(Str_array_point);
-			ptr_panel.info[i].name = "AY";
+			ptr_panel.info[i].name = (char*)"AY";
 			ptr_panel.info[i].max_points = MAX_ARRAYS;
 			break;
 		case ALARMM:          //12
 			ptr_panel.info[i].address = (char*)ptr_panel.alarms;
 			ptr_panel.info[i].str_size = sizeof(Alarm_point);
-			ptr_panel.info[i].name = "ALR";
+			ptr_panel.info[i].name = (char*)"ALR";
 			ptr_panel.info[i].max_points = MAX_ALARMS;
 			break;
 		case UNIT:
 			ptr_panel.info[i].address = (char*)ptr_panel.units;
 			ptr_panel.info[i].str_size = sizeof(Units_element);
-			ptr_panel.info[i].name = "UNITS";
+			ptr_panel.info[i].name = (char*)"UNITS";
 			ptr_panel.info[i].max_points = MAX_UNITS;
 			break;
 		case USER_NAME:
 			ptr_panel.info[i].address = (char*)&::ptr_panel.passwords;
 			//info[i].str_size = sizeof( Password_point );
-			ptr_panel.info[i].name = "PASS";
+			ptr_panel.info[i].name = (char*)"PASS";
 			ptr_panel.info[i].max_points = MAX_PASSW;
 			break;
 		case ALARMS:          //12
 			ptr_panel.info[i].address = (char*)ptr_panel.alarms_set;
 			ptr_panel.info[i].str_size = sizeof(Alarm_set_point);
-			ptr_panel.info[i].name = "ALRS";
+			ptr_panel.info[i].name = (char*)"ALRS";
 			ptr_panel.info[i].max_points = MAX_ALARMS_SET;
 			break;
 			/*	case 15: {
 			//		  &system_info[i].name = data;
 						System_Name(  ctype );
-							info[i].name = "";
+							info[i].name = (char*)"";
 						break;
 					}
 				case 16: {
 						program_code = ( byte * ) data;
 						result = Program_Code( ctype, code_length, subscript );
-							info[i].name = "";
+							info[i].name = (char*)"";
 						break;
 					}************************/
 		case WR_TIME:
 			ptr_panel.info[i].address = (char*)ptr_panel.wr_times;
 			ptr_panel.info[i].str_size = 9 * sizeof(Wr_one_day);
-			ptr_panel.info[i].name = "WR_T";
+			ptr_panel.info[i].name = (char*)"WR_T";
 			break;
 		case AR_Y:                //17
 			ptr_panel.info[i].address = (char*)ptr_panel.ar_dates;
 			ptr_panel.info[i].str_size = 46;
-			ptr_panel.info[i].name = "AR_D";
+			ptr_panel.info[i].name = (char*)"AR_D";
 			break;
 			//case REG:
 			//	//ptr_panel.info[i].address = (char *)ptr_panel.;
 			//	//ptr_panel.info[i].str_size = 46;
-			//	ptr_panel.info[i].name = "REG";
+			//	ptr_panel.info[i].name = (char*)"REG";
 			//	break;
 		case BAC_BI:
-			ptr_panel.info[i].name = "BI";
+			ptr_panel.info[i].name = (char*)"BI";
 			break;
 		case COIL_REG:
-			ptr_panel.info[i].name = "MB_COIL";
+			ptr_panel.info[i].name = (char*)"MB_COIL";
 			break;
 		case DIS_INPUT_REG:
-			ptr_panel.info[i].name = "MB_DISINPUT";
+			ptr_panel.info[i].name = (char*)"MB_DISINPUT";
 			break;
 		case INPUT_REG:
-			ptr_panel.info[i].name = "MB_INPUTREG";
+			ptr_panel.info[i].name = (char*)"MB_INPUTREG";
 			break;
 		case MB_REG:
-			ptr_panel.info[i].name = "MB_REG";
+			ptr_panel.info[i].name = (char*)"MB_REG";
 			break;
 
 		case BAC_AV:
-			ptr_panel.info[i].name = "AV";
+			ptr_panel.info[i].name = (char*)"AV";
 			break;
 		case BAC_AI:
-			ptr_panel.info[i].name = "AI";
+			ptr_panel.info[i].name = (char*)"AI";
 			break;
 		case BAC_AO:
-			ptr_panel.info[i].name = "AO";
+			ptr_panel.info[i].name = (char*)"AO";
 			break;
 		case BAC_BO:
-			ptr_panel.info[i].name = "BO";  //change DO to BO.
+			ptr_panel.info[i].name = (char*)"BO";  //change DO to BO.
 			break;
 		case BAC_BV:
-			ptr_panel.info[i].name = "BV";
+			ptr_panel.info[i].name = (char*)"BV";
 			break;
 		case BAC_FLOAT_ABCD:
-			ptr_panel.info[i].name = "MB_REG_FLOAT_ABCD";
+			ptr_panel.info[i].name = (char*)"MB_REG_FLOAT_ABCD";
 			break;
 		case BAC_FLOAT_CDAB:
-			ptr_panel.info[i].name = "MB_REG_FLOAT_CDAB";
+			ptr_panel.info[i].name = (char*)"MB_REG_FLOAT_CDAB";
 			break;
 		case BAC_FLOAT_BADC:
-			ptr_panel.info[i].name = "MB_REG_FLOAT_BADC";
+			ptr_panel.info[i].name = (char*)"MB_REG_FLOAT_BADC";
 			break;
 		case BAC_FLOAT_DCBA:
-			ptr_panel.info[i].name = "MB_REG_FLOAT_DCBA";
+			ptr_panel.info[i].name = (char*)"MB_REG_FLOAT_DCBA";
 			break;
 		default:
 		{
-			ptr_panel.info[i].name = "DEFAULT_NAME";
+			ptr_panel.info[i].name = (char*)"DEFAULT_NAME";
 		}
 		break;
 		}
