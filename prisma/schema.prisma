@@ -47,16 +47,15 @@ enum AppStatus {
 }
 
 model Project {
-  id          Int        @id @default(autoincrement())
+  id          String     @id @default(cuid())
   name        String     @db.VarChar(100)
-  slug        String     @unique @db.VarChar(100)
+  slug        String?     @unique @db.VarChar(100)
   description String?
   imageFileId Int?
   image       File?      @relation(fields: [imageFileId], references: [id])
   buildings   Building[]
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
-  authorId    String     @db.VarChar(100)
 }
 
 model Building {
@@ -76,8 +75,8 @@ model Building {
   devices       Device[]
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
-  Project       Project?          @relation(fields: [projectId], references: [id])
-  projectId     Int?
+  Project       Project         @relation(fields: [projectId], references: [id])
+  projectId     String
 
   @@unique([title, projectId])
 }

@@ -6,6 +6,7 @@ import { createContext } from './context'
 import {
   prismaSelect,
   auth /* , subscriptionsMiddleware */,
+  resolverMiddlewares,
 } from './middlewares'
 import { NoIntrospection } from './common/noIntrospection'
 
@@ -13,6 +14,7 @@ const schemaWithMiddlewares = applyMiddleware(
   mainSchema,
   auth,
   prismaSelect,
+  resolverMiddlewares,
   // subscriptionsMiddleware,
   // add_middlewares
 )

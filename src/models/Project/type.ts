@@ -20,13 +20,13 @@ export const Project = new GraphQLObjectType({
   name: 'Project',
   fields: () => ({
     id: {
-      type: new GraphQLNonNull(GraphQLInt),
+      type: new GraphQLNonNull(GraphQLString),
     },
     name: {
       type: new GraphQLNonNull(GraphQLString),
     },
     slug: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
     },
     description: {
       type: GraphQLString,
@@ -56,9 +56,6 @@ export const Project = new GraphQLObjectType({
     updatedAt: {
       type: new GraphQLNonNull(GraphQLDateTime),
     },
-    authorId: {
-      type: new GraphQLNonNull(GraphQLString),
-    },
 
     _count: {
       type: ProjectCountOutputType,
@@ -80,14 +77,13 @@ export const AggregateProject = new GraphQLObjectType({
 export const ProjectGroupByOutputType = new GraphQLObjectType({
   name: 'ProjectGroupByOutputType',
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     name: { type: GraphQLString },
     slug: { type: GraphQLString },
     description: { type: GraphQLString },
     imageFileId: { type: GraphQLInt },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    authorId: { type: GraphQLString },
     _count: { type: ProjectCountAggregateOutputType },
     _avg: { type: ProjectAvgAggregateOutputType },
     _sum: { type: ProjectSumAggregateOutputType },
@@ -113,7 +109,6 @@ export const ProjectCountAggregateOutputType = new GraphQLObjectType({
     imageFileId: { type: GraphQLInt },
     createdAt: { type: GraphQLInt },
     updatedAt: { type: GraphQLInt },
-    authorId: { type: GraphQLInt },
     _all: { type: GraphQLInt },
   }),
 })
@@ -121,7 +116,6 @@ export const ProjectCountAggregateOutputType = new GraphQLObjectType({
 export const ProjectAvgAggregateOutputType = new GraphQLObjectType({
   name: 'ProjectAvgAggregateOutputType',
   fields: () => ({
-    id: { type: GraphQLFloat },
     imageFileId: { type: GraphQLFloat },
   }),
 })
@@ -129,7 +123,6 @@ export const ProjectAvgAggregateOutputType = new GraphQLObjectType({
 export const ProjectSumAggregateOutputType = new GraphQLObjectType({
   name: 'ProjectSumAggregateOutputType',
   fields: () => ({
-    id: { type: GraphQLInt },
     imageFileId: { type: GraphQLInt },
   }),
 })
@@ -137,27 +130,25 @@ export const ProjectSumAggregateOutputType = new GraphQLObjectType({
 export const ProjectMinAggregateOutputType = new GraphQLObjectType({
   name: 'ProjectMinAggregateOutputType',
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     name: { type: GraphQLString },
     slug: { type: GraphQLString },
     description: { type: GraphQLString },
     imageFileId: { type: GraphQLInt },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    authorId: { type: GraphQLString },
   }),
 })
 
 export const ProjectMaxAggregateOutputType = new GraphQLObjectType({
   name: 'ProjectMaxAggregateOutputType',
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     name: { type: GraphQLString },
     slug: { type: GraphQLString },
     description: { type: GraphQLString },
     imageFileId: { type: GraphQLInt },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    authorId: { type: GraphQLString },
   }),
 })

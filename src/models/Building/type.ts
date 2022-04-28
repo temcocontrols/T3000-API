@@ -78,10 +78,10 @@ export const Building = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLDateTime),
     },
     Project: {
-      type: Project,
+      type: new GraphQLNonNull(Project),
     },
     projectId: {
-      type: GraphQLInt,
+      type: new GraphQLNonNull(GraphQLString),
     },
 
     _count: {
@@ -119,7 +119,7 @@ export const BuildingGroupByOutputType = new GraphQLObjectType({
     engineering: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    projectId: { type: GraphQLInt },
+    projectId: { type: GraphQLString },
     _count: { type: BuildingCountAggregateOutputType },
     _avg: { type: BuildingAvgAggregateOutputType },
     _sum: { type: BuildingSumAggregateOutputType },
@@ -163,7 +163,6 @@ export const BuildingAvgAggregateOutputType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLFloat },
     baudRate: { type: GraphQLFloat },
-    projectId: { type: GraphQLFloat },
   }),
 })
 
@@ -172,7 +171,6 @@ export const BuildingSumAggregateOutputType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     baudRate: { type: GraphQLInt },
-    projectId: { type: GraphQLInt },
   }),
 })
 
@@ -194,7 +192,7 @@ export const BuildingMinAggregateOutputType = new GraphQLObjectType({
     engineering: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    projectId: { type: GraphQLInt },
+    projectId: { type: GraphQLString },
   }),
 })
 
@@ -216,6 +214,6 @@ export const BuildingMaxAggregateOutputType = new GraphQLObjectType({
     engineering: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    projectId: { type: GraphQLInt },
+    projectId: { type: GraphQLString },
   }),
 })

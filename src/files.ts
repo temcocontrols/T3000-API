@@ -130,7 +130,7 @@ async function getImageSize(req, reply) {
       stream2.pipe(fs.createWriteStream(filePath))
       return stream2
     } else {
-      throw new Error("Image not found!")
+      throw new Error('Image not found!')
     }
   }
   return stream

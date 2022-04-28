@@ -62,7 +62,6 @@ export const ProjectScalarFieldEnum = new GraphQLEnumType({
     imageFileId: { value: 'imageFileId' },
     createdAt: { value: 'createdAt' },
     updatedAt: { value: 'updatedAt' },
-    authorId: { value: 'authorId' },
   },
 })
 

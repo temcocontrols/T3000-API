@@ -47,7 +47,7 @@ export const SimpleStringFilter = new GraphQLInputObjectType({
 })
 
 export const FileWhereInput = new GraphQLInputObjectType({
-  name: 'FileWhereInput',
+  name: 'FileFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(FileWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(FileWhereInput)) },
@@ -84,7 +84,7 @@ export const FileOrderByWithRelationInput = new GraphQLInputObjectType({
 })
 
 export const FileWhereUniqueInput = new GraphQLInputObjectType({
-  name: 'FileWhereUniqueInput',
+  name: 'FileFilterUnique',
   fields: () => ({
     id: { type: GraphQLInt },
     path: { type: GraphQLString },
@@ -142,21 +142,20 @@ export const FileScalarWhereWithAggregatesInput = new GraphQLInputObjectType({
 })
 
 export const ProjectWhereInput = new GraphQLInputObjectType({
-  name: 'ProjectWhereInput',
+  name: 'ProjectFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(ProjectWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(ProjectWhereInput)) },
     NOT: { type: new GraphQLList(new GraphQLNonNull(ProjectWhereInput)) },
-    id: { type: IntFilter },
+    id: { type: StringFilter },
     name: { type: StringFilter },
-    slug: { type: StringFilter },
+    slug: { type: StringNullableFilter },
     description: { type: StringNullableFilter },
     imageFileId: { type: IntNullableFilter },
     image: { type: FileWhereInput },
     buildings: { type: BuildingListRelationFilter },
     createdAt: { type: DateTimeFilter },
     updatedAt: { type: DateTimeFilter },
-    authorId: { type: StringFilter },
   }),
 })
 
@@ -172,14 +171,13 @@ export const ProjectOrderByWithRelationInput = new GraphQLInputObjectType({
     buildings: { type: BuildingOrderByRelationAggregateInput },
     createdAt: { type: SortOrder },
     updatedAt: { type: SortOrder },
-    authorId: { type: SortOrder },
   }),
 })
 
 export const ProjectWhereUniqueInput = new GraphQLInputObjectType({
-  name: 'ProjectWhereUniqueInput',
+  name: 'ProjectFilterUnique',
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     slug: { type: GraphQLString },
   }),
 })
@@ -194,7 +192,6 @@ export const ProjectOrderByWithAggregationInput = new GraphQLInputObjectType({
     imageFileId: { type: SortOrder },
     createdAt: { type: SortOrder },
     updatedAt: { type: SortOrder },
-    authorId: { type: SortOrder },
     _count: { type: ProjectCountOrderByAggregateInput },
     _avg: { type: ProjectAvgOrderByAggregateInput },
     _max: { type: ProjectMaxOrderByAggregateInput },
@@ -222,20 +219,19 @@ export const ProjectScalarWhereWithAggregatesInput = new GraphQLInputObjectType(
           new GraphQLNonNull(ProjectScalarWhereWithAggregatesInput),
         ),
       },
-      id: { type: IntWithAggregatesFilter },
+      id: { type: StringWithAggregatesFilter },
       name: { type: StringWithAggregatesFilter },
-      slug: { type: StringWithAggregatesFilter },
+      slug: { type: StringNullableWithAggregatesFilter },
       description: { type: StringNullableWithAggregatesFilter },
       imageFileId: { type: IntNullableWithAggregatesFilter },
       createdAt: { type: DateTimeWithAggregatesFilter },
       updatedAt: { type: DateTimeWithAggregatesFilter },
-      authorId: { type: StringWithAggregatesFilter },
     }),
   },
 )
 
 export const BuildingWhereInput = new GraphQLInputObjectType({
-  name: 'BuildingWhereInput',
+  name: 'BuildingFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(BuildingWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(BuildingWhereInput)) },
@@ -257,7 +253,7 @@ export const BuildingWhereInput = new GraphQLInputObjectType({
     createdAt: { type: DateTimeFilter },
     updatedAt: { type: DateTimeFilter },
     Project: { type: ProjectWhereInput },
-    projectId: { type: IntNullableFilter },
+    projectId: { type: StringFilter },
   }),
 })
 
@@ -286,7 +282,7 @@ export const BuildingOrderByWithRelationInput = new GraphQLInputObjectType({
 })
 
 export const BuildingWhereUniqueInput = new GraphQLInputObjectType({
-  name: 'BuildingWhereUniqueInput',
+  name: 'BuildingFilterUnique',
   fields: () => ({
     id: { type: GraphQLInt },
     title_projectId: { type: BuildingTitleProjectIdCompoundUniqueInput },
@@ -354,12 +350,12 @@ export const BuildingScalarWhereWithAggregatesInput =
       engineering: { type: StringWithAggregatesFilter },
       createdAt: { type: DateTimeWithAggregatesFilter },
       updatedAt: { type: DateTimeWithAggregatesFilter },
-      projectId: { type: IntNullableWithAggregatesFilter },
+      projectId: { type: StringWithAggregatesFilter },
     }),
   })
 
 export const DeviceWhereInput = new GraphQLInputObjectType({
-  name: 'DeviceWhereInput',
+  name: 'DeviceFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(DeviceWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(DeviceWhereInput)) },
@@ -414,7 +410,7 @@ export const DeviceOrderByWithRelationInput = new GraphQLInputObjectType({
 })
 
 export const DeviceWhereUniqueInput = new GraphQLInputObjectType({
-  name: 'DeviceWhereUniqueInput',
+  name: 'DeviceFilterUnique',
   fields: () => ({
     id: { type: GraphQLInt },
   }),
@@ -475,7 +471,7 @@ export const DeviceScalarWhereWithAggregatesInput = new GraphQLInputObjectType({
 })
 
 export const InputWhereInput = new GraphQLInputObjectType({
-  name: 'InputWhereInput',
+  name: 'InputFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(InputWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(InputWhereInput)) },
@@ -530,7 +526,7 @@ export const InputOrderByWithRelationInput = new GraphQLInputObjectType({
 })
 
 export const InputWhereUniqueInput = new GraphQLInputObjectType({
-  name: 'InputWhereUniqueInput',
+  name: 'InputFilterUnique',
   fields: () => ({
     id: { type: GraphQLInt },
     index_deviceId: { type: InputIndexDeviceIdCompoundUniqueInput },
@@ -608,7 +604,7 @@ export const InputScalarWhereWithAggregatesInput = new GraphQLInputObjectType({
 })
 
 export const OutputWhereInput = new GraphQLInputObjectType({
-  name: 'OutputWhereInput',
+  name: 'OutputFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(OutputWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(OutputWhereInput)) },
@@ -663,7 +659,7 @@ export const OutputOrderByWithRelationInput = new GraphQLInputObjectType({
 })
 
 export const OutputWhereUniqueInput = new GraphQLInputObjectType({
-  name: 'OutputWhereUniqueInput',
+  name: 'OutputFilterUnique',
   fields: () => ({
     id: { type: GraphQLInt },
     index_deviceId: { type: OutputIndexDeviceIdCompoundUniqueInput },
@@ -741,7 +737,7 @@ export const OutputScalarWhereWithAggregatesInput = new GraphQLInputObjectType({
 })
 
 export const VariableWhereInput = new GraphQLInputObjectType({
-  name: 'VariableWhereInput',
+  name: 'VariableFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(VariableWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(VariableWhereInput)) },
@@ -780,7 +776,7 @@ export const VariableOrderByWithRelationInput = new GraphQLInputObjectType({
 })
 
 export const VariableWhereUniqueInput = new GraphQLInputObjectType({
-  name: 'VariableWhereUniqueInput',
+  name: 'VariableFilterUnique',
   fields: () => ({
     id: { type: GraphQLInt },
     index_deviceId: { type: VariableIndexDeviceIdCompoundUniqueInput },
@@ -843,7 +839,7 @@ export const VariableScalarWhereWithAggregatesInput =
   })
 
 export const ProgramWhereInput = new GraphQLInputObjectType({
-  name: 'ProgramWhereInput',
+  name: 'ProgramFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(ProgramWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(ProgramWhereInput)) },
@@ -886,7 +882,7 @@ export const ProgramOrderByWithRelationInput = new GraphQLInputObjectType({
 })
 
 export const ProgramWhereUniqueInput = new GraphQLInputObjectType({
-  name: 'ProgramWhereUniqueInput',
+  name: 'ProgramFilterUnique',
   fields: () => ({
     id: { type: GraphQLInt },
     index_deviceId: { type: ProgramIndexDeviceIdCompoundUniqueInput },
@@ -954,7 +950,7 @@ export const ProgramScalarWhereWithAggregatesInput = new GraphQLInputObjectType(
 )
 
 export const PidWhereInput = new GraphQLInputObjectType({
-  name: 'PidWhereInput',
+  name: 'PidFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(PidWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(PidWhereInput)) },
@@ -1011,7 +1007,7 @@ export const PidOrderByWithRelationInput = new GraphQLInputObjectType({
 })
 
 export const PidWhereUniqueInput = new GraphQLInputObjectType({
-  name: 'PidWhereUniqueInput',
+  name: 'PidFilterUnique',
   fields: () => ({
     id: { type: GraphQLInt },
     index_deviceId: { type: PidIndexDeviceIdCompoundUniqueInput },
@@ -1091,7 +1087,7 @@ export const PidScalarWhereWithAggregatesInput = new GraphQLInputObjectType({
 })
 
 export const GraphicWhereInput = new GraphQLInputObjectType({
-  name: 'GraphicWhereInput',
+  name: 'GraphicFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(GraphicWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(GraphicWhereInput)) },
@@ -1130,7 +1126,7 @@ export const GraphicOrderByWithRelationInput = new GraphQLInputObjectType({
 })
 
 export const GraphicWhereUniqueInput = new GraphQLInputObjectType({
-  name: 'GraphicWhereUniqueInput',
+  name: 'GraphicFilterUnique',
   fields: () => ({
     id: { type: GraphQLInt },
     index_deviceId: { type: GraphicIndexDeviceIdCompoundUniqueInput },
@@ -1192,7 +1188,7 @@ export const GraphicScalarWhereWithAggregatesInput = new GraphQLInputObjectType(
 )
 
 export const ScheduleWhereInput = new GraphQLInputObjectType({
-  name: 'ScheduleWhereInput',
+  name: 'ScheduleFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(ScheduleWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(ScheduleWhereInput)) },
@@ -1237,7 +1233,7 @@ export const ScheduleOrderByWithRelationInput = new GraphQLInputObjectType({
 })
 
 export const ScheduleWhereUniqueInput = new GraphQLInputObjectType({
-  name: 'ScheduleWhereUniqueInput',
+  name: 'ScheduleFilterUnique',
   fields: () => ({
     id: { type: GraphQLInt },
     index_deviceId: { type: ScheduleIndexDeviceIdCompoundUniqueInput },
@@ -1306,7 +1302,7 @@ export const ScheduleScalarWhereWithAggregatesInput =
   })
 
 export const HolidayWhereInput = new GraphQLInputObjectType({
-  name: 'HolidayWhereInput',
+  name: 'HolidayFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(HolidayWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(HolidayWhereInput)) },
@@ -1345,7 +1341,7 @@ export const HolidayOrderByWithRelationInput = new GraphQLInputObjectType({
 })
 
 export const HolidayWhereUniqueInput = new GraphQLInputObjectType({
-  name: 'HolidayWhereUniqueInput',
+  name: 'HolidayFilterUnique',
   fields: () => ({
     id: { type: GraphQLInt },
     index_deviceId: { type: HolidayIndexDeviceIdCompoundUniqueInput },
@@ -1472,20 +1468,21 @@ export const FileUpdateManyMutationInput = new GraphQLInputObjectType({
 export const ProjectCreateInput = new GraphQLInputObjectType({
   name: 'ProjectCreateInput',
   fields: () => ({
+    id: { type: GraphQLString },
     name: { type: new GraphQLNonNull(GraphQLString) },
-    slug: { type: new GraphQLNonNull(GraphQLString) },
+    slug: { type: GraphQLString },
     description: { type: GraphQLString },
     image: { type: FileCreateNestedOneWithoutProjectInput },
     buildings: { type: BuildingCreateNestedManyWithoutProjectInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    authorId: { type: new GraphQLNonNull(GraphQLString) },
   }),
 })
 
 export const ProjectUpdateInput = new GraphQLInputObjectType({
   name: 'ProjectUpdateInput',
   fields: () => ({
+    id: { type: GraphQLString },
     name: { type: GraphQLString },
     slug: { type: GraphQLString },
     description: { type: GraphQLString },
@@ -1493,33 +1490,31 @@ export const ProjectUpdateInput = new GraphQLInputObjectType({
     buildings: { type: BuildingUpdateManyWithoutProjectInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    authorId: { type: GraphQLString },
   }),
 })
 
 export const ProjectCreateManyInput = new GraphQLInputObjectType({
   name: 'ProjectCreateManyInput',
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     name: { type: new GraphQLNonNull(GraphQLString) },
-    slug: { type: new GraphQLNonNull(GraphQLString) },
+    slug: { type: GraphQLString },
     description: { type: GraphQLString },
     imageFileId: { type: GraphQLInt },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    authorId: { type: new GraphQLNonNull(GraphQLString) },
   }),
 })
 
 export const ProjectUpdateManyMutationInput = new GraphQLInputObjectType({
   name: 'ProjectUpdateManyMutationInput',
   fields: () => ({
+    id: { type: GraphQLString },
     name: { type: GraphQLString },
     slug: { type: GraphQLString },
     description: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    authorId: { type: GraphQLString },
   }),
 })
 
@@ -1541,7 +1536,9 @@ export const BuildingCreateInput = new GraphQLInputObjectType({
     devices: { type: DeviceCreateNestedManyWithoutBuildingInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Project: { type: ProjectCreateNestedOneWithoutBuildingsInput },
+    Project: {
+      type: new GraphQLNonNull(ProjectCreateNestedOneWithoutBuildingsInput),
+    },
   }),
 })
 
@@ -1563,7 +1560,7 @@ export const BuildingUpdateInput = new GraphQLInputObjectType({
     devices: { type: DeviceUpdateManyWithoutBuildingInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Project: { type: ProjectUpdateOneWithoutBuildingsInput },
+    Project: { type: ProjectUpdateOneRequiredWithoutBuildingsInput },
   }),
 })
 
@@ -1585,7 +1582,7 @@ export const BuildingCreateManyInput = new GraphQLInputObjectType({
     engineering: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    projectId: { type: GraphQLInt },
+    projectId: { type: new GraphQLNonNull(GraphQLString) },
   }),
 })
 
@@ -2625,14 +2622,12 @@ export const ProjectCountOrderByAggregateInput = new GraphQLInputObjectType({
     imageFileId: { type: SortOrder },
     createdAt: { type: SortOrder },
     updatedAt: { type: SortOrder },
-    authorId: { type: SortOrder },
   }),
 })
 
 export const ProjectAvgOrderByAggregateInput = new GraphQLInputObjectType({
   name: 'ProjectAvgOrderByAggregateInput',
   fields: () => ({
-    id: { type: SortOrder },
     imageFileId: { type: SortOrder },
   }),
 })
@@ -2647,7 +2642,6 @@ export const ProjectMaxOrderByAggregateInput = new GraphQLInputObjectType({
     imageFileId: { type: SortOrder },
     createdAt: { type: SortOrder },
     updatedAt: { type: SortOrder },
-    authorId: { type: SortOrder },
   }),
 })
 
@@ -2661,14 +2655,12 @@ export const ProjectMinOrderByAggregateInput = new GraphQLInputObjectType({
     imageFileId: { type: SortOrder },
     createdAt: { type: SortOrder },
     updatedAt: { type: SortOrder },
-    authorId: { type: SortOrder },
   }),
 })
 
 export const ProjectSumOrderByAggregateInput = new GraphQLInputObjectType({
   name: 'ProjectSumOrderByAggregateInput',
   fields: () => ({
-    id: { type: SortOrder },
     imageFileId: { type: SortOrder },
   }),
 })
@@ -2733,7 +2725,7 @@ export const BuildingTitleProjectIdCompoundUniqueInput =
     name: 'BuildingTitleProjectIdCompoundUniqueInput',
     fields: () => ({
       title: { type: new GraphQLNonNull(GraphQLString) },
-      projectId: { type: new GraphQLNonNull(GraphQLInt) },
+      projectId: { type: new GraphQLNonNull(GraphQLString) },
     }),
   })
 
@@ -2764,7 +2756,6 @@ export const BuildingAvgOrderByAggregateInput = new GraphQLInputObjectType({
   fields: () => ({
     id: { type: SortOrder },
     baudRate: { type: SortOrder },
-    projectId: { type: SortOrder },
   }),
 })
 
@@ -2817,7 +2808,6 @@ export const BuildingSumOrderByAggregateInput = new GraphQLInputObjectType({
   fields: () => ({
     id: { type: SortOrder },
     baudRate: { type: SortOrder },
-    projectId: { type: SortOrder },
   }),
 })
 
@@ -4268,20 +4258,17 @@ export const DeviceUpdateManyWithoutBuildingInput = new GraphQLInputObjectType({
   }),
 })
 
-export const ProjectUpdateOneWithoutBuildingsInput = new GraphQLInputObjectType(
-  {
-    name: 'ProjectUpdateOneWithoutBuildingsInput',
+export const ProjectUpdateOneRequiredWithoutBuildingsInput =
+  new GraphQLInputObjectType({
+    name: 'ProjectUpdateOneRequiredWithoutBuildingsInput',
     fields: () => ({
       create: { type: ProjectCreateWithoutBuildingsInput },
       connectOrCreate: { type: ProjectCreateOrConnectWithoutBuildingsInput },
       upsert: { type: ProjectUpsertWithoutBuildingsInput },
-      disconnect: { type: GraphQLBoolean },
-      delete: { type: GraphQLBoolean },
       connect: { type: ProjectWhereUniqueInput },
       update: { type: ProjectUpdateWithoutBuildingsInput },
     }),
-  },
-)
+  })
 
 export const BuildingCreateNestedOneWithoutDevicesInput =
   new GraphQLInputObjectType({
@@ -5457,13 +5444,13 @@ export const GraphicCreateManyPictureInputEnvelope = new GraphQLInputObjectType(
 export const ProjectCreateWithoutImageInput = new GraphQLInputObjectType({
   name: 'ProjectCreateWithoutImageInput',
   fields: () => ({
+    id: { type: GraphQLString },
     name: { type: new GraphQLNonNull(GraphQLString) },
-    slug: { type: new GraphQLNonNull(GraphQLString) },
+    slug: { type: GraphQLString },
     description: { type: GraphQLString },
     buildings: { type: BuildingCreateNestedManyWithoutProjectInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    authorId: { type: new GraphQLNonNull(GraphQLString) },
   }),
 })
 
@@ -5517,7 +5504,7 @@ export const GraphicUpdateManyWithWhereWithoutPictureInput =
   })
 
 export const GraphicScalarWhereInput = new GraphQLInputObjectType({
-  name: 'GraphicScalarWhereInput',
+  name: 'GraphicScalarFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(GraphicScalarWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(GraphicScalarWhereInput)) },
@@ -5564,19 +5551,18 @@ export const ProjectUpdateManyWithWhereWithoutImageInput =
   })
 
 export const ProjectScalarWhereInput = new GraphQLInputObjectType({
-  name: 'ProjectScalarWhereInput',
+  name: 'ProjectScalarFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(ProjectScalarWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(ProjectScalarWhereInput)) },
     NOT: { type: new GraphQLList(new GraphQLNonNull(ProjectScalarWhereInput)) },
-    id: { type: IntFilter },
+    id: { type: StringFilter },
     name: { type: StringFilter },
-    slug: { type: StringFilter },
+    slug: { type: StringNullableFilter },
     description: { type: StringNullableFilter },
     imageFileId: { type: IntNullableFilter },
     createdAt: { type: DateTimeFilter },
     updatedAt: { type: DateTimeFilter },
-    authorId: { type: StringFilter },
   }),
 })
 
@@ -5699,7 +5685,7 @@ export const BuildingUpdateManyWithWhereWithoutProjectInput =
   })
 
 export const BuildingScalarWhereInput = new GraphQLInputObjectType({
-  name: 'BuildingScalarWhereInput',
+  name: 'BuildingScalarFilter',
   fields: () => ({
     AND: {
       type: new GraphQLList(new GraphQLNonNull(BuildingScalarWhereInput)),
@@ -5723,7 +5709,7 @@ export const BuildingScalarWhereInput = new GraphQLInputObjectType({
     engineering: { type: StringFilter },
     createdAt: { type: DateTimeFilter },
     updatedAt: { type: DateTimeFilter },
-    projectId: { type: IntNullableFilter },
+    projectId: { type: StringFilter },
   }),
 })
 
@@ -5776,13 +5762,13 @@ export const DeviceCreateManyBuildingInputEnvelope = new GraphQLInputObjectType(
 export const ProjectCreateWithoutBuildingsInput = new GraphQLInputObjectType({
   name: 'ProjectCreateWithoutBuildingsInput',
   fields: () => ({
+    id: { type: GraphQLString },
     name: { type: new GraphQLNonNull(GraphQLString) },
-    slug: { type: new GraphQLNonNull(GraphQLString) },
+    slug: { type: GraphQLString },
     description: { type: GraphQLString },
     image: { type: FileCreateNestedOneWithoutProjectInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    authorId: { type: new GraphQLNonNull(GraphQLString) },
   }),
 })
 
@@ -5824,7 +5810,7 @@ export const DeviceUpdateManyWithWhereWithoutBuildingInput =
   })
 
 export const DeviceScalarWhereInput = new GraphQLInputObjectType({
-  name: 'DeviceScalarWhereInput',
+  name: 'DeviceScalarFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(DeviceScalarWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(DeviceScalarWhereInput)) },
@@ -5854,13 +5840,13 @@ export const ProjectUpsertWithoutBuildingsInput = new GraphQLInputObjectType({
 export const ProjectUpdateWithoutBuildingsInput = new GraphQLInputObjectType({
   name: 'ProjectUpdateWithoutBuildingsInput',
   fields: () => ({
+    id: { type: GraphQLString },
     name: { type: GraphQLString },
     slug: { type: GraphQLString },
     description: { type: GraphQLString },
     image: { type: FileUpdateOneWithoutProjectInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    authorId: { type: GraphQLString },
   }),
 })
 
@@ -5881,7 +5867,9 @@ export const BuildingCreateWithoutDevicesInput = new GraphQLInputObjectType({
     engineering: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Project: { type: ProjectCreateNestedOneWithoutBuildingsInput },
+    Project: {
+      type: new GraphQLNonNull(ProjectCreateNestedOneWithoutBuildingsInput),
+    },
   }),
 })
 
@@ -6239,7 +6227,7 @@ export const BuildingUpdateWithoutDevicesInput = new GraphQLInputObjectType({
     engineering: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Project: { type: ProjectUpdateOneWithoutBuildingsInput },
+    Project: { type: ProjectUpdateOneRequiredWithoutBuildingsInput },
   }),
 })
 
@@ -6272,7 +6260,7 @@ export const InputUpdateManyWithWhereWithoutDeviceInput =
   })
 
 export const InputScalarWhereInput = new GraphQLInputObjectType({
-  name: 'InputScalarWhereInput',
+  name: 'InputScalarFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(InputScalarWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(InputScalarWhereInput)) },
@@ -6328,7 +6316,7 @@ export const OutputUpdateManyWithWhereWithoutDeviceInput =
   })
 
 export const OutputScalarWhereInput = new GraphQLInputObjectType({
-  name: 'OutputScalarWhereInput',
+  name: 'OutputScalarFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(OutputScalarWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(OutputScalarWhereInput)) },
@@ -6384,7 +6372,7 @@ export const PidUpdateManyWithWhereWithoutDeviceInput =
   })
 
 export const PidScalarWhereInput = new GraphQLInputObjectType({
-  name: 'PidScalarWhereInput',
+  name: 'PidScalarFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(PidScalarWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(PidScalarWhereInput)) },
@@ -6441,7 +6429,7 @@ export const VariableUpdateManyWithWhereWithoutDeviceInput =
   })
 
 export const VariableScalarWhereInput = new GraphQLInputObjectType({
-  name: 'VariableScalarWhereInput',
+  name: 'VariableScalarFilter',
   fields: () => ({
     AND: {
       type: new GraphQLList(new GraphQLNonNull(VariableScalarWhereInput)),
@@ -6521,7 +6509,7 @@ export const ProgramUpdateManyWithWhereWithoutDeviceInput =
   })
 
 export const ProgramScalarWhereInput = new GraphQLInputObjectType({
-  name: 'ProgramScalarWhereInput',
+  name: 'ProgramScalarFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(ProgramScalarWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(ProgramScalarWhereInput)) },
@@ -6571,7 +6559,7 @@ export const HolidayUpdateManyWithWhereWithoutDeviceInput =
   })
 
 export const HolidayScalarWhereInput = new GraphQLInputObjectType({
-  name: 'HolidayScalarWhereInput',
+  name: 'HolidayScalarFilter',
   fields: () => ({
     AND: { type: new GraphQLList(new GraphQLNonNull(HolidayScalarWhereInput)) },
     OR: { type: new GraphQLList(new GraphQLNonNull(HolidayScalarWhereInput)) },
@@ -6619,7 +6607,7 @@ export const ScheduleUpdateManyWithWhereWithoutDeviceInput =
   })
 
 export const ScheduleScalarWhereInput = new GraphQLInputObjectType({
-  name: 'ScheduleScalarWhereInput',
+  name: 'ScheduleScalarFilter',
   fields: () => ({
     AND: {
       type: new GraphQLList(new GraphQLNonNull(ScheduleScalarWhereInput)),
@@ -7215,13 +7203,12 @@ export const GraphicCreateManyPictureInput = new GraphQLInputObjectType({
 export const ProjectCreateManyImageInput = new GraphQLInputObjectType({
   name: 'ProjectCreateManyImageInput',
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     name: { type: new GraphQLNonNull(GraphQLString) },
-    slug: { type: new GraphQLNonNull(GraphQLString) },
+    slug: { type: GraphQLString },
     description: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    authorId: { type: new GraphQLNonNull(GraphQLString) },
   }),
 })
 
@@ -7242,13 +7229,13 @@ export const GraphicUpdateWithoutPictureInput = new GraphQLInputObjectType({
 export const ProjectUpdateWithoutImageInput = new GraphQLInputObjectType({
   name: 'ProjectUpdateWithoutImageInput',
   fields: () => ({
+    id: { type: GraphQLString },
     name: { type: GraphQLString },
     slug: { type: GraphQLString },
     description: { type: GraphQLString },
     buildings: { type: BuildingUpdateManyWithoutProjectInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    authorId: { type: GraphQLString },
   }),
 })
 
