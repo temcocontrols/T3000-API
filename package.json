@@ -1,10 +1,10 @@
 {
-  "name": "app-library-api",
+  "name": "t3000-api",
   "version": "1.0.0",
   "main": "dist/server.js",
   "license": "MIT",
   "private": true,
-  "description": "Application Library System",
+  "description": "T3000 API, a storage of building dbs and hvac applications",
   "scripts": {
     "start": "NODE_ENV=production node -r dotenv/config dist/server",
     "dev": "nodemon --ext ts --exec \"npm -s run compile && NODE_ENV=development node -r dotenv/config dist/server\"",
