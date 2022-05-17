@@ -22,8 +22,6 @@
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
-    "@graphql-tools/delegate": "^8.7.6",
-    "@graphql-tools/wrap": "^8.4.15",
     "@paljs/plugins": "^4.0.18",
     "@prisma/client": "^3.12.0",
     "bcrypt": "^5.0.1",
@@ -42,8 +40,7 @@
     "node-cache": "^5.1.2",
     "node-fetch": "^2.6.6",
     "pluralize": "^8.0.0",
-    "sharp": "^0.30.3",
-    "t3000-interpretor": "file:t3000-interpretor"
+    "sharp": "^0.30.3"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.55",

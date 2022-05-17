@@ -49,7 +49,7 @@ enum AppStatus {
 model Project {
   id          String     @id @default(cuid())
   name        String     @db.VarChar(100)
-  slug        String?     @unique @db.VarChar(100)
+  slug        String?    @unique @db.VarChar(100)
   description String?
   imageFileId Int?
   image       File?      @relation(fields: [imageFileId], references: [id])
@@ -75,7 +75,7 @@ model Building {
   devices       Device[]
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
-  Project       Project         @relation(fields: [projectId], references: [id])
+  Project       Project           @relation(fields: [projectId], references: [id])
   projectId     String
 
   @@unique([title, projectId])
@@ -234,21 +234,22 @@ model Graphic {
 }
 
 model Schedule {
-  id          Int        @id @default(autoincrement())
-  index       Int        @db.SmallInt
-  label       String?    @db.VarChar(250)
+  id          Int            @id @default(autoincrement())
+  index       Int            @db.SmallInt
+  label       String?        @db.VarChar(250)
   fullLabel   String?
   autoManual  AutoManual
-  output      String?    @db.VarChar(30)
-  holiday1    String?    @db.VarChar(30)
-  status1     String?    @db.VarChar(30)
-  holiday2    String?    @db.VarChar(30)
-  status2     String?    @db.VarChar(30)
+  output      String?        @db.VarChar(30)
+  holiday1    String?        @db.VarChar(30)
+  status1     String?        @db.VarChar(30)
+  holiday2    String?        @db.VarChar(30)
+  status2     String?        @db.VarChar(30)
   binaryArray String?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  Device      Device?    @relation(fields: [deviceId], references: [id])
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  Device      Device?        @relation(fields: [deviceId], references: [id])
   deviceId    Int?
+  times       ScheduleTime[]
 
   @@unique([index, deviceId])
 }
@@ -268,4 +269,22 @@ model Holiday {
   deviceId    Int?
 
   @@unique([index, deviceId])
+}
+
+model ScheduleTime {
+  id         Int       @id @default(autoincrement())
+  status     String    @default("OFF") @db.VarChar(50)
+  monday     DateTime?
+  tuesday    DateTime?
+  wednesday  DateTime?
+  thursday   DateTime?
+  friday     DateTime?
+  saterday   DateTime?
+  sunday     DateTime?
+  holiday1   DateTime?
+  holiday2   DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Schedule   Schedule? @relation(fields: [scheduleId], references: [id])
+  scheduleId Int?
 }

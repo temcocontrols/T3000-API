@@ -2,6 +2,9 @@
 import { projectQueries } from './models/queries'
 import { projectMutations } from './models/mutations'
 /* 
+import { scheduleTimeSubscriptions } from './models/subscriptions'
+import { scheduleTimeQueries } from './models/queries'
+import { scheduleTimeMutations } from './models/mutations'
 import { deviceSubscriptions } from './models/subscriptions'
 import { deviceQueries } from './models/queries'
 import { deviceMutations } from './models/mutations'
@@ -44,6 +47,7 @@ export const schema = new GraphQLSchema({
     name: 'Query',
     fields: {
       // merge_the_query_fields_here
+      // ...scheduleTimeQueries,
       ...projectQueries,
       /* ...buildingQueries,
       ...deviceQueries,
@@ -63,6 +67,7 @@ export const schema = new GraphQLSchema({
     name: 'Mutation',
     fields: {
       // merge_the_mutation_fields_here
+      // ...scheduleTimeMutations,
       ...projectMutations,
       /*  
       ...buildingMutations,
@@ -84,6 +89,7 @@ export const schema = new GraphQLSchema({
     name: 'Subscription',
     fields: {
       // merge_the_subscription_fields_here
+      ...scheduleTimeSubscriptions,
       ...projectSubscriptions,
       ...buildingSubscriptions,
       ...deviceSubscriptions,

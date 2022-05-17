@@ -8,8 +8,13 @@ import {
   GraphQLObjectType,
 } from 'graphql'
 import { GraphQLDateTime, GraphQLJSON } from 'graphql-scalars'
-import { Device } from '../types'
-import { AutoManual } from '../enums'
+import { Device, ScheduleTime } from '../types'
+import { AutoManual, ScheduleTimeScalarFieldEnum } from '../enums'
+import {
+  ScheduleTimeOrderByWithRelationInput,
+  ScheduleTimeWhereInput,
+  ScheduleTimeWhereUniqueInput,
+} from '../inputs'
 
 export const Schedule = new GraphQLObjectType({
   name: 'Schedule',
@@ -59,6 +64,27 @@ export const Schedule = new GraphQLObjectType({
     deviceId: {
       type: GraphQLInt,
     },
+    times: {
+      type: new GraphQLNonNull(
+        new GraphQLList(new GraphQLNonNull(ScheduleTime)),
+      ),
+      args: {
+        where: { type: ScheduleTimeWhereInput },
+        orderBy: { type: ScheduleTimeOrderByWithRelationInput },
+        cursor: { type: ScheduleTimeWhereUniqueInput },
+        take: { type: GraphQLInt },
+        skip: { type: GraphQLInt },
+        distinct: {
+          type: new GraphQLList(
+            new GraphQLNonNull(ScheduleTimeScalarFieldEnum),
+          ),
+        },
+      },
+    },
+
+    _count: {
+      type: ScheduleCountOutputType,
+    },
   }),
 })
 
@@ -95,6 +121,13 @@ export const ScheduleGroupByOutputType = new GraphQLObjectType({
     _sum: { type: ScheduleSumAggregateOutputType },
     _min: { type: ScheduleMinAggregateOutputType },
     _max: { type: ScheduleMaxAggregateOutputType },
+  }),
+})
+
+export const ScheduleCountOutputType = new GraphQLObjectType({
+  name: 'ScheduleCountOutputType',
+  fields: () => ({
+    times: { type: GraphQLInt },
   }),
 })
 

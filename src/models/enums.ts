@@ -269,6 +269,26 @@ export const HolidayScalarFieldEnum = new GraphQLEnumType({
   },
 })
 
+export const ScheduleTimeScalarFieldEnum = new GraphQLEnumType({
+  name: 'ScheduleTimeScalarFieldEnum',
+  values: {
+    id: { value: 'id' },
+    status: { value: 'status' },
+    monday: { value: 'monday' },
+    tuesday: { value: 'tuesday' },
+    wednesday: { value: 'wednesday' },
+    thursday: { value: 'thursday' },
+    friday: { value: 'friday' },
+    saterday: { value: 'saterday' },
+    sunday: { value: 'sunday' },
+    holiday1: { value: 'holiday1' },
+    holiday2: { value: 'holiday2' },
+    createdAt: { value: 'createdAt' },
+    updatedAt: { value: 'updatedAt' },
+    scheduleId: { value: 'scheduleId' },
+  },
+})
+
 export const SortOrder = new GraphQLEnumType({
   name: 'SortOrder',
   values: {
