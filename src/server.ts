@@ -46,7 +46,7 @@ async function start() {
   await app.ready()
 
   app
-    .listen(process.env.PORT || 3000)
+    .listen(process.env.PORT || 3000, '0.0.0.0')
     .then(() =>
       console.log(
         `🚀 Server ready at https://sandbox.apollo.dev/?endpoint=${process.env.API_URL}/graphql`,
