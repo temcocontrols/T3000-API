@@ -22,14 +22,14 @@
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
+    "@fastify/cookie": "^6.0.0",
+    "@fastify/cors": "^7.0.0",
+    "@fastify/multipart": "^6.0.0",
     "@paljs/plugins": "^4.0.18",
     "@prisma/client": "^3.12.0",
     "change-case": "^4.1.2",
     "dotenv": "^16.0.0",
     "fastify": "^3.22.1",
-    "fastify-cookie": "^5.3.1",
-    "fastify-cors": "^6.0.2",
-    "fastify-multipart": "^5.1.0",
     "flat": "^5.0.2",
     "graphql": "^16.2.0",
     "graphql-middleware": "^6.1.24",

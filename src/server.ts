@@ -21,12 +21,12 @@ const schemaWithMiddlewares = applyMiddleware(
 const app = fastify()
 
 async function start() {
-  app.register(require('fastify-cors'), {
+  app.register(require('@fastify/cors'), {
     origin: true,
     credentials: true,
   })
-  app.register(require('fastify-cookie'))
-  app.register(require('fastify-multipart'))
+  app.register(require('@fastify/cookie'))
+  app.register(require('@fastify/multipart'))
 
   app.register(require('./files'))
 
