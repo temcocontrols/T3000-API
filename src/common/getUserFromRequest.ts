@@ -15,6 +15,6 @@ export function getUserFromRequest(req, reply) {
       throw new Error('Invalid access key!')
     }
   } else {
-    return { role: process.env.UNAUTHORIZED_ROLE || 'UNAUTHORIZED' }
+    return { role: 'UNAUTHORIZED' }
   }
 }

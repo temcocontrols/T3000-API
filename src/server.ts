@@ -8,7 +8,6 @@ import {
   auth /* , subscriptionsMiddleware */,
   resolverMiddlewares,
 } from './middlewares'
-import { NoIntrospection } from './common/noIntrospection'
 
 const schemaWithMiddlewares = applyMiddleware(
   mainSchema,
@@ -33,14 +32,13 @@ async function start() {
   app.register(mercurius, {
     schema: schemaWithMiddlewares,
     context: createContext,
-    graphiql: process.env.INTROSPECTIONS === 'on',
+    graphiql: true,
     /*  subscription: {
       context: (_, req) => {
         return createContext(req)
       },
     }, */
     allowBatchedQueries: true,
-    validationRules: [NoIntrospection],
   })
 
   await app.ready()
