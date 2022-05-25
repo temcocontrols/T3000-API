@@ -8,9 +8,8 @@
   "scripts": {
     "start": "NODE_ENV=production node -r dotenv/config dist/server",
     "dev": "nodemon --ext ts --exec \"npm -s run compile && NODE_ENV=development node -r dotenv/config dist/server\"",
+    "build": "npm -s run clean && npm -s run compile",
     "clean": "rm -rf dist",
-    "rename:inputs": "replace-in-file ** --configFile=replace-config.js",
-    "build": "npm -s run rename:inputs && npm -s run clean && npm -s run compile",
     "compile": "swc src -d dist --config-file swcrc.json",
     "prisma:generate": "prisma generate",
     "prisma:studio": "prisma studio",
@@ -19,7 +18,8 @@
     "prisma:db-pull": "prisma db pull",
     "prettier": "prettier --write src",
     "docs:dev": "vuepress dev docs --clean-cache",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "rename:inputs": "replace-in-file ** --configFile=replace-config.js"
   },
   "dependencies": {
     "@fastify/cookie": "^6.0.0",
@@ -31,7 +31,7 @@
     "dotenv": "^16.0.0",
     "fastify": "^3.22.1",
     "flat": "^5.0.2",
-    "graphql": "^16.2.0",
+    "graphql": "^15.8.0",
     "graphql-middleware": "^6.1.24",
     "graphql-scalars": "^1.17.0",
     "jsonwebtoken": "^8.5.1",
@@ -62,5 +62,5 @@
     "trailingComma": "all"
   },
   "repository": "",
-  "author": "Alaa Rihan"
+  "author": "Temco Controls"
 }
