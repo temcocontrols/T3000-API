@@ -1,6 +1,7 @@
 import fastify from 'fastify'
 import mercurius from 'mercurius'
 import { applyMiddleware } from 'graphql-middleware'
+import { networkInterfaces } from 'os'
 import { schema as mainSchema } from './schema'
 import { createContext } from './context'
 import {
@@ -42,14 +43,21 @@ async function start() {
   })
 
   await app.ready()
-
+  const interfaces = networkInterfaces()
   app
     .listen(process.env.PORT || 3000, '0.0.0.0')
-    .then(() =>
-      console.log(
-        `🚀 Server ready at https://sandbox.apollo.dev/?endpoint=${process.env.API_URL}/graphql`,
-      ),
-    )
+    .then(() => {
+      console.log(`🚀 Server ready at:`)
+      for (const key in interfaces) {
+        if (Object.prototype.hasOwnProperty.call(interfaces, key)) {
+          console.log(
+            `http://${interfaces[key][0].address}:${
+              process.env.PORT || 3000
+            }/graphql`,
+          )
+        }
+      }
+    })
     .catch((err) => {
       console.log(err)
     })
