@@ -9,6 +9,10 @@ export const en: SidebarConfig = {
       children: ['/README.md'],
     },
     {
+      text: 'Installing',
+      children: ['/Installing.md'],
+    },
+    {
       text: 'Getting Started',
       children: ['/Getting-started.md', '/GraphQL.md'],
     },
