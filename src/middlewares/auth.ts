@@ -1,4 +1,5 @@
-import { ErrorWithProps } from 'mercurius'
+const mercurius = require('mercurius')
+const { ErrorWithProps } = mercurius
 export const auth = async (resolve, root, args, context, info) => {
   if (['Mutation', 'Query'].includes(info.path.typename)) {
     // const ext = info.parentType.getFields()[info.fieldName].extensions

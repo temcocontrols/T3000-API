@@ -21,6 +21,13 @@ const schemaWithMiddlewares = applyMiddleware(
 const app = fastify()
 
 async function start() {
+  app.register(async (fas) => {
+    fas.setErrorHandler(async (err) => {
+      console.log(err.message)
+      throw new Error('server error')
+    })
+  })
+
   app.register(require('@fastify/cors'), {
     origin: true,
     credentials: true,
@@ -45,7 +52,7 @@ async function start() {
   await app.ready()
   const interfaces = networkInterfaces()
   app
-    .listen(process.env.PORT || 3000, '0.0.0.0')
+    .listen({ port: parseInt(process.env.PORT) || 3000, host: '0.0.0.0' })
     .then(() => {
       console.log(`🚀 Server ready at:`)
       for (const key in interfaces) {
