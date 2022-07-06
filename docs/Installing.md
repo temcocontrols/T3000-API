@@ -167,15 +167,23 @@ PORT=3000
 
 When you finish press `CTRL` + `X` then `y` and press `Enter` twice to save the changes.
 
+### Creating the API tables in the database
+
+Use this command to auto create the required tables in the database
+
+```
+npm run prisma:db-push
+```
+
 ### Starting the API
 
-Now let us run the API:
+Now you can run the API like this:
 
 ```
 npm start
 ```
 
-When the API start successfully, you will see your API URL as this example (Note that, the IP address might be different in your device ):
+When the API start successfully, you will see your API URL like in the following example (Note that, the IP address might be different in your device ):
 
 ```
 🚀 Server ready at:
@@ -183,4 +191,4 @@ http://127.0.0.1:3000/graphql
 http://192.168.0.109:3000/graphql
 ```
 
-If you want to use the API from any device, you make sure that that device is connected to the same network as your API then you can use the API by the URL that you see above.
+As you see you will get multiple urls to use, the first one will work only on the Pi itself and the other/s depend on your local network, You can access the API from any device in the same network as your API Pi, just make sure that your device is connected to the same network as your API.
