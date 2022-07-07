@@ -1,7 +1,6 @@
 # T3000 API
 
-T3000 API, a storage of building dbs and hvac applications
-This is the API for interacting with the database. 
+T3000 API,This is the API for interacting with the building database. 
 
 For the full documentation check [the web documentation](https://temcocontrols-app-lib-docs.netlify.app)
 
