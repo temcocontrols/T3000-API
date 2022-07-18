@@ -194,7 +194,7 @@ model Pid {
   id            Int        @id @default(autoincrement())
   index         Int        @db.SmallInt
   input         String?    @db.VarChar(30)
-  inputValue    Float?
+  inputValue    String?
   inputUnits    String?    @db.VarChar(30)
   autoManual    AutoManual
   output        String?    @db.VarChar(30)

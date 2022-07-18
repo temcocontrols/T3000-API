@@ -24,7 +24,7 @@ export const Pid = new GraphQLObjectType({
       type: GraphQLString,
     },
     inputValue: {
-      type: GraphQLFloat,
+      type: GraphQLString,
     },
     inputUnits: {
       type: GraphQLString,
