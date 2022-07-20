@@ -1415,15 +1415,15 @@ export const ScheduleTimeWhereInput = new GraphQLInputObjectType({
     NOT: { type: new GraphQLList(new GraphQLNonNull(ScheduleTimeWhereInput)) },
     id: { type: IntFilter },
     status: { type: StringFilter },
-    monday: { type: DateTimeNullableFilter },
-    tuesday: { type: DateTimeNullableFilter },
-    wednesday: { type: DateTimeNullableFilter },
-    thursday: { type: DateTimeNullableFilter },
-    friday: { type: DateTimeNullableFilter },
-    saterday: { type: DateTimeNullableFilter },
-    sunday: { type: DateTimeNullableFilter },
-    holiday1: { type: DateTimeNullableFilter },
-    holiday2: { type: DateTimeNullableFilter },
+    monday: { type: StringNullableFilter },
+    tuesday: { type: StringNullableFilter },
+    wednesday: { type: StringNullableFilter },
+    thursday: { type: StringNullableFilter },
+    friday: { type: StringNullableFilter },
+    saterday: { type: StringNullableFilter },
+    sunday: { type: StringNullableFilter },
+    holiday1: { type: StringNullableFilter },
+    holiday2: { type: StringNullableFilter },
     createdAt: { type: DateTimeFilter },
     updatedAt: { type: DateTimeFilter },
     Schedule: { type: ScheduleWhereInput },
@@ -1506,15 +1506,15 @@ export const ScheduleTimeScalarWhereWithAggregatesInput =
       },
       id: { type: IntWithAggregatesFilter },
       status: { type: StringWithAggregatesFilter },
-      monday: { type: DateTimeNullableWithAggregatesFilter },
-      tuesday: { type: DateTimeNullableWithAggregatesFilter },
-      wednesday: { type: DateTimeNullableWithAggregatesFilter },
-      thursday: { type: DateTimeNullableWithAggregatesFilter },
-      friday: { type: DateTimeNullableWithAggregatesFilter },
-      saterday: { type: DateTimeNullableWithAggregatesFilter },
-      sunday: { type: DateTimeNullableWithAggregatesFilter },
-      holiday1: { type: DateTimeNullableWithAggregatesFilter },
-      holiday2: { type: DateTimeNullableWithAggregatesFilter },
+      monday: { type: StringNullableWithAggregatesFilter },
+      tuesday: { type: StringNullableWithAggregatesFilter },
+      wednesday: { type: StringNullableWithAggregatesFilter },
+      thursday: { type: StringNullableWithAggregatesFilter },
+      friday: { type: StringNullableWithAggregatesFilter },
+      saterday: { type: StringNullableWithAggregatesFilter },
+      sunday: { type: StringNullableWithAggregatesFilter },
+      holiday1: { type: StringNullableWithAggregatesFilter },
+      holiday2: { type: StringNullableWithAggregatesFilter },
       createdAt: { type: DateTimeWithAggregatesFilter },
       updatedAt: { type: DateTimeWithAggregatesFilter },
       scheduleId: { type: IntNullableWithAggregatesFilter },
@@ -1548,8 +1548,8 @@ export const FileUpdateInput = new GraphQLInputObjectType({
     updatedAt: { type: GraphQLDateTime },
     meta: { type: GraphQLJSON },
     tags: { type: new GraphQLList(new GraphQLNonNull(GraphQLString)) },
-    Graphic: { type: GraphicUpdateManyWithoutPictureInput },
-    Project: { type: ProjectUpdateManyWithoutImageInput },
+    Graphic: { type: GraphicUpdateManyWithoutPictureNestedInput },
+    Project: { type: ProjectUpdateManyWithoutImageNestedInput },
   }),
 })
 
@@ -1603,8 +1603,8 @@ export const ProjectUpdateInput = new GraphQLInputObjectType({
     name: { type: GraphQLString },
     slug: { type: GraphQLString },
     description: { type: GraphQLString },
-    image: { type: FileUpdateOneWithoutProjectInput },
-    buildings: { type: BuildingUpdateManyWithoutProjectInput },
+    image: { type: FileUpdateOneWithoutProjectNestedInput },
+    buildings: { type: BuildingUpdateManyWithoutProjectNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -1674,10 +1674,10 @@ export const BuildingUpdateInput = new GraphQLInputObjectType({
     street: { type: GraphQLString },
     zip: { type: GraphQLString },
     engineering: { type: GraphQLString },
-    devices: { type: DeviceUpdateManyWithoutBuildingInput },
+    devices: { type: DeviceUpdateManyWithoutBuildingNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Project: { type: ProjectUpdateOneRequiredWithoutBuildingsInput },
+    Project: { type: ProjectUpdateOneRequiredWithoutBuildingsNestedInput },
   }),
 })
 
@@ -1757,15 +1757,15 @@ export const DeviceUpdateInput = new GraphQLInputObjectType({
     networkId: { type: GraphQLInt },
     floor: { type: GraphQLString },
     room: { type: GraphQLString },
-    building: { type: BuildingUpdateOneWithoutDevicesInput },
-    inputs: { type: InputUpdateManyWithoutDeviceInput },
-    outputs: { type: OutputUpdateManyWithoutDeviceInput },
-    pids: { type: PidUpdateManyWithoutDeviceInput },
-    variables: { type: VariableUpdateManyWithoutDeviceInput },
-    graphics: { type: GraphicUpdateManyWithoutDeviceInput },
-    programs: { type: ProgramUpdateManyWithoutDeviceInput },
-    holidays: { type: HolidayUpdateManyWithoutDeviceInput },
-    schedules: { type: ScheduleUpdateManyWithoutDeviceInput },
+    building: { type: BuildingUpdateOneWithoutDevicesNestedInput },
+    inputs: { type: InputUpdateManyWithoutDeviceNestedInput },
+    outputs: { type: OutputUpdateManyWithoutDeviceNestedInput },
+    pids: { type: PidUpdateManyWithoutDeviceNestedInput },
+    variables: { type: VariableUpdateManyWithoutDeviceNestedInput },
+    graphics: { type: GraphicUpdateManyWithoutDeviceNestedInput },
+    programs: { type: ProgramUpdateManyWithoutDeviceNestedInput },
+    holidays: { type: HolidayUpdateManyWithoutDeviceNestedInput },
+    schedules: { type: ScheduleUpdateManyWithoutDeviceNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -1847,7 +1847,7 @@ export const InputUpdateInput = new GraphQLInputObjectType({
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Device: { type: DeviceUpdateOneWithoutInputsInput },
+    Device: { type: DeviceUpdateOneWithoutInputsNestedInput },
   }),
 })
 
@@ -1943,7 +1943,7 @@ export const OutputUpdateInput = new GraphQLInputObjectType({
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Device: { type: DeviceUpdateOneWithoutOutputsInput },
+    Device: { type: DeviceUpdateOneWithoutOutputsNestedInput },
   }),
 })
 
@@ -2023,7 +2023,7 @@ export const VariableUpdateInput = new GraphQLInputObjectType({
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Device: { type: DeviceUpdateOneWithoutVariablesInput },
+    Device: { type: DeviceUpdateOneWithoutVariablesNestedInput },
   }),
 })
 
@@ -2091,7 +2091,7 @@ export const ProgramUpdateInput = new GraphQLInputObjectType({
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Device: { type: DeviceUpdateOneWithoutProgramsInput },
+    Device: { type: DeviceUpdateOneWithoutProgramsNestedInput },
   }),
 })
 
@@ -2177,7 +2177,7 @@ export const PidUpdateInput = new GraphQLInputObjectType({
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Device: { type: DeviceUpdateOneWithoutPidsInput },
+    Device: { type: DeviceUpdateOneWithoutPidsNestedInput },
   }),
 })
 
@@ -2252,12 +2252,12 @@ export const GraphicUpdateInput = new GraphQLInputObjectType({
     index: { type: GraphQLInt },
     label: { type: GraphQLString },
     fullLabel: { type: GraphQLString },
-    picture: { type: FileUpdateOneWithoutGraphicInput },
+    picture: { type: FileUpdateOneWithoutGraphicNestedInput },
     elementCount: { type: GraphQLInt },
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Device: { type: DeviceUpdateOneWithoutGraphicsInput },
+    Device: { type: DeviceUpdateOneWithoutGraphicsNestedInput },
   }),
 })
 
@@ -2325,8 +2325,8 @@ export const ScheduleUpdateInput = new GraphQLInputObjectType({
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Device: { type: DeviceUpdateOneWithoutSchedulesInput },
-    times: { type: ScheduleTimeUpdateManyWithoutScheduleInput },
+    Device: { type: DeviceUpdateOneWithoutSchedulesNestedInput },
+    times: { type: ScheduleTimeUpdateManyWithoutScheduleNestedInput },
   }),
 })
 
@@ -2396,7 +2396,7 @@ export const HolidayUpdateInput = new GraphQLInputObjectType({
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Device: { type: DeviceUpdateOneWithoutHolidaysInput },
+    Device: { type: DeviceUpdateOneWithoutHolidaysNestedInput },
   }),
 })
 
@@ -2436,15 +2436,15 @@ export const ScheduleTimeCreateInput = new GraphQLInputObjectType({
   name: 'ScheduleTimeCreateInput',
   fields: () => ({
     status: { type: GraphQLString },
-    monday: { type: GraphQLDateTime },
-    tuesday: { type: GraphQLDateTime },
-    wednesday: { type: GraphQLDateTime },
-    thursday: { type: GraphQLDateTime },
-    friday: { type: GraphQLDateTime },
-    saterday: { type: GraphQLDateTime },
-    sunday: { type: GraphQLDateTime },
-    holiday1: { type: GraphQLDateTime },
-    holiday2: { type: GraphQLDateTime },
+    monday: { type: GraphQLString },
+    tuesday: { type: GraphQLString },
+    wednesday: { type: GraphQLString },
+    thursday: { type: GraphQLString },
+    friday: { type: GraphQLString },
+    saterday: { type: GraphQLString },
+    sunday: { type: GraphQLString },
+    holiday1: { type: GraphQLString },
+    holiday2: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
     Schedule: { type: ScheduleCreateNestedOneWithoutTimesInput },
@@ -2455,18 +2455,18 @@ export const ScheduleTimeUpdateInput = new GraphQLInputObjectType({
   name: 'ScheduleTimeUpdateInput',
   fields: () => ({
     status: { type: GraphQLString },
-    monday: { type: GraphQLDateTime },
-    tuesday: { type: GraphQLDateTime },
-    wednesday: { type: GraphQLDateTime },
-    thursday: { type: GraphQLDateTime },
-    friday: { type: GraphQLDateTime },
-    saterday: { type: GraphQLDateTime },
-    sunday: { type: GraphQLDateTime },
-    holiday1: { type: GraphQLDateTime },
-    holiday2: { type: GraphQLDateTime },
+    monday: { type: GraphQLString },
+    tuesday: { type: GraphQLString },
+    wednesday: { type: GraphQLString },
+    thursday: { type: GraphQLString },
+    friday: { type: GraphQLString },
+    saterday: { type: GraphQLString },
+    sunday: { type: GraphQLString },
+    holiday1: { type: GraphQLString },
+    holiday2: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Schedule: { type: ScheduleUpdateOneWithoutTimesInput },
+    Schedule: { type: ScheduleUpdateOneWithoutTimesNestedInput },
   }),
 })
 
@@ -2475,15 +2475,15 @@ export const ScheduleTimeCreateManyInput = new GraphQLInputObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     status: { type: GraphQLString },
-    monday: { type: GraphQLDateTime },
-    tuesday: { type: GraphQLDateTime },
-    wednesday: { type: GraphQLDateTime },
-    thursday: { type: GraphQLDateTime },
-    friday: { type: GraphQLDateTime },
-    saterday: { type: GraphQLDateTime },
-    sunday: { type: GraphQLDateTime },
-    holiday1: { type: GraphQLDateTime },
-    holiday2: { type: GraphQLDateTime },
+    monday: { type: GraphQLString },
+    tuesday: { type: GraphQLString },
+    wednesday: { type: GraphQLString },
+    thursday: { type: GraphQLString },
+    friday: { type: GraphQLString },
+    saterday: { type: GraphQLString },
+    sunday: { type: GraphQLString },
+    holiday1: { type: GraphQLString },
+    holiday2: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
     scheduleId: { type: GraphQLInt },
@@ -2494,15 +2494,15 @@ export const ScheduleTimeUpdateManyMutationInput = new GraphQLInputObjectType({
   name: 'ScheduleTimeUpdateManyMutationInput',
   fields: () => ({
     status: { type: GraphQLString },
-    monday: { type: GraphQLDateTime },
-    tuesday: { type: GraphQLDateTime },
-    wednesday: { type: GraphQLDateTime },
-    thursday: { type: GraphQLDateTime },
-    friday: { type: GraphQLDateTime },
-    saterday: { type: GraphQLDateTime },
-    sunday: { type: GraphQLDateTime },
-    holiday1: { type: GraphQLDateTime },
-    holiday2: { type: GraphQLDateTime },
+    monday: { type: GraphQLString },
+    tuesday: { type: GraphQLString },
+    wednesday: { type: GraphQLString },
+    thursday: { type: GraphQLString },
+    friday: { type: GraphQLString },
+    saterday: { type: GraphQLString },
+    sunday: { type: GraphQLString },
+    holiday1: { type: GraphQLString },
+    holiday2: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -2572,6 +2572,17 @@ export const JsonNullableFilter = new GraphQLInputObjectType({
   name: 'JsonNullableFilter',
   fields: () => ({
     equals: { type: GraphQLJSON },
+    path: { type: new GraphQLList(new GraphQLNonNull(GraphQLString)) },
+    string_contains: { type: GraphQLString },
+    string_starts_with: { type: GraphQLString },
+    string_ends_with: { type: GraphQLString },
+    array_contains: { type: GraphQLJSON },
+    array_starts_with: { type: GraphQLJSON },
+    array_ends_with: { type: GraphQLJSON },
+    lt: { type: GraphQLJSON },
+    lte: { type: GraphQLJSON },
+    gt: { type: GraphQLJSON },
+    gte: { type: GraphQLJSON },
     not: { type: GraphQLJSON },
   }),
 })
@@ -2756,6 +2767,17 @@ export const JsonNullableWithAggregatesFilter = new GraphQLInputObjectType({
   name: 'JsonNullableWithAggregatesFilter',
   fields: () => ({
     equals: { type: GraphQLJSON },
+    path: { type: new GraphQLList(new GraphQLNonNull(GraphQLString)) },
+    string_contains: { type: GraphQLString },
+    string_starts_with: { type: GraphQLString },
+    string_ends_with: { type: GraphQLString },
+    array_contains: { type: GraphQLJSON },
+    array_starts_with: { type: GraphQLJSON },
+    array_ends_with: { type: GraphQLJSON },
+    lt: { type: GraphQLJSON },
+    lte: { type: GraphQLJSON },
+    gt: { type: GraphQLJSON },
+    gte: { type: GraphQLJSON },
     not: { type: GraphQLJSON },
     _count: { type: NestedIntNullableFilter },
     _min: { type: NestedJsonNullableFilter },
@@ -3751,7 +3773,6 @@ export const PidAvgOrderByAggregateInput = new GraphQLInputObjectType({
   fields: () => ({
     id: { type: SortOrder },
     index: { type: SortOrder },
-    inputValue: { type: SortOrder },
     setpointValue: { type: SortOrder },
     pidProp: { type: SortOrder },
     pidInt: { type: SortOrder },
@@ -3818,7 +3839,6 @@ export const PidSumOrderByAggregateInput = new GraphQLInputObjectType({
   fields: () => ({
     id: { type: SortOrder },
     index: { type: SortOrder },
-    inputValue: { type: SortOrder },
     setpointValue: { type: SortOrder },
     pidProp: { type: SortOrder },
     pidInt: { type: SortOrder },
@@ -4098,20 +4118,6 @@ export const HolidaySumOrderByAggregateInput = new GraphQLInputObjectType({
   }),
 })
 
-export const DateTimeNullableFilter = new GraphQLInputObjectType({
-  name: 'DateTimeNullableFilter',
-  fields: () => ({
-    equals: { type: GraphQLDateTime },
-    in: { type: new GraphQLList(GraphQLDateTime) },
-    notIn: { type: new GraphQLList(GraphQLDateTime) },
-    lt: { type: GraphQLDateTime },
-    lte: { type: GraphQLDateTime },
-    gt: { type: GraphQLDateTime },
-    gte: { type: GraphQLDateTime },
-    not: { type: NestedDateTimeNullableFilter },
-  }),
-})
-
 export const ScheduleRelationFilter = new GraphQLInputObjectType({
   name: 'ScheduleRelationFilter',
   fields: () => ({
@@ -4194,23 +4200,6 @@ export const ScheduleTimeSumOrderByAggregateInput = new GraphQLInputObjectType({
   fields: () => ({
     id: { type: SortOrder },
     scheduleId: { type: SortOrder },
-  }),
-})
-
-export const DateTimeNullableWithAggregatesFilter = new GraphQLInputObjectType({
-  name: 'DateTimeNullableWithAggregatesFilter',
-  fields: () => ({
-    equals: { type: GraphQLDateTime },
-    in: { type: new GraphQLList(GraphQLDateTime) },
-    notIn: { type: new GraphQLList(GraphQLDateTime) },
-    lt: { type: GraphQLDateTime },
-    lte: { type: GraphQLDateTime },
-    gt: { type: GraphQLDateTime },
-    gte: { type: GraphQLDateTime },
-    not: { type: NestedDateTimeNullableWithAggregatesFilter },
-    _count: { type: NestedIntNullableFilter },
-    _min: { type: NestedDateTimeNullableFilter },
-    _max: { type: NestedDateTimeNullableFilter },
   }),
 })
 
@@ -4302,93 +4291,101 @@ export const FileUpdatetagsInput = new GraphQLInputObjectType({
   }),
 })
 
-export const GraphicUpdateManyWithoutPictureInput = new GraphQLInputObjectType({
-  name: 'GraphicUpdateManyWithoutPictureInput',
-  fields: () => ({
-    create: {
-      type: new GraphQLList(
-        new GraphQLNonNull(GraphicCreateWithoutPictureInput),
-      ),
-    },
-    connectOrCreate: {
-      type: new GraphQLList(
-        new GraphQLNonNull(GraphicCreateOrConnectWithoutPictureInput),
-      ),
-    },
-    upsert: {
-      type: new GraphQLList(
-        new GraphQLNonNull(GraphicUpsertWithWhereUniqueWithoutPictureInput),
-      ),
-    },
-    createMany: { type: GraphicCreateManyPictureInputEnvelope },
-    set: { type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)) },
-    disconnect: {
-      type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)),
-    },
-    delete: {
-      type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)),
-    },
-    connect: {
-      type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)),
-    },
-    update: {
-      type: new GraphQLList(
-        new GraphQLNonNull(GraphicUpdateWithWhereUniqueWithoutPictureInput),
-      ),
-    },
-    updateMany: {
-      type: new GraphQLList(
-        new GraphQLNonNull(GraphicUpdateManyWithWhereWithoutPictureInput),
-      ),
-    },
-    deleteMany: {
-      type: new GraphQLList(new GraphQLNonNull(GraphicScalarWhereInput)),
-    },
-  }),
-})
+export const GraphicUpdateManyWithoutPictureNestedInput =
+  new GraphQLInputObjectType({
+    name: 'GraphicUpdateManyWithoutPictureNestedInput',
+    fields: () => ({
+      create: {
+        type: new GraphQLList(
+          new GraphQLNonNull(GraphicCreateWithoutPictureInput),
+        ),
+      },
+      connectOrCreate: {
+        type: new GraphQLList(
+          new GraphQLNonNull(GraphicCreateOrConnectWithoutPictureInput),
+        ),
+      },
+      upsert: {
+        type: new GraphQLList(
+          new GraphQLNonNull(GraphicUpsertWithWhereUniqueWithoutPictureInput),
+        ),
+      },
+      createMany: { type: GraphicCreateManyPictureInputEnvelope },
+      set: {
+        type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)),
+      },
+      disconnect: {
+        type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)),
+      },
+      delete: {
+        type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)),
+      },
+      connect: {
+        type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)),
+      },
+      update: {
+        type: new GraphQLList(
+          new GraphQLNonNull(GraphicUpdateWithWhereUniqueWithoutPictureInput),
+        ),
+      },
+      updateMany: {
+        type: new GraphQLList(
+          new GraphQLNonNull(GraphicUpdateManyWithWhereWithoutPictureInput),
+        ),
+      },
+      deleteMany: {
+        type: new GraphQLList(new GraphQLNonNull(GraphicScalarWhereInput)),
+      },
+    }),
+  })
 
-export const ProjectUpdateManyWithoutImageInput = new GraphQLInputObjectType({
-  name: 'ProjectUpdateManyWithoutImageInput',
-  fields: () => ({
-    create: {
-      type: new GraphQLList(new GraphQLNonNull(ProjectCreateWithoutImageInput)),
-    },
-    connectOrCreate: {
-      type: new GraphQLList(
-        new GraphQLNonNull(ProjectCreateOrConnectWithoutImageInput),
-      ),
-    },
-    upsert: {
-      type: new GraphQLList(
-        new GraphQLNonNull(ProjectUpsertWithWhereUniqueWithoutImageInput),
-      ),
-    },
-    createMany: { type: ProjectCreateManyImageInputEnvelope },
-    set: { type: new GraphQLList(new GraphQLNonNull(ProjectWhereUniqueInput)) },
-    disconnect: {
-      type: new GraphQLList(new GraphQLNonNull(ProjectWhereUniqueInput)),
-    },
-    delete: {
-      type: new GraphQLList(new GraphQLNonNull(ProjectWhereUniqueInput)),
-    },
-    connect: {
-      type: new GraphQLList(new GraphQLNonNull(ProjectWhereUniqueInput)),
-    },
-    update: {
-      type: new GraphQLList(
-        new GraphQLNonNull(ProjectUpdateWithWhereUniqueWithoutImageInput),
-      ),
-    },
-    updateMany: {
-      type: new GraphQLList(
-        new GraphQLNonNull(ProjectUpdateManyWithWhereWithoutImageInput),
-      ),
-    },
-    deleteMany: {
-      type: new GraphQLList(new GraphQLNonNull(ProjectScalarWhereInput)),
-    },
-  }),
-})
+export const ProjectUpdateManyWithoutImageNestedInput =
+  new GraphQLInputObjectType({
+    name: 'ProjectUpdateManyWithoutImageNestedInput',
+    fields: () => ({
+      create: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ProjectCreateWithoutImageInput),
+        ),
+      },
+      connectOrCreate: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ProjectCreateOrConnectWithoutImageInput),
+        ),
+      },
+      upsert: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ProjectUpsertWithWhereUniqueWithoutImageInput),
+        ),
+      },
+      createMany: { type: ProjectCreateManyImageInputEnvelope },
+      set: {
+        type: new GraphQLList(new GraphQLNonNull(ProjectWhereUniqueInput)),
+      },
+      disconnect: {
+        type: new GraphQLList(new GraphQLNonNull(ProjectWhereUniqueInput)),
+      },
+      delete: {
+        type: new GraphQLList(new GraphQLNonNull(ProjectWhereUniqueInput)),
+      },
+      connect: {
+        type: new GraphQLList(new GraphQLNonNull(ProjectWhereUniqueInput)),
+      },
+      update: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ProjectUpdateWithWhereUniqueWithoutImageInput),
+        ),
+      },
+      updateMany: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ProjectUpdateManyWithWhereWithoutImageInput),
+        ),
+      },
+      deleteMany: {
+        type: new GraphQLList(new GraphQLNonNull(ProjectScalarWhereInput)),
+      },
+    }),
+  })
 
 export const IntFieldUpdateOperationsInput = new GraphQLInputObjectType({
   name: 'IntFieldUpdateOperationsInput',
@@ -4440,22 +4437,23 @@ export const NullableStringFieldUpdateOperationsInput =
     }),
   })
 
-export const FileUpdateOneWithoutProjectInput = new GraphQLInputObjectType({
-  name: 'FileUpdateOneWithoutProjectInput',
-  fields: () => ({
-    create: { type: FileCreateWithoutProjectInput },
-    connectOrCreate: { type: FileCreateOrConnectWithoutProjectInput },
-    upsert: { type: FileUpsertWithoutProjectInput },
-    disconnect: { type: GraphQLBoolean },
-    delete: { type: GraphQLBoolean },
-    connect: { type: FileWhereUniqueInput },
-    update: { type: FileUpdateWithoutProjectInput },
-  }),
-})
+export const FileUpdateOneWithoutProjectNestedInput =
+  new GraphQLInputObjectType({
+    name: 'FileUpdateOneWithoutProjectNestedInput',
+    fields: () => ({
+      create: { type: FileCreateWithoutProjectInput },
+      connectOrCreate: { type: FileCreateOrConnectWithoutProjectInput },
+      upsert: { type: FileUpsertWithoutProjectInput },
+      disconnect: { type: GraphQLBoolean },
+      delete: { type: GraphQLBoolean },
+      connect: { type: FileWhereUniqueInput },
+      update: { type: FileUpdateWithoutProjectInput },
+    }),
+  })
 
-export const BuildingUpdateManyWithoutProjectInput = new GraphQLInputObjectType(
-  {
-    name: 'BuildingUpdateManyWithoutProjectInput',
+export const BuildingUpdateManyWithoutProjectNestedInput =
+  new GraphQLInputObjectType({
+    name: 'BuildingUpdateManyWithoutProjectNestedInput',
     fields: () => ({
       create: {
         type: new GraphQLList(
@@ -4499,8 +4497,7 @@ export const BuildingUpdateManyWithoutProjectInput = new GraphQLInputObjectType(
         type: new GraphQLList(new GraphQLNonNull(BuildingScalarWhereInput)),
       },
     }),
-  },
-)
+  })
 
 export const DeviceCreateNestedManyWithoutBuildingInput =
   new GraphQLInputObjectType({
@@ -4541,54 +4538,57 @@ export const NullableEnumBuildingProtocolFieldUpdateOperationsInput =
     }),
   })
 
-export const DeviceUpdateManyWithoutBuildingInput = new GraphQLInputObjectType({
-  name: 'DeviceUpdateManyWithoutBuildingInput',
-  fields: () => ({
-    create: {
-      type: new GraphQLList(
-        new GraphQLNonNull(DeviceCreateWithoutBuildingInput),
-      ),
-    },
-    connectOrCreate: {
-      type: new GraphQLList(
-        new GraphQLNonNull(DeviceCreateOrConnectWithoutBuildingInput),
-      ),
-    },
-    upsert: {
-      type: new GraphQLList(
-        new GraphQLNonNull(DeviceUpsertWithWhereUniqueWithoutBuildingInput),
-      ),
-    },
-    createMany: { type: DeviceCreateManyBuildingInputEnvelope },
-    set: { type: new GraphQLList(new GraphQLNonNull(DeviceWhereUniqueInput)) },
-    disconnect: {
-      type: new GraphQLList(new GraphQLNonNull(DeviceWhereUniqueInput)),
-    },
-    delete: {
-      type: new GraphQLList(new GraphQLNonNull(DeviceWhereUniqueInput)),
-    },
-    connect: {
-      type: new GraphQLList(new GraphQLNonNull(DeviceWhereUniqueInput)),
-    },
-    update: {
-      type: new GraphQLList(
-        new GraphQLNonNull(DeviceUpdateWithWhereUniqueWithoutBuildingInput),
-      ),
-    },
-    updateMany: {
-      type: new GraphQLList(
-        new GraphQLNonNull(DeviceUpdateManyWithWhereWithoutBuildingInput),
-      ),
-    },
-    deleteMany: {
-      type: new GraphQLList(new GraphQLNonNull(DeviceScalarWhereInput)),
-    },
-  }),
-})
-
-export const ProjectUpdateOneRequiredWithoutBuildingsInput =
+export const DeviceUpdateManyWithoutBuildingNestedInput =
   new GraphQLInputObjectType({
-    name: 'ProjectUpdateOneRequiredWithoutBuildingsInput',
+    name: 'DeviceUpdateManyWithoutBuildingNestedInput',
+    fields: () => ({
+      create: {
+        type: new GraphQLList(
+          new GraphQLNonNull(DeviceCreateWithoutBuildingInput),
+        ),
+      },
+      connectOrCreate: {
+        type: new GraphQLList(
+          new GraphQLNonNull(DeviceCreateOrConnectWithoutBuildingInput),
+        ),
+      },
+      upsert: {
+        type: new GraphQLList(
+          new GraphQLNonNull(DeviceUpsertWithWhereUniqueWithoutBuildingInput),
+        ),
+      },
+      createMany: { type: DeviceCreateManyBuildingInputEnvelope },
+      set: {
+        type: new GraphQLList(new GraphQLNonNull(DeviceWhereUniqueInput)),
+      },
+      disconnect: {
+        type: new GraphQLList(new GraphQLNonNull(DeviceWhereUniqueInput)),
+      },
+      delete: {
+        type: new GraphQLList(new GraphQLNonNull(DeviceWhereUniqueInput)),
+      },
+      connect: {
+        type: new GraphQLList(new GraphQLNonNull(DeviceWhereUniqueInput)),
+      },
+      update: {
+        type: new GraphQLList(
+          new GraphQLNonNull(DeviceUpdateWithWhereUniqueWithoutBuildingInput),
+        ),
+      },
+      updateMany: {
+        type: new GraphQLList(
+          new GraphQLNonNull(DeviceUpdateManyWithWhereWithoutBuildingInput),
+        ),
+      },
+      deleteMany: {
+        type: new GraphQLList(new GraphQLNonNull(DeviceScalarWhereInput)),
+      },
+    }),
+  })
+
+export const ProjectUpdateOneRequiredWithoutBuildingsNestedInput =
+  new GraphQLInputObjectType({
+    name: 'ProjectUpdateOneRequiredWithoutBuildingsNestedInput',
     fields: () => ({
       create: { type: ProjectCreateWithoutBuildingsInput },
       connectOrCreate: { type: ProjectCreateOrConnectWithoutBuildingsInput },
@@ -4783,372 +4783,398 @@ export const EnumDeviceConnectionFieldUpdateOperationsInput =
     }),
   })
 
-export const BuildingUpdateOneWithoutDevicesInput = new GraphQLInputObjectType({
-  name: 'BuildingUpdateOneWithoutDevicesInput',
-  fields: () => ({
-    create: { type: BuildingCreateWithoutDevicesInput },
-    connectOrCreate: { type: BuildingCreateOrConnectWithoutDevicesInput },
-    upsert: { type: BuildingUpsertWithoutDevicesInput },
-    disconnect: { type: GraphQLBoolean },
-    delete: { type: GraphQLBoolean },
-    connect: { type: BuildingWhereUniqueInput },
-    update: { type: BuildingUpdateWithoutDevicesInput },
-  }),
-})
+export const BuildingUpdateOneWithoutDevicesNestedInput =
+  new GraphQLInputObjectType({
+    name: 'BuildingUpdateOneWithoutDevicesNestedInput',
+    fields: () => ({
+      create: { type: BuildingCreateWithoutDevicesInput },
+      connectOrCreate: { type: BuildingCreateOrConnectWithoutDevicesInput },
+      upsert: { type: BuildingUpsertWithoutDevicesInput },
+      disconnect: { type: GraphQLBoolean },
+      delete: { type: GraphQLBoolean },
+      connect: { type: BuildingWhereUniqueInput },
+      update: { type: BuildingUpdateWithoutDevicesInput },
+    }),
+  })
 
-export const InputUpdateManyWithoutDeviceInput = new GraphQLInputObjectType({
-  name: 'InputUpdateManyWithoutDeviceInput',
-  fields: () => ({
-    create: {
-      type: new GraphQLList(new GraphQLNonNull(InputCreateWithoutDeviceInput)),
-    },
-    connectOrCreate: {
-      type: new GraphQLList(
-        new GraphQLNonNull(InputCreateOrConnectWithoutDeviceInput),
-      ),
-    },
-    upsert: {
-      type: new GraphQLList(
-        new GraphQLNonNull(InputUpsertWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    createMany: { type: InputCreateManyDeviceInputEnvelope },
-    set: { type: new GraphQLList(new GraphQLNonNull(InputWhereUniqueInput)) },
-    disconnect: {
-      type: new GraphQLList(new GraphQLNonNull(InputWhereUniqueInput)),
-    },
-    delete: {
-      type: new GraphQLList(new GraphQLNonNull(InputWhereUniqueInput)),
-    },
-    connect: {
-      type: new GraphQLList(new GraphQLNonNull(InputWhereUniqueInput)),
-    },
-    update: {
-      type: new GraphQLList(
-        new GraphQLNonNull(InputUpdateWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    updateMany: {
-      type: new GraphQLList(
-        new GraphQLNonNull(InputUpdateManyWithWhereWithoutDeviceInput),
-      ),
-    },
-    deleteMany: {
-      type: new GraphQLList(new GraphQLNonNull(InputScalarWhereInput)),
-    },
-  }),
-})
+export const InputUpdateManyWithoutDeviceNestedInput =
+  new GraphQLInputObjectType({
+    name: 'InputUpdateManyWithoutDeviceNestedInput',
+    fields: () => ({
+      create: {
+        type: new GraphQLList(
+          new GraphQLNonNull(InputCreateWithoutDeviceInput),
+        ),
+      },
+      connectOrCreate: {
+        type: new GraphQLList(
+          new GraphQLNonNull(InputCreateOrConnectWithoutDeviceInput),
+        ),
+      },
+      upsert: {
+        type: new GraphQLList(
+          new GraphQLNonNull(InputUpsertWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      createMany: { type: InputCreateManyDeviceInputEnvelope },
+      set: { type: new GraphQLList(new GraphQLNonNull(InputWhereUniqueInput)) },
+      disconnect: {
+        type: new GraphQLList(new GraphQLNonNull(InputWhereUniqueInput)),
+      },
+      delete: {
+        type: new GraphQLList(new GraphQLNonNull(InputWhereUniqueInput)),
+      },
+      connect: {
+        type: new GraphQLList(new GraphQLNonNull(InputWhereUniqueInput)),
+      },
+      update: {
+        type: new GraphQLList(
+          new GraphQLNonNull(InputUpdateWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      updateMany: {
+        type: new GraphQLList(
+          new GraphQLNonNull(InputUpdateManyWithWhereWithoutDeviceInput),
+        ),
+      },
+      deleteMany: {
+        type: new GraphQLList(new GraphQLNonNull(InputScalarWhereInput)),
+      },
+    }),
+  })
 
-export const OutputUpdateManyWithoutDeviceInput = new GraphQLInputObjectType({
-  name: 'OutputUpdateManyWithoutDeviceInput',
-  fields: () => ({
-    create: {
-      type: new GraphQLList(new GraphQLNonNull(OutputCreateWithoutDeviceInput)),
-    },
-    connectOrCreate: {
-      type: new GraphQLList(
-        new GraphQLNonNull(OutputCreateOrConnectWithoutDeviceInput),
-      ),
-    },
-    upsert: {
-      type: new GraphQLList(
-        new GraphQLNonNull(OutputUpsertWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    createMany: { type: OutputCreateManyDeviceInputEnvelope },
-    set: { type: new GraphQLList(new GraphQLNonNull(OutputWhereUniqueInput)) },
-    disconnect: {
-      type: new GraphQLList(new GraphQLNonNull(OutputWhereUniqueInput)),
-    },
-    delete: {
-      type: new GraphQLList(new GraphQLNonNull(OutputWhereUniqueInput)),
-    },
-    connect: {
-      type: new GraphQLList(new GraphQLNonNull(OutputWhereUniqueInput)),
-    },
-    update: {
-      type: new GraphQLList(
-        new GraphQLNonNull(OutputUpdateWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    updateMany: {
-      type: new GraphQLList(
-        new GraphQLNonNull(OutputUpdateManyWithWhereWithoutDeviceInput),
-      ),
-    },
-    deleteMany: {
-      type: new GraphQLList(new GraphQLNonNull(OutputScalarWhereInput)),
-    },
-  }),
-})
+export const OutputUpdateManyWithoutDeviceNestedInput =
+  new GraphQLInputObjectType({
+    name: 'OutputUpdateManyWithoutDeviceNestedInput',
+    fields: () => ({
+      create: {
+        type: new GraphQLList(
+          new GraphQLNonNull(OutputCreateWithoutDeviceInput),
+        ),
+      },
+      connectOrCreate: {
+        type: new GraphQLList(
+          new GraphQLNonNull(OutputCreateOrConnectWithoutDeviceInput),
+        ),
+      },
+      upsert: {
+        type: new GraphQLList(
+          new GraphQLNonNull(OutputUpsertWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      createMany: { type: OutputCreateManyDeviceInputEnvelope },
+      set: {
+        type: new GraphQLList(new GraphQLNonNull(OutputWhereUniqueInput)),
+      },
+      disconnect: {
+        type: new GraphQLList(new GraphQLNonNull(OutputWhereUniqueInput)),
+      },
+      delete: {
+        type: new GraphQLList(new GraphQLNonNull(OutputWhereUniqueInput)),
+      },
+      connect: {
+        type: new GraphQLList(new GraphQLNonNull(OutputWhereUniqueInput)),
+      },
+      update: {
+        type: new GraphQLList(
+          new GraphQLNonNull(OutputUpdateWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      updateMany: {
+        type: new GraphQLList(
+          new GraphQLNonNull(OutputUpdateManyWithWhereWithoutDeviceInput),
+        ),
+      },
+      deleteMany: {
+        type: new GraphQLList(new GraphQLNonNull(OutputScalarWhereInput)),
+      },
+    }),
+  })
 
-export const PidUpdateManyWithoutDeviceInput = new GraphQLInputObjectType({
-  name: 'PidUpdateManyWithoutDeviceInput',
-  fields: () => ({
-    create: {
-      type: new GraphQLList(new GraphQLNonNull(PidCreateWithoutDeviceInput)),
-    },
-    connectOrCreate: {
-      type: new GraphQLList(
-        new GraphQLNonNull(PidCreateOrConnectWithoutDeviceInput),
-      ),
-    },
-    upsert: {
-      type: new GraphQLList(
-        new GraphQLNonNull(PidUpsertWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    createMany: { type: PidCreateManyDeviceInputEnvelope },
-    set: { type: new GraphQLList(new GraphQLNonNull(PidWhereUniqueInput)) },
-    disconnect: {
-      type: new GraphQLList(new GraphQLNonNull(PidWhereUniqueInput)),
-    },
-    delete: { type: new GraphQLList(new GraphQLNonNull(PidWhereUniqueInput)) },
-    connect: { type: new GraphQLList(new GraphQLNonNull(PidWhereUniqueInput)) },
-    update: {
-      type: new GraphQLList(
-        new GraphQLNonNull(PidUpdateWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    updateMany: {
-      type: new GraphQLList(
-        new GraphQLNonNull(PidUpdateManyWithWhereWithoutDeviceInput),
-      ),
-    },
-    deleteMany: {
-      type: new GraphQLList(new GraphQLNonNull(PidScalarWhereInput)),
-    },
-  }),
-})
+export const PidUpdateManyWithoutDeviceNestedInput = new GraphQLInputObjectType(
+  {
+    name: 'PidUpdateManyWithoutDeviceNestedInput',
+    fields: () => ({
+      create: {
+        type: new GraphQLList(new GraphQLNonNull(PidCreateWithoutDeviceInput)),
+      },
+      connectOrCreate: {
+        type: new GraphQLList(
+          new GraphQLNonNull(PidCreateOrConnectWithoutDeviceInput),
+        ),
+      },
+      upsert: {
+        type: new GraphQLList(
+          new GraphQLNonNull(PidUpsertWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      createMany: { type: PidCreateManyDeviceInputEnvelope },
+      set: { type: new GraphQLList(new GraphQLNonNull(PidWhereUniqueInput)) },
+      disconnect: {
+        type: new GraphQLList(new GraphQLNonNull(PidWhereUniqueInput)),
+      },
+      delete: {
+        type: new GraphQLList(new GraphQLNonNull(PidWhereUniqueInput)),
+      },
+      connect: {
+        type: new GraphQLList(new GraphQLNonNull(PidWhereUniqueInput)),
+      },
+      update: {
+        type: new GraphQLList(
+          new GraphQLNonNull(PidUpdateWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      updateMany: {
+        type: new GraphQLList(
+          new GraphQLNonNull(PidUpdateManyWithWhereWithoutDeviceInput),
+        ),
+      },
+      deleteMany: {
+        type: new GraphQLList(new GraphQLNonNull(PidScalarWhereInput)),
+      },
+    }),
+  },
+)
 
-export const VariableUpdateManyWithoutDeviceInput = new GraphQLInputObjectType({
-  name: 'VariableUpdateManyWithoutDeviceInput',
-  fields: () => ({
-    create: {
-      type: new GraphQLList(
-        new GraphQLNonNull(VariableCreateWithoutDeviceInput),
-      ),
-    },
-    connectOrCreate: {
-      type: new GraphQLList(
-        new GraphQLNonNull(VariableCreateOrConnectWithoutDeviceInput),
-      ),
-    },
-    upsert: {
-      type: new GraphQLList(
-        new GraphQLNonNull(VariableUpsertWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    createMany: { type: VariableCreateManyDeviceInputEnvelope },
-    set: {
-      type: new GraphQLList(new GraphQLNonNull(VariableWhereUniqueInput)),
-    },
-    disconnect: {
-      type: new GraphQLList(new GraphQLNonNull(VariableWhereUniqueInput)),
-    },
-    delete: {
-      type: new GraphQLList(new GraphQLNonNull(VariableWhereUniqueInput)),
-    },
-    connect: {
-      type: new GraphQLList(new GraphQLNonNull(VariableWhereUniqueInput)),
-    },
-    update: {
-      type: new GraphQLList(
-        new GraphQLNonNull(VariableUpdateWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    updateMany: {
-      type: new GraphQLList(
-        new GraphQLNonNull(VariableUpdateManyWithWhereWithoutDeviceInput),
-      ),
-    },
-    deleteMany: {
-      type: new GraphQLList(new GraphQLNonNull(VariableScalarWhereInput)),
-    },
-  }),
-})
+export const VariableUpdateManyWithoutDeviceNestedInput =
+  new GraphQLInputObjectType({
+    name: 'VariableUpdateManyWithoutDeviceNestedInput',
+    fields: () => ({
+      create: {
+        type: new GraphQLList(
+          new GraphQLNonNull(VariableCreateWithoutDeviceInput),
+        ),
+      },
+      connectOrCreate: {
+        type: new GraphQLList(
+          new GraphQLNonNull(VariableCreateOrConnectWithoutDeviceInput),
+        ),
+      },
+      upsert: {
+        type: new GraphQLList(
+          new GraphQLNonNull(VariableUpsertWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      createMany: { type: VariableCreateManyDeviceInputEnvelope },
+      set: {
+        type: new GraphQLList(new GraphQLNonNull(VariableWhereUniqueInput)),
+      },
+      disconnect: {
+        type: new GraphQLList(new GraphQLNonNull(VariableWhereUniqueInput)),
+      },
+      delete: {
+        type: new GraphQLList(new GraphQLNonNull(VariableWhereUniqueInput)),
+      },
+      connect: {
+        type: new GraphQLList(new GraphQLNonNull(VariableWhereUniqueInput)),
+      },
+      update: {
+        type: new GraphQLList(
+          new GraphQLNonNull(VariableUpdateWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      updateMany: {
+        type: new GraphQLList(
+          new GraphQLNonNull(VariableUpdateManyWithWhereWithoutDeviceInput),
+        ),
+      },
+      deleteMany: {
+        type: new GraphQLList(new GraphQLNonNull(VariableScalarWhereInput)),
+      },
+    }),
+  })
 
-export const GraphicUpdateManyWithoutDeviceInput = new GraphQLInputObjectType({
-  name: 'GraphicUpdateManyWithoutDeviceInput',
-  fields: () => ({
-    create: {
-      type: new GraphQLList(
-        new GraphQLNonNull(GraphicCreateWithoutDeviceInput),
-      ),
-    },
-    connectOrCreate: {
-      type: new GraphQLList(
-        new GraphQLNonNull(GraphicCreateOrConnectWithoutDeviceInput),
-      ),
-    },
-    upsert: {
-      type: new GraphQLList(
-        new GraphQLNonNull(GraphicUpsertWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    createMany: { type: GraphicCreateManyDeviceInputEnvelope },
-    set: { type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)) },
-    disconnect: {
-      type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)),
-    },
-    delete: {
-      type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)),
-    },
-    connect: {
-      type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)),
-    },
-    update: {
-      type: new GraphQLList(
-        new GraphQLNonNull(GraphicUpdateWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    updateMany: {
-      type: new GraphQLList(
-        new GraphQLNonNull(GraphicUpdateManyWithWhereWithoutDeviceInput),
-      ),
-    },
-    deleteMany: {
-      type: new GraphQLList(new GraphQLNonNull(GraphicScalarWhereInput)),
-    },
-  }),
-})
+export const GraphicUpdateManyWithoutDeviceNestedInput =
+  new GraphQLInputObjectType({
+    name: 'GraphicUpdateManyWithoutDeviceNestedInput',
+    fields: () => ({
+      create: {
+        type: new GraphQLList(
+          new GraphQLNonNull(GraphicCreateWithoutDeviceInput),
+        ),
+      },
+      connectOrCreate: {
+        type: new GraphQLList(
+          new GraphQLNonNull(GraphicCreateOrConnectWithoutDeviceInput),
+        ),
+      },
+      upsert: {
+        type: new GraphQLList(
+          new GraphQLNonNull(GraphicUpsertWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      createMany: { type: GraphicCreateManyDeviceInputEnvelope },
+      set: {
+        type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)),
+      },
+      disconnect: {
+        type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)),
+      },
+      delete: {
+        type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)),
+      },
+      connect: {
+        type: new GraphQLList(new GraphQLNonNull(GraphicWhereUniqueInput)),
+      },
+      update: {
+        type: new GraphQLList(
+          new GraphQLNonNull(GraphicUpdateWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      updateMany: {
+        type: new GraphQLList(
+          new GraphQLNonNull(GraphicUpdateManyWithWhereWithoutDeviceInput),
+        ),
+      },
+      deleteMany: {
+        type: new GraphQLList(new GraphQLNonNull(GraphicScalarWhereInput)),
+      },
+    }),
+  })
 
-export const ProgramUpdateManyWithoutDeviceInput = new GraphQLInputObjectType({
-  name: 'ProgramUpdateManyWithoutDeviceInput',
-  fields: () => ({
-    create: {
-      type: new GraphQLList(
-        new GraphQLNonNull(ProgramCreateWithoutDeviceInput),
-      ),
-    },
-    connectOrCreate: {
-      type: new GraphQLList(
-        new GraphQLNonNull(ProgramCreateOrConnectWithoutDeviceInput),
-      ),
-    },
-    upsert: {
-      type: new GraphQLList(
-        new GraphQLNonNull(ProgramUpsertWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    createMany: { type: ProgramCreateManyDeviceInputEnvelope },
-    set: { type: new GraphQLList(new GraphQLNonNull(ProgramWhereUniqueInput)) },
-    disconnect: {
-      type: new GraphQLList(new GraphQLNonNull(ProgramWhereUniqueInput)),
-    },
-    delete: {
-      type: new GraphQLList(new GraphQLNonNull(ProgramWhereUniqueInput)),
-    },
-    connect: {
-      type: new GraphQLList(new GraphQLNonNull(ProgramWhereUniqueInput)),
-    },
-    update: {
-      type: new GraphQLList(
-        new GraphQLNonNull(ProgramUpdateWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    updateMany: {
-      type: new GraphQLList(
-        new GraphQLNonNull(ProgramUpdateManyWithWhereWithoutDeviceInput),
-      ),
-    },
-    deleteMany: {
-      type: new GraphQLList(new GraphQLNonNull(ProgramScalarWhereInput)),
-    },
-  }),
-})
+export const ProgramUpdateManyWithoutDeviceNestedInput =
+  new GraphQLInputObjectType({
+    name: 'ProgramUpdateManyWithoutDeviceNestedInput',
+    fields: () => ({
+      create: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ProgramCreateWithoutDeviceInput),
+        ),
+      },
+      connectOrCreate: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ProgramCreateOrConnectWithoutDeviceInput),
+        ),
+      },
+      upsert: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ProgramUpsertWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      createMany: { type: ProgramCreateManyDeviceInputEnvelope },
+      set: {
+        type: new GraphQLList(new GraphQLNonNull(ProgramWhereUniqueInput)),
+      },
+      disconnect: {
+        type: new GraphQLList(new GraphQLNonNull(ProgramWhereUniqueInput)),
+      },
+      delete: {
+        type: new GraphQLList(new GraphQLNonNull(ProgramWhereUniqueInput)),
+      },
+      connect: {
+        type: new GraphQLList(new GraphQLNonNull(ProgramWhereUniqueInput)),
+      },
+      update: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ProgramUpdateWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      updateMany: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ProgramUpdateManyWithWhereWithoutDeviceInput),
+        ),
+      },
+      deleteMany: {
+        type: new GraphQLList(new GraphQLNonNull(ProgramScalarWhereInput)),
+      },
+    }),
+  })
 
-export const HolidayUpdateManyWithoutDeviceInput = new GraphQLInputObjectType({
-  name: 'HolidayUpdateManyWithoutDeviceInput',
-  fields: () => ({
-    create: {
-      type: new GraphQLList(
-        new GraphQLNonNull(HolidayCreateWithoutDeviceInput),
-      ),
-    },
-    connectOrCreate: {
-      type: new GraphQLList(
-        new GraphQLNonNull(HolidayCreateOrConnectWithoutDeviceInput),
-      ),
-    },
-    upsert: {
-      type: new GraphQLList(
-        new GraphQLNonNull(HolidayUpsertWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    createMany: { type: HolidayCreateManyDeviceInputEnvelope },
-    set: { type: new GraphQLList(new GraphQLNonNull(HolidayWhereUniqueInput)) },
-    disconnect: {
-      type: new GraphQLList(new GraphQLNonNull(HolidayWhereUniqueInput)),
-    },
-    delete: {
-      type: new GraphQLList(new GraphQLNonNull(HolidayWhereUniqueInput)),
-    },
-    connect: {
-      type: new GraphQLList(new GraphQLNonNull(HolidayWhereUniqueInput)),
-    },
-    update: {
-      type: new GraphQLList(
-        new GraphQLNonNull(HolidayUpdateWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    updateMany: {
-      type: new GraphQLList(
-        new GraphQLNonNull(HolidayUpdateManyWithWhereWithoutDeviceInput),
-      ),
-    },
-    deleteMany: {
-      type: new GraphQLList(new GraphQLNonNull(HolidayScalarWhereInput)),
-    },
-  }),
-})
+export const HolidayUpdateManyWithoutDeviceNestedInput =
+  new GraphQLInputObjectType({
+    name: 'HolidayUpdateManyWithoutDeviceNestedInput',
+    fields: () => ({
+      create: {
+        type: new GraphQLList(
+          new GraphQLNonNull(HolidayCreateWithoutDeviceInput),
+        ),
+      },
+      connectOrCreate: {
+        type: new GraphQLList(
+          new GraphQLNonNull(HolidayCreateOrConnectWithoutDeviceInput),
+        ),
+      },
+      upsert: {
+        type: new GraphQLList(
+          new GraphQLNonNull(HolidayUpsertWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      createMany: { type: HolidayCreateManyDeviceInputEnvelope },
+      set: {
+        type: new GraphQLList(new GraphQLNonNull(HolidayWhereUniqueInput)),
+      },
+      disconnect: {
+        type: new GraphQLList(new GraphQLNonNull(HolidayWhereUniqueInput)),
+      },
+      delete: {
+        type: new GraphQLList(new GraphQLNonNull(HolidayWhereUniqueInput)),
+      },
+      connect: {
+        type: new GraphQLList(new GraphQLNonNull(HolidayWhereUniqueInput)),
+      },
+      update: {
+        type: new GraphQLList(
+          new GraphQLNonNull(HolidayUpdateWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      updateMany: {
+        type: new GraphQLList(
+          new GraphQLNonNull(HolidayUpdateManyWithWhereWithoutDeviceInput),
+        ),
+      },
+      deleteMany: {
+        type: new GraphQLList(new GraphQLNonNull(HolidayScalarWhereInput)),
+      },
+    }),
+  })
 
-export const ScheduleUpdateManyWithoutDeviceInput = new GraphQLInputObjectType({
-  name: 'ScheduleUpdateManyWithoutDeviceInput',
-  fields: () => ({
-    create: {
-      type: new GraphQLList(
-        new GraphQLNonNull(ScheduleCreateWithoutDeviceInput),
-      ),
-    },
-    connectOrCreate: {
-      type: new GraphQLList(
-        new GraphQLNonNull(ScheduleCreateOrConnectWithoutDeviceInput),
-      ),
-    },
-    upsert: {
-      type: new GraphQLList(
-        new GraphQLNonNull(ScheduleUpsertWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    createMany: { type: ScheduleCreateManyDeviceInputEnvelope },
-    set: {
-      type: new GraphQLList(new GraphQLNonNull(ScheduleWhereUniqueInput)),
-    },
-    disconnect: {
-      type: new GraphQLList(new GraphQLNonNull(ScheduleWhereUniqueInput)),
-    },
-    delete: {
-      type: new GraphQLList(new GraphQLNonNull(ScheduleWhereUniqueInput)),
-    },
-    connect: {
-      type: new GraphQLList(new GraphQLNonNull(ScheduleWhereUniqueInput)),
-    },
-    update: {
-      type: new GraphQLList(
-        new GraphQLNonNull(ScheduleUpdateWithWhereUniqueWithoutDeviceInput),
-      ),
-    },
-    updateMany: {
-      type: new GraphQLList(
-        new GraphQLNonNull(ScheduleUpdateManyWithWhereWithoutDeviceInput),
-      ),
-    },
-    deleteMany: {
-      type: new GraphQLList(new GraphQLNonNull(ScheduleScalarWhereInput)),
-    },
-  }),
-})
+export const ScheduleUpdateManyWithoutDeviceNestedInput =
+  new GraphQLInputObjectType({
+    name: 'ScheduleUpdateManyWithoutDeviceNestedInput',
+    fields: () => ({
+      create: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ScheduleCreateWithoutDeviceInput),
+        ),
+      },
+      connectOrCreate: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ScheduleCreateOrConnectWithoutDeviceInput),
+        ),
+      },
+      upsert: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ScheduleUpsertWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      createMany: { type: ScheduleCreateManyDeviceInputEnvelope },
+      set: {
+        type: new GraphQLList(new GraphQLNonNull(ScheduleWhereUniqueInput)),
+      },
+      disconnect: {
+        type: new GraphQLList(new GraphQLNonNull(ScheduleWhereUniqueInput)),
+      },
+      delete: {
+        type: new GraphQLList(new GraphQLNonNull(ScheduleWhereUniqueInput)),
+      },
+      connect: {
+        type: new GraphQLList(new GraphQLNonNull(ScheduleWhereUniqueInput)),
+      },
+      update: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ScheduleUpdateWithWhereUniqueWithoutDeviceInput),
+        ),
+      },
+      updateMany: {
+        type: new GraphQLList(
+          new GraphQLNonNull(ScheduleUpdateManyWithWhereWithoutDeviceInput),
+        ),
+      },
+      deleteMany: {
+        type: new GraphQLList(new GraphQLNonNull(ScheduleScalarWhereInput)),
+      },
+    }),
+  })
 
 export const DeviceCreateNestedOneWithoutInputsInput =
   new GraphQLInputObjectType({
@@ -5180,18 +5206,19 @@ export const NullableFloatFieldUpdateOperationsInput =
     }),
   })
 
-export const DeviceUpdateOneWithoutInputsInput = new GraphQLInputObjectType({
-  name: 'DeviceUpdateOneWithoutInputsInput',
-  fields: () => ({
-    create: { type: DeviceCreateWithoutInputsInput },
-    connectOrCreate: { type: DeviceCreateOrConnectWithoutInputsInput },
-    upsert: { type: DeviceUpsertWithoutInputsInput },
-    disconnect: { type: GraphQLBoolean },
-    delete: { type: GraphQLBoolean },
-    connect: { type: DeviceWhereUniqueInput },
-    update: { type: DeviceUpdateWithoutInputsInput },
-  }),
-})
+export const DeviceUpdateOneWithoutInputsNestedInput =
+  new GraphQLInputObjectType({
+    name: 'DeviceUpdateOneWithoutInputsNestedInput',
+    fields: () => ({
+      create: { type: DeviceCreateWithoutInputsInput },
+      connectOrCreate: { type: DeviceCreateOrConnectWithoutInputsInput },
+      upsert: { type: DeviceUpsertWithoutInputsInput },
+      disconnect: { type: GraphQLBoolean },
+      delete: { type: GraphQLBoolean },
+      connect: { type: DeviceWhereUniqueInput },
+      update: { type: DeviceUpdateWithoutInputsInput },
+    }),
+  })
 
 export const DeviceCreateNestedOneWithoutOutputsInput =
   new GraphQLInputObjectType({
@@ -5211,18 +5238,19 @@ export const NullableEnumAutoManualFieldUpdateOperationsInput =
     }),
   })
 
-export const DeviceUpdateOneWithoutOutputsInput = new GraphQLInputObjectType({
-  name: 'DeviceUpdateOneWithoutOutputsInput',
-  fields: () => ({
-    create: { type: DeviceCreateWithoutOutputsInput },
-    connectOrCreate: { type: DeviceCreateOrConnectWithoutOutputsInput },
-    upsert: { type: DeviceUpsertWithoutOutputsInput },
-    disconnect: { type: GraphQLBoolean },
-    delete: { type: GraphQLBoolean },
-    connect: { type: DeviceWhereUniqueInput },
-    update: { type: DeviceUpdateWithoutOutputsInput },
-  }),
-})
+export const DeviceUpdateOneWithoutOutputsNestedInput =
+  new GraphQLInputObjectType({
+    name: 'DeviceUpdateOneWithoutOutputsNestedInput',
+    fields: () => ({
+      create: { type: DeviceCreateWithoutOutputsInput },
+      connectOrCreate: { type: DeviceCreateOrConnectWithoutOutputsInput },
+      upsert: { type: DeviceUpsertWithoutOutputsInput },
+      disconnect: { type: GraphQLBoolean },
+      delete: { type: GraphQLBoolean },
+      connect: { type: DeviceWhereUniqueInput },
+      update: { type: DeviceUpdateWithoutOutputsInput },
+    }),
+  })
 
 export const DeviceCreateNestedOneWithoutVariablesInput =
   new GraphQLInputObjectType({
@@ -5234,18 +5262,19 @@ export const DeviceCreateNestedOneWithoutVariablesInput =
     }),
   })
 
-export const DeviceUpdateOneWithoutVariablesInput = new GraphQLInputObjectType({
-  name: 'DeviceUpdateOneWithoutVariablesInput',
-  fields: () => ({
-    create: { type: DeviceCreateWithoutVariablesInput },
-    connectOrCreate: { type: DeviceCreateOrConnectWithoutVariablesInput },
-    upsert: { type: DeviceUpsertWithoutVariablesInput },
-    disconnect: { type: GraphQLBoolean },
-    delete: { type: GraphQLBoolean },
-    connect: { type: DeviceWhereUniqueInput },
-    update: { type: DeviceUpdateWithoutVariablesInput },
-  }),
-})
+export const DeviceUpdateOneWithoutVariablesNestedInput =
+  new GraphQLInputObjectType({
+    name: 'DeviceUpdateOneWithoutVariablesNestedInput',
+    fields: () => ({
+      create: { type: DeviceCreateWithoutVariablesInput },
+      connectOrCreate: { type: DeviceCreateOrConnectWithoutVariablesInput },
+      upsert: { type: DeviceUpsertWithoutVariablesInput },
+      disconnect: { type: GraphQLBoolean },
+      delete: { type: GraphQLBoolean },
+      connect: { type: DeviceWhereUniqueInput },
+      update: { type: DeviceUpdateWithoutVariablesInput },
+    }),
+  })
 
 export const DeviceCreateNestedOneWithoutProgramsInput =
   new GraphQLInputObjectType({
@@ -5257,18 +5286,19 @@ export const DeviceCreateNestedOneWithoutProgramsInput =
     }),
   })
 
-export const DeviceUpdateOneWithoutProgramsInput = new GraphQLInputObjectType({
-  name: 'DeviceUpdateOneWithoutProgramsInput',
-  fields: () => ({
-    create: { type: DeviceCreateWithoutProgramsInput },
-    connectOrCreate: { type: DeviceCreateOrConnectWithoutProgramsInput },
-    upsert: { type: DeviceUpsertWithoutProgramsInput },
-    disconnect: { type: GraphQLBoolean },
-    delete: { type: GraphQLBoolean },
-    connect: { type: DeviceWhereUniqueInput },
-    update: { type: DeviceUpdateWithoutProgramsInput },
-  }),
-})
+export const DeviceUpdateOneWithoutProgramsNestedInput =
+  new GraphQLInputObjectType({
+    name: 'DeviceUpdateOneWithoutProgramsNestedInput',
+    fields: () => ({
+      create: { type: DeviceCreateWithoutProgramsInput },
+      connectOrCreate: { type: DeviceCreateOrConnectWithoutProgramsInput },
+      upsert: { type: DeviceUpsertWithoutProgramsInput },
+      disconnect: { type: GraphQLBoolean },
+      delete: { type: GraphQLBoolean },
+      connect: { type: DeviceWhereUniqueInput },
+      update: { type: DeviceUpdateWithoutProgramsInput },
+    }),
+  })
 
 export const DeviceCreateNestedOneWithoutPidsInput = new GraphQLInputObjectType(
   {
@@ -5281,18 +5311,20 @@ export const DeviceCreateNestedOneWithoutPidsInput = new GraphQLInputObjectType(
   },
 )
 
-export const DeviceUpdateOneWithoutPidsInput = new GraphQLInputObjectType({
-  name: 'DeviceUpdateOneWithoutPidsInput',
-  fields: () => ({
-    create: { type: DeviceCreateWithoutPidsInput },
-    connectOrCreate: { type: DeviceCreateOrConnectWithoutPidsInput },
-    upsert: { type: DeviceUpsertWithoutPidsInput },
-    disconnect: { type: GraphQLBoolean },
-    delete: { type: GraphQLBoolean },
-    connect: { type: DeviceWhereUniqueInput },
-    update: { type: DeviceUpdateWithoutPidsInput },
-  }),
-})
+export const DeviceUpdateOneWithoutPidsNestedInput = new GraphQLInputObjectType(
+  {
+    name: 'DeviceUpdateOneWithoutPidsNestedInput',
+    fields: () => ({
+      create: { type: DeviceCreateWithoutPidsInput },
+      connectOrCreate: { type: DeviceCreateOrConnectWithoutPidsInput },
+      upsert: { type: DeviceUpsertWithoutPidsInput },
+      disconnect: { type: GraphQLBoolean },
+      delete: { type: GraphQLBoolean },
+      connect: { type: DeviceWhereUniqueInput },
+      update: { type: DeviceUpdateWithoutPidsInput },
+    }),
+  },
+)
 
 export const FileCreateNestedOneWithoutGraphicInput =
   new GraphQLInputObjectType({
@@ -5314,31 +5346,33 @@ export const DeviceCreateNestedOneWithoutGraphicsInput =
     }),
   })
 
-export const FileUpdateOneWithoutGraphicInput = new GraphQLInputObjectType({
-  name: 'FileUpdateOneWithoutGraphicInput',
-  fields: () => ({
-    create: { type: FileCreateWithoutGraphicInput },
-    connectOrCreate: { type: FileCreateOrConnectWithoutGraphicInput },
-    upsert: { type: FileUpsertWithoutGraphicInput },
-    disconnect: { type: GraphQLBoolean },
-    delete: { type: GraphQLBoolean },
-    connect: { type: FileWhereUniqueInput },
-    update: { type: FileUpdateWithoutGraphicInput },
-  }),
-})
+export const FileUpdateOneWithoutGraphicNestedInput =
+  new GraphQLInputObjectType({
+    name: 'FileUpdateOneWithoutGraphicNestedInput',
+    fields: () => ({
+      create: { type: FileCreateWithoutGraphicInput },
+      connectOrCreate: { type: FileCreateOrConnectWithoutGraphicInput },
+      upsert: { type: FileUpsertWithoutGraphicInput },
+      disconnect: { type: GraphQLBoolean },
+      delete: { type: GraphQLBoolean },
+      connect: { type: FileWhereUniqueInput },
+      update: { type: FileUpdateWithoutGraphicInput },
+    }),
+  })
 
-export const DeviceUpdateOneWithoutGraphicsInput = new GraphQLInputObjectType({
-  name: 'DeviceUpdateOneWithoutGraphicsInput',
-  fields: () => ({
-    create: { type: DeviceCreateWithoutGraphicsInput },
-    connectOrCreate: { type: DeviceCreateOrConnectWithoutGraphicsInput },
-    upsert: { type: DeviceUpsertWithoutGraphicsInput },
-    disconnect: { type: GraphQLBoolean },
-    delete: { type: GraphQLBoolean },
-    connect: { type: DeviceWhereUniqueInput },
-    update: { type: DeviceUpdateWithoutGraphicsInput },
-  }),
-})
+export const DeviceUpdateOneWithoutGraphicsNestedInput =
+  new GraphQLInputObjectType({
+    name: 'DeviceUpdateOneWithoutGraphicsNestedInput',
+    fields: () => ({
+      create: { type: DeviceCreateWithoutGraphicsInput },
+      connectOrCreate: { type: DeviceCreateOrConnectWithoutGraphicsInput },
+      upsert: { type: DeviceUpsertWithoutGraphicsInput },
+      disconnect: { type: GraphQLBoolean },
+      delete: { type: GraphQLBoolean },
+      connect: { type: DeviceWhereUniqueInput },
+      update: { type: DeviceUpdateWithoutGraphicsInput },
+    }),
+  })
 
 export const DeviceCreateNestedOneWithoutSchedulesInput =
   new GraphQLInputObjectType({
@@ -5371,22 +5405,23 @@ export const ScheduleTimeCreateNestedManyWithoutScheduleInput =
     }),
   })
 
-export const DeviceUpdateOneWithoutSchedulesInput = new GraphQLInputObjectType({
-  name: 'DeviceUpdateOneWithoutSchedulesInput',
-  fields: () => ({
-    create: { type: DeviceCreateWithoutSchedulesInput },
-    connectOrCreate: { type: DeviceCreateOrConnectWithoutSchedulesInput },
-    upsert: { type: DeviceUpsertWithoutSchedulesInput },
-    disconnect: { type: GraphQLBoolean },
-    delete: { type: GraphQLBoolean },
-    connect: { type: DeviceWhereUniqueInput },
-    update: { type: DeviceUpdateWithoutSchedulesInput },
-  }),
-})
-
-export const ScheduleTimeUpdateManyWithoutScheduleInput =
+export const DeviceUpdateOneWithoutSchedulesNestedInput =
   new GraphQLInputObjectType({
-    name: 'ScheduleTimeUpdateManyWithoutScheduleInput',
+    name: 'DeviceUpdateOneWithoutSchedulesNestedInput',
+    fields: () => ({
+      create: { type: DeviceCreateWithoutSchedulesInput },
+      connectOrCreate: { type: DeviceCreateOrConnectWithoutSchedulesInput },
+      upsert: { type: DeviceUpsertWithoutSchedulesInput },
+      disconnect: { type: GraphQLBoolean },
+      delete: { type: GraphQLBoolean },
+      connect: { type: DeviceWhereUniqueInput },
+      update: { type: DeviceUpdateWithoutSchedulesInput },
+    }),
+  })
+
+export const ScheduleTimeUpdateManyWithoutScheduleNestedInput =
+  new GraphQLInputObjectType({
+    name: 'ScheduleTimeUpdateManyWithoutScheduleNestedInput',
     fields: () => ({
       create: {
         type: new GraphQLList(
@@ -5467,18 +5502,19 @@ export const HolidayUpdatedaysInput = new GraphQLInputObjectType({
   }),
 })
 
-export const DeviceUpdateOneWithoutHolidaysInput = new GraphQLInputObjectType({
-  name: 'DeviceUpdateOneWithoutHolidaysInput',
-  fields: () => ({
-    create: { type: DeviceCreateWithoutHolidaysInput },
-    connectOrCreate: { type: DeviceCreateOrConnectWithoutHolidaysInput },
-    upsert: { type: DeviceUpsertWithoutHolidaysInput },
-    disconnect: { type: GraphQLBoolean },
-    delete: { type: GraphQLBoolean },
-    connect: { type: DeviceWhereUniqueInput },
-    update: { type: DeviceUpdateWithoutHolidaysInput },
-  }),
-})
+export const DeviceUpdateOneWithoutHolidaysNestedInput =
+  new GraphQLInputObjectType({
+    name: 'DeviceUpdateOneWithoutHolidaysNestedInput',
+    fields: () => ({
+      create: { type: DeviceCreateWithoutHolidaysInput },
+      connectOrCreate: { type: DeviceCreateOrConnectWithoutHolidaysInput },
+      upsert: { type: DeviceUpsertWithoutHolidaysInput },
+      disconnect: { type: GraphQLBoolean },
+      delete: { type: GraphQLBoolean },
+      connect: { type: DeviceWhereUniqueInput },
+      update: { type: DeviceUpdateWithoutHolidaysInput },
+    }),
+  })
 
 export const ScheduleCreateNestedOneWithoutTimesInput =
   new GraphQLInputObjectType({
@@ -5490,26 +5526,19 @@ export const ScheduleCreateNestedOneWithoutTimesInput =
     }),
   })
 
-export const NullableDateTimeFieldUpdateOperationsInput =
+export const ScheduleUpdateOneWithoutTimesNestedInput =
   new GraphQLInputObjectType({
-    name: 'NullableDateTimeFieldUpdateOperationsInput',
+    name: 'ScheduleUpdateOneWithoutTimesNestedInput',
     fields: () => ({
-      set: { type: GraphQLDateTime },
+      create: { type: ScheduleCreateWithoutTimesInput },
+      connectOrCreate: { type: ScheduleCreateOrConnectWithoutTimesInput },
+      upsert: { type: ScheduleUpsertWithoutTimesInput },
+      disconnect: { type: GraphQLBoolean },
+      delete: { type: GraphQLBoolean },
+      connect: { type: ScheduleWhereUniqueInput },
+      update: { type: ScheduleUpdateWithoutTimesInput },
     }),
   })
-
-export const ScheduleUpdateOneWithoutTimesInput = new GraphQLInputObjectType({
-  name: 'ScheduleUpdateOneWithoutTimesInput',
-  fields: () => ({
-    create: { type: ScheduleCreateWithoutTimesInput },
-    connectOrCreate: { type: ScheduleCreateOrConnectWithoutTimesInput },
-    upsert: { type: ScheduleUpsertWithoutTimesInput },
-    disconnect: { type: GraphQLBoolean },
-    delete: { type: GraphQLBoolean },
-    connect: { type: ScheduleWhereUniqueInput },
-    update: { type: ScheduleUpdateWithoutTimesInput },
-  }),
-})
 
 export const NestedIntFilter = new GraphQLInputObjectType({
   name: 'NestedIntFilter',
@@ -5679,6 +5708,17 @@ export const NestedJsonNullableFilter = new GraphQLInputObjectType({
   name: 'NestedJsonNullableFilter',
   fields: () => ({
     equals: { type: GraphQLJSON },
+    path: { type: new GraphQLList(new GraphQLNonNull(GraphQLString)) },
+    string_contains: { type: GraphQLString },
+    string_starts_with: { type: GraphQLString },
+    string_ends_with: { type: GraphQLString },
+    array_contains: { type: GraphQLJSON },
+    array_starts_with: { type: GraphQLJSON },
+    array_ends_with: { type: GraphQLJSON },
+    lt: { type: GraphQLJSON },
+    lte: { type: GraphQLJSON },
+    gt: { type: GraphQLJSON },
+    gte: { type: GraphQLJSON },
     not: { type: GraphQLJSON },
   }),
 })
@@ -5835,38 +5875,6 @@ export const NestedEnumAutoManualNullableWithAggregatesFilter =
       _count: { type: NestedIntNullableFilter },
       _min: { type: NestedEnumAutoManualNullableFilter },
       _max: { type: NestedEnumAutoManualNullableFilter },
-    }),
-  })
-
-export const NestedDateTimeNullableFilter = new GraphQLInputObjectType({
-  name: 'NestedDateTimeNullableFilter',
-  fields: () => ({
-    equals: { type: GraphQLDateTime },
-    in: { type: new GraphQLList(GraphQLDateTime) },
-    notIn: { type: new GraphQLList(GraphQLDateTime) },
-    lt: { type: GraphQLDateTime },
-    lte: { type: GraphQLDateTime },
-    gt: { type: GraphQLDateTime },
-    gte: { type: GraphQLDateTime },
-    not: { type: NestedDateTimeNullableFilter },
-  }),
-})
-
-export const NestedDateTimeNullableWithAggregatesFilter =
-  new GraphQLInputObjectType({
-    name: 'NestedDateTimeNullableWithAggregatesFilter',
-    fields: () => ({
-      equals: { type: GraphQLDateTime },
-      in: { type: new GraphQLList(GraphQLDateTime) },
-      notIn: { type: new GraphQLList(GraphQLDateTime) },
-      lt: { type: GraphQLDateTime },
-      lte: { type: GraphQLDateTime },
-      gt: { type: GraphQLDateTime },
-      gte: { type: GraphQLDateTime },
-      not: { type: NestedDateTimeNullableWithAggregatesFilter },
-      _count: { type: NestedIntNullableFilter },
-      _min: { type: NestedDateTimeNullableFilter },
-      _max: { type: NestedDateTimeNullableFilter },
     }),
   })
 
@@ -6118,7 +6126,7 @@ export const FileUpdateWithoutProjectInput = new GraphQLInputObjectType({
     updatedAt: { type: GraphQLDateTime },
     meta: { type: GraphQLJSON },
     tags: { type: new GraphQLList(new GraphQLNonNull(GraphQLString)) },
-    Graphic: { type: GraphicUpdateManyWithoutPictureInput },
+    Graphic: { type: GraphicUpdateManyWithoutPictureNestedInput },
   }),
 })
 
@@ -6310,7 +6318,7 @@ export const ProjectUpdateWithoutBuildingsInput = new GraphQLInputObjectType({
     name: { type: GraphQLString },
     slug: { type: GraphQLString },
     description: { type: GraphQLString },
-    image: { type: FileUpdateOneWithoutProjectInput },
+    image: { type: FileUpdateOneWithoutProjectNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -6694,7 +6702,7 @@ export const BuildingUpdateWithoutDevicesInput = new GraphQLInputObjectType({
     engineering: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Project: { type: ProjectUpdateOneRequiredWithoutBuildingsInput },
+    Project: { type: ProjectUpdateOneRequiredWithoutBuildingsNestedInput },
   }),
 })
 
@@ -7150,14 +7158,14 @@ export const DeviceUpdateWithoutInputsInput = new GraphQLInputObjectType({
     networkId: { type: GraphQLInt },
     floor: { type: GraphQLString },
     room: { type: GraphQLString },
-    building: { type: BuildingUpdateOneWithoutDevicesInput },
-    outputs: { type: OutputUpdateManyWithoutDeviceInput },
-    pids: { type: PidUpdateManyWithoutDeviceInput },
-    variables: { type: VariableUpdateManyWithoutDeviceInput },
-    graphics: { type: GraphicUpdateManyWithoutDeviceInput },
-    programs: { type: ProgramUpdateManyWithoutDeviceInput },
-    holidays: { type: HolidayUpdateManyWithoutDeviceInput },
-    schedules: { type: ScheduleUpdateManyWithoutDeviceInput },
+    building: { type: BuildingUpdateOneWithoutDevicesNestedInput },
+    outputs: { type: OutputUpdateManyWithoutDeviceNestedInput },
+    pids: { type: PidUpdateManyWithoutDeviceNestedInput },
+    variables: { type: VariableUpdateManyWithoutDeviceNestedInput },
+    graphics: { type: GraphicUpdateManyWithoutDeviceNestedInput },
+    programs: { type: ProgramUpdateManyWithoutDeviceNestedInput },
+    holidays: { type: HolidayUpdateManyWithoutDeviceNestedInput },
+    schedules: { type: ScheduleUpdateManyWithoutDeviceNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -7213,14 +7221,14 @@ export const DeviceUpdateWithoutOutputsInput = new GraphQLInputObjectType({
     networkId: { type: GraphQLInt },
     floor: { type: GraphQLString },
     room: { type: GraphQLString },
-    building: { type: BuildingUpdateOneWithoutDevicesInput },
-    inputs: { type: InputUpdateManyWithoutDeviceInput },
-    pids: { type: PidUpdateManyWithoutDeviceInput },
-    variables: { type: VariableUpdateManyWithoutDeviceInput },
-    graphics: { type: GraphicUpdateManyWithoutDeviceInput },
-    programs: { type: ProgramUpdateManyWithoutDeviceInput },
-    holidays: { type: HolidayUpdateManyWithoutDeviceInput },
-    schedules: { type: ScheduleUpdateManyWithoutDeviceInput },
+    building: { type: BuildingUpdateOneWithoutDevicesNestedInput },
+    inputs: { type: InputUpdateManyWithoutDeviceNestedInput },
+    pids: { type: PidUpdateManyWithoutDeviceNestedInput },
+    variables: { type: VariableUpdateManyWithoutDeviceNestedInput },
+    graphics: { type: GraphicUpdateManyWithoutDeviceNestedInput },
+    programs: { type: ProgramUpdateManyWithoutDeviceNestedInput },
+    holidays: { type: HolidayUpdateManyWithoutDeviceNestedInput },
+    schedules: { type: ScheduleUpdateManyWithoutDeviceNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -7276,14 +7284,14 @@ export const DeviceUpdateWithoutVariablesInput = new GraphQLInputObjectType({
     networkId: { type: GraphQLInt },
     floor: { type: GraphQLString },
     room: { type: GraphQLString },
-    building: { type: BuildingUpdateOneWithoutDevicesInput },
-    inputs: { type: InputUpdateManyWithoutDeviceInput },
-    outputs: { type: OutputUpdateManyWithoutDeviceInput },
-    pids: { type: PidUpdateManyWithoutDeviceInput },
-    graphics: { type: GraphicUpdateManyWithoutDeviceInput },
-    programs: { type: ProgramUpdateManyWithoutDeviceInput },
-    holidays: { type: HolidayUpdateManyWithoutDeviceInput },
-    schedules: { type: ScheduleUpdateManyWithoutDeviceInput },
+    building: { type: BuildingUpdateOneWithoutDevicesNestedInput },
+    inputs: { type: InputUpdateManyWithoutDeviceNestedInput },
+    outputs: { type: OutputUpdateManyWithoutDeviceNestedInput },
+    pids: { type: PidUpdateManyWithoutDeviceNestedInput },
+    graphics: { type: GraphicUpdateManyWithoutDeviceNestedInput },
+    programs: { type: ProgramUpdateManyWithoutDeviceNestedInput },
+    holidays: { type: HolidayUpdateManyWithoutDeviceNestedInput },
+    schedules: { type: ScheduleUpdateManyWithoutDeviceNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -7339,14 +7347,14 @@ export const DeviceUpdateWithoutProgramsInput = new GraphQLInputObjectType({
     networkId: { type: GraphQLInt },
     floor: { type: GraphQLString },
     room: { type: GraphQLString },
-    building: { type: BuildingUpdateOneWithoutDevicesInput },
-    inputs: { type: InputUpdateManyWithoutDeviceInput },
-    outputs: { type: OutputUpdateManyWithoutDeviceInput },
-    pids: { type: PidUpdateManyWithoutDeviceInput },
-    variables: { type: VariableUpdateManyWithoutDeviceInput },
-    graphics: { type: GraphicUpdateManyWithoutDeviceInput },
-    holidays: { type: HolidayUpdateManyWithoutDeviceInput },
-    schedules: { type: ScheduleUpdateManyWithoutDeviceInput },
+    building: { type: BuildingUpdateOneWithoutDevicesNestedInput },
+    inputs: { type: InputUpdateManyWithoutDeviceNestedInput },
+    outputs: { type: OutputUpdateManyWithoutDeviceNestedInput },
+    pids: { type: PidUpdateManyWithoutDeviceNestedInput },
+    variables: { type: VariableUpdateManyWithoutDeviceNestedInput },
+    graphics: { type: GraphicUpdateManyWithoutDeviceNestedInput },
+    holidays: { type: HolidayUpdateManyWithoutDeviceNestedInput },
+    schedules: { type: ScheduleUpdateManyWithoutDeviceNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -7403,14 +7411,14 @@ export const DeviceUpdateWithoutPidsInput = new GraphQLInputObjectType({
     networkId: { type: GraphQLInt },
     floor: { type: GraphQLString },
     room: { type: GraphQLString },
-    building: { type: BuildingUpdateOneWithoutDevicesInput },
-    inputs: { type: InputUpdateManyWithoutDeviceInput },
-    outputs: { type: OutputUpdateManyWithoutDeviceInput },
-    variables: { type: VariableUpdateManyWithoutDeviceInput },
-    graphics: { type: GraphicUpdateManyWithoutDeviceInput },
-    programs: { type: ProgramUpdateManyWithoutDeviceInput },
-    holidays: { type: HolidayUpdateManyWithoutDeviceInput },
-    schedules: { type: ScheduleUpdateManyWithoutDeviceInput },
+    building: { type: BuildingUpdateOneWithoutDevicesNestedInput },
+    inputs: { type: InputUpdateManyWithoutDeviceNestedInput },
+    outputs: { type: OutputUpdateManyWithoutDeviceNestedInput },
+    variables: { type: VariableUpdateManyWithoutDeviceNestedInput },
+    graphics: { type: GraphicUpdateManyWithoutDeviceNestedInput },
+    programs: { type: ProgramUpdateManyWithoutDeviceNestedInput },
+    holidays: { type: HolidayUpdateManyWithoutDeviceNestedInput },
+    schedules: { type: ScheduleUpdateManyWithoutDeviceNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -7491,7 +7499,7 @@ export const FileUpdateWithoutGraphicInput = new GraphQLInputObjectType({
     updatedAt: { type: GraphQLDateTime },
     meta: { type: GraphQLJSON },
     tags: { type: new GraphQLList(new GraphQLNonNull(GraphQLString)) },
-    Project: { type: ProjectUpdateManyWithoutImageInput },
+    Project: { type: ProjectUpdateManyWithoutImageNestedInput },
   }),
 })
 
@@ -7513,14 +7521,14 @@ export const DeviceUpdateWithoutGraphicsInput = new GraphQLInputObjectType({
     networkId: { type: GraphQLInt },
     floor: { type: GraphQLString },
     room: { type: GraphQLString },
-    building: { type: BuildingUpdateOneWithoutDevicesInput },
-    inputs: { type: InputUpdateManyWithoutDeviceInput },
-    outputs: { type: OutputUpdateManyWithoutDeviceInput },
-    pids: { type: PidUpdateManyWithoutDeviceInput },
-    variables: { type: VariableUpdateManyWithoutDeviceInput },
-    programs: { type: ProgramUpdateManyWithoutDeviceInput },
-    holidays: { type: HolidayUpdateManyWithoutDeviceInput },
-    schedules: { type: ScheduleUpdateManyWithoutDeviceInput },
+    building: { type: BuildingUpdateOneWithoutDevicesNestedInput },
+    inputs: { type: InputUpdateManyWithoutDeviceNestedInput },
+    outputs: { type: OutputUpdateManyWithoutDeviceNestedInput },
+    pids: { type: PidUpdateManyWithoutDeviceNestedInput },
+    variables: { type: VariableUpdateManyWithoutDeviceNestedInput },
+    programs: { type: ProgramUpdateManyWithoutDeviceNestedInput },
+    holidays: { type: HolidayUpdateManyWithoutDeviceNestedInput },
+    schedules: { type: ScheduleUpdateManyWithoutDeviceNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -7563,15 +7571,15 @@ export const ScheduleTimeCreateWithoutScheduleInput =
     name: 'ScheduleTimeCreateWithoutScheduleInput',
     fields: () => ({
       status: { type: GraphQLString },
-      monday: { type: GraphQLDateTime },
-      tuesday: { type: GraphQLDateTime },
-      wednesday: { type: GraphQLDateTime },
-      thursday: { type: GraphQLDateTime },
-      friday: { type: GraphQLDateTime },
-      saterday: { type: GraphQLDateTime },
-      sunday: { type: GraphQLDateTime },
-      holiday1: { type: GraphQLDateTime },
-      holiday2: { type: GraphQLDateTime },
+      monday: { type: GraphQLString },
+      tuesday: { type: GraphQLString },
+      wednesday: { type: GraphQLString },
+      thursday: { type: GraphQLString },
+      friday: { type: GraphQLString },
+      saterday: { type: GraphQLString },
+      sunday: { type: GraphQLString },
+      holiday1: { type: GraphQLString },
+      holiday2: { type: GraphQLString },
       createdAt: { type: GraphQLDateTime },
       updatedAt: { type: GraphQLDateTime },
     }),
@@ -7621,14 +7629,14 @@ export const DeviceUpdateWithoutSchedulesInput = new GraphQLInputObjectType({
     networkId: { type: GraphQLInt },
     floor: { type: GraphQLString },
     room: { type: GraphQLString },
-    building: { type: BuildingUpdateOneWithoutDevicesInput },
-    inputs: { type: InputUpdateManyWithoutDeviceInput },
-    outputs: { type: OutputUpdateManyWithoutDeviceInput },
-    pids: { type: PidUpdateManyWithoutDeviceInput },
-    variables: { type: VariableUpdateManyWithoutDeviceInput },
-    graphics: { type: GraphicUpdateManyWithoutDeviceInput },
-    programs: { type: ProgramUpdateManyWithoutDeviceInput },
-    holidays: { type: HolidayUpdateManyWithoutDeviceInput },
+    building: { type: BuildingUpdateOneWithoutDevicesNestedInput },
+    inputs: { type: InputUpdateManyWithoutDeviceNestedInput },
+    outputs: { type: OutputUpdateManyWithoutDeviceNestedInput },
+    pids: { type: PidUpdateManyWithoutDeviceNestedInput },
+    variables: { type: VariableUpdateManyWithoutDeviceNestedInput },
+    graphics: { type: GraphicUpdateManyWithoutDeviceNestedInput },
+    programs: { type: ProgramUpdateManyWithoutDeviceNestedInput },
+    holidays: { type: HolidayUpdateManyWithoutDeviceNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -7682,15 +7690,15 @@ export const ScheduleTimeScalarWhereInput = new GraphQLInputObjectType({
     },
     id: { type: IntFilter },
     status: { type: StringFilter },
-    monday: { type: DateTimeNullableFilter },
-    tuesday: { type: DateTimeNullableFilter },
-    wednesday: { type: DateTimeNullableFilter },
-    thursday: { type: DateTimeNullableFilter },
-    friday: { type: DateTimeNullableFilter },
-    saterday: { type: DateTimeNullableFilter },
-    sunday: { type: DateTimeNullableFilter },
-    holiday1: { type: DateTimeNullableFilter },
-    holiday2: { type: DateTimeNullableFilter },
+    monday: { type: StringNullableFilter },
+    tuesday: { type: StringNullableFilter },
+    wednesday: { type: StringNullableFilter },
+    thursday: { type: StringNullableFilter },
+    friday: { type: StringNullableFilter },
+    saterday: { type: StringNullableFilter },
+    sunday: { type: StringNullableFilter },
+    holiday1: { type: StringNullableFilter },
+    holiday2: { type: StringNullableFilter },
     createdAt: { type: DateTimeFilter },
     updatedAt: { type: DateTimeFilter },
     scheduleId: { type: IntNullableFilter },
@@ -7747,14 +7755,14 @@ export const DeviceUpdateWithoutHolidaysInput = new GraphQLInputObjectType({
     networkId: { type: GraphQLInt },
     floor: { type: GraphQLString },
     room: { type: GraphQLString },
-    building: { type: BuildingUpdateOneWithoutDevicesInput },
-    inputs: { type: InputUpdateManyWithoutDeviceInput },
-    outputs: { type: OutputUpdateManyWithoutDeviceInput },
-    pids: { type: PidUpdateManyWithoutDeviceInput },
-    variables: { type: VariableUpdateManyWithoutDeviceInput },
-    graphics: { type: GraphicUpdateManyWithoutDeviceInput },
-    programs: { type: ProgramUpdateManyWithoutDeviceInput },
-    schedules: { type: ScheduleUpdateManyWithoutDeviceInput },
+    building: { type: BuildingUpdateOneWithoutDevicesNestedInput },
+    inputs: { type: InputUpdateManyWithoutDeviceNestedInput },
+    outputs: { type: OutputUpdateManyWithoutDeviceNestedInput },
+    pids: { type: PidUpdateManyWithoutDeviceNestedInput },
+    variables: { type: VariableUpdateManyWithoutDeviceNestedInput },
+    graphics: { type: GraphicUpdateManyWithoutDeviceNestedInput },
+    programs: { type: ProgramUpdateManyWithoutDeviceNestedInput },
+    schedules: { type: ScheduleUpdateManyWithoutDeviceNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -7811,7 +7819,7 @@ export const ScheduleUpdateWithoutTimesInput = new GraphQLInputObjectType({
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Device: { type: DeviceUpdateOneWithoutSchedulesInput },
+    Device: { type: DeviceUpdateOneWithoutSchedulesNestedInput },
   }),
 })
 
@@ -7852,7 +7860,7 @@ export const GraphicUpdateWithoutPictureInput = new GraphQLInputObjectType({
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    Device: { type: DeviceUpdateOneWithoutGraphicsInput },
+    Device: { type: DeviceUpdateOneWithoutGraphicsNestedInput },
   }),
 })
 
@@ -7863,7 +7871,7 @@ export const ProjectUpdateWithoutImageInput = new GraphQLInputObjectType({
     name: { type: GraphQLString },
     slug: { type: GraphQLString },
     description: { type: GraphQLString },
-    buildings: { type: BuildingUpdateManyWithoutProjectInput },
+    buildings: { type: BuildingUpdateManyWithoutProjectNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -7905,7 +7913,7 @@ export const BuildingUpdateWithoutProjectInput = new GraphQLInputObjectType({
     street: { type: GraphQLString },
     zip: { type: GraphQLString },
     engineering: { type: GraphQLString },
-    devices: { type: DeviceUpdateManyWithoutBuildingInput },
+    devices: { type: DeviceUpdateManyWithoutBuildingNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -7937,14 +7945,14 @@ export const DeviceUpdateWithoutBuildingInput = new GraphQLInputObjectType({
     networkId: { type: GraphQLInt },
     floor: { type: GraphQLString },
     room: { type: GraphQLString },
-    inputs: { type: InputUpdateManyWithoutDeviceInput },
-    outputs: { type: OutputUpdateManyWithoutDeviceInput },
-    pids: { type: PidUpdateManyWithoutDeviceInput },
-    variables: { type: VariableUpdateManyWithoutDeviceInput },
-    graphics: { type: GraphicUpdateManyWithoutDeviceInput },
-    programs: { type: ProgramUpdateManyWithoutDeviceInput },
-    holidays: { type: HolidayUpdateManyWithoutDeviceInput },
-    schedules: { type: ScheduleUpdateManyWithoutDeviceInput },
+    inputs: { type: InputUpdateManyWithoutDeviceNestedInput },
+    outputs: { type: OutputUpdateManyWithoutDeviceNestedInput },
+    pids: { type: PidUpdateManyWithoutDeviceNestedInput },
+    variables: { type: VariableUpdateManyWithoutDeviceNestedInput },
+    graphics: { type: GraphicUpdateManyWithoutDeviceNestedInput },
+    programs: { type: ProgramUpdateManyWithoutDeviceNestedInput },
+    holidays: { type: HolidayUpdateManyWithoutDeviceNestedInput },
+    schedules: { type: ScheduleUpdateManyWithoutDeviceNestedInput },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -8198,7 +8206,7 @@ export const GraphicUpdateWithoutDeviceInput = new GraphQLInputObjectType({
     index: { type: GraphQLInt },
     label: { type: GraphQLString },
     fullLabel: { type: GraphQLString },
-    picture: { type: FileUpdateOneWithoutGraphicInput },
+    picture: { type: FileUpdateOneWithoutGraphicNestedInput },
     elementCount: { type: GraphQLInt },
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
@@ -8253,7 +8261,7 @@ export const ScheduleUpdateWithoutDeviceInput = new GraphQLInputObjectType({
     binaryArray: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
-    times: { type: ScheduleTimeUpdateManyWithoutScheduleInput },
+    times: { type: ScheduleTimeUpdateManyWithoutScheduleNestedInput },
   }),
 })
 
@@ -8262,15 +8270,15 @@ export const ScheduleTimeCreateManyScheduleInput = new GraphQLInputObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     status: { type: GraphQLString },
-    monday: { type: GraphQLDateTime },
-    tuesday: { type: GraphQLDateTime },
-    wednesday: { type: GraphQLDateTime },
-    thursday: { type: GraphQLDateTime },
-    friday: { type: GraphQLDateTime },
-    saterday: { type: GraphQLDateTime },
-    sunday: { type: GraphQLDateTime },
-    holiday1: { type: GraphQLDateTime },
-    holiday2: { type: GraphQLDateTime },
+    monday: { type: GraphQLString },
+    tuesday: { type: GraphQLString },
+    wednesday: { type: GraphQLString },
+    thursday: { type: GraphQLString },
+    friday: { type: GraphQLString },
+    saterday: { type: GraphQLString },
+    sunday: { type: GraphQLString },
+    holiday1: { type: GraphQLString },
+    holiday2: { type: GraphQLString },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
   }),
@@ -8281,15 +8289,15 @@ export const ScheduleTimeUpdateWithoutScheduleInput =
     name: 'ScheduleTimeUpdateWithoutScheduleInput',
     fields: () => ({
       status: { type: GraphQLString },
-      monday: { type: GraphQLDateTime },
-      tuesday: { type: GraphQLDateTime },
-      wednesday: { type: GraphQLDateTime },
-      thursday: { type: GraphQLDateTime },
-      friday: { type: GraphQLDateTime },
-      saterday: { type: GraphQLDateTime },
-      sunday: { type: GraphQLDateTime },
-      holiday1: { type: GraphQLDateTime },
-      holiday2: { type: GraphQLDateTime },
+      monday: { type: GraphQLString },
+      tuesday: { type: GraphQLString },
+      wednesday: { type: GraphQLString },
+      thursday: { type: GraphQLString },
+      friday: { type: GraphQLString },
+      saterday: { type: GraphQLString },
+      sunday: { type: GraphQLString },
+      holiday1: { type: GraphQLString },
+      holiday2: { type: GraphQLString },
       createdAt: { type: GraphQLDateTime },
       updatedAt: { type: GraphQLDateTime },
     }),

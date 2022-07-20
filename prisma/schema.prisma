@@ -274,15 +274,15 @@ model Holiday {
 model ScheduleTime {
   id         Int       @id @default(autoincrement())
   status     String    @default("OFF") @db.VarChar(50)
-  monday     DateTime?
-  tuesday    DateTime?
-  wednesday  DateTime?
-  thursday   DateTime?
-  friday     DateTime?
-  saterday   DateTime?
-  sunday     DateTime?
-  holiday1   DateTime?
-  holiday2   DateTime?
+  monday     String?
+  tuesday    String? 
+  wednesday  String?
+  thursday   String?
+  friday     String?
+  saterday   String?
+  sunday     String?
+  holiday1   String?
+  holiday2   String?
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   Schedule   Schedule? @relation(fields: [scheduleId], references: [id])
