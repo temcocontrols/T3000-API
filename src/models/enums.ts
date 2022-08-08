@@ -99,6 +99,7 @@ export const DeviceScalarFieldEnum = new GraphQLEnumType({
     floor: { value: 'floor' },
     room: { value: 'room' },
     buildingId: { value: 'buildingId' },
+    customRanges: { value: 'customRanges' },
     createdAt: { value: 'createdAt' },
     updatedAt: { value: 'updatedAt' },
   },

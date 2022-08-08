@@ -194,6 +194,9 @@ export const Device = new GraphQLObjectType({
         },
       },
     },
+    customRanges: {
+      type: GraphQLJSON,
+    },
     createdAt: {
       type: new GraphQLNonNull(GraphQLDateTime),
     },
@@ -230,6 +233,7 @@ export const DeviceGroupByOutputType = new GraphQLObjectType({
     floor: { type: GraphQLString },
     room: { type: GraphQLString },
     buildingId: { type: GraphQLInt },
+    customRanges: { type: GraphQLJSON },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
     _count: { type: DeviceCountAggregateOutputType },
@@ -266,6 +270,7 @@ export const DeviceCountAggregateOutputType = new GraphQLObjectType({
     floor: { type: GraphQLInt },
     room: { type: GraphQLInt },
     buildingId: { type: GraphQLInt },
+    customRanges: { type: GraphQLInt },
     createdAt: { type: GraphQLInt },
     updatedAt: { type: GraphQLInt },
     _all: { type: GraphQLInt },
