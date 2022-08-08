@@ -100,6 +100,7 @@ model Device {
   programs     Program[]
   holidays     Holiday[]
   schedules    Schedule[]
+  customRanges Json?
   createdAt    DateTime         @default(now())
   updatedAt    DateTime         @updatedAt
 }
