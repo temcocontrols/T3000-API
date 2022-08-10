@@ -60,6 +60,7 @@ export const ProjectScalarFieldEnum = new GraphQLEnumType({
     slug: { value: 'slug' },
     description: { value: 'description' },
     imageFileId: { value: 'imageFileId' },
+    customRanges: { value: 'customRanges' },
     createdAt: { value: 'createdAt' },
     updatedAt: { value: 'updatedAt' },
   },
@@ -99,7 +100,6 @@ export const DeviceScalarFieldEnum = new GraphQLEnumType({
     floor: { value: 'floor' },
     room: { value: 'room' },
     buildingId: { value: 'buildingId' },
-    customRanges: { value: 'customRanges' },
     createdAt: { value: 'createdAt' },
     updatedAt: { value: 'updatedAt' },
   },
@@ -302,6 +302,13 @@ export const NullableJsonNullValueInput = new GraphQLEnumType({
   name: 'NullableJsonNullValueInput',
   values: {
     DbNull: { value: 'DbNull' },
+    JsonNull: { value: 'JsonNull' },
+  },
+})
+
+export const JsonNullValueInput = new GraphQLEnumType({
+  name: 'JsonNullValueInput',
+  values: {
     JsonNull: { value: 'JsonNull' },
   },
 })

@@ -54,6 +54,7 @@ model Project {
   imageFileId Int?
   image       File?      @relation(fields: [imageFileId], references: [id])
   buildings   Building[]
+  customRanges Json @default("{\"digital\": [], \"analog\": []}")
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 }
@@ -100,7 +101,6 @@ model Device {
   programs     Program[]
   holidays     Holiday[]
   schedules    Schedule[]
-  customRanges Json?
   createdAt    DateTime         @default(now())
   updatedAt    DateTime         @updatedAt
 }

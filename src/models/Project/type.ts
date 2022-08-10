@@ -50,6 +50,9 @@ export const Project = new GraphQLObjectType({
         },
       },
     },
+    customRanges: {
+      type: new GraphQLNonNull(GraphQLJSON),
+    },
     createdAt: {
       type: new GraphQLNonNull(GraphQLDateTime),
     },
@@ -82,6 +85,7 @@ export const ProjectGroupByOutputType = new GraphQLObjectType({
     slug: { type: GraphQLString },
     description: { type: GraphQLString },
     imageFileId: { type: GraphQLInt },
+    customRanges: { type: GraphQLJSON },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
     _count: { type: ProjectCountAggregateOutputType },
@@ -107,6 +111,7 @@ export const ProjectCountAggregateOutputType = new GraphQLObjectType({
     slug: { type: GraphQLInt },
     description: { type: GraphQLInt },
     imageFileId: { type: GraphQLInt },
+    customRanges: { type: GraphQLInt },
     createdAt: { type: GraphQLInt },
     updatedAt: { type: GraphQLInt },
     _all: { type: GraphQLInt },
