@@ -47,16 +47,16 @@ enum AppStatus {
 }
 
 model Project {
-  id          String     @id @default(cuid())
-  name        String     @db.VarChar(100)
-  slug        String?    @unique @db.VarChar(100)
-  description String?
-  imageFileId Int?
-  image       File?      @relation(fields: [imageFileId], references: [id])
-  buildings   Building[]
-  customRanges Json @default("{\"digital\": [], \"analog\": []}")
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id           String     @id @default(cuid())
+  name         String     @db.VarChar(100)
+  slug         String?    @unique @db.VarChar(100)
+  description  String?
+  imageFileId  Int?
+  image        File?      @relation(fields: [imageFileId], references: [id])
+  buildings    Building[]
+  customRanges Json       @default("{\"digital\": [], \"analog\": []}")
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
 
 model Building {
@@ -91,6 +91,7 @@ model Device {
   networkId    Int?
   floor        String?          @db.VarChar(100)
   room         String?          @db.VarChar(100)
+  panelId      Int?
   buildingId   Int?
   building     Building?        @relation(fields: [buildingId], references: [id])
   inputs       Input[]
@@ -108,7 +109,6 @@ model Device {
 model Input {
   id          Int        @id @default(autoincrement())
   index       Int        @db.SmallInt
-  panel       Int
   label       String?    @db.VarChar(250)
   fullLabel   String?
   autoManual  AutoManual
@@ -133,7 +133,6 @@ model Input {
 model Output {
   id          Int         @id @default(autoincrement())
   index       Int         @db.SmallInt
-  panel       Int
   label       String?     @db.VarChar(250)
   fullLabel   String?
   autoManual  AutoManual?
@@ -276,7 +275,7 @@ model ScheduleTime {
   id         Int       @id @default(autoincrement())
   status     String    @default("OFF") @db.VarChar(50)
   monday     String?
-  tuesday    String? 
+  tuesday    String?
   wednesday  String?
   thursday   String?
   friday     String?

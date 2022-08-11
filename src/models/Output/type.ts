@@ -20,9 +20,6 @@ export const Output = new GraphQLObjectType({
     index: {
       type: new GraphQLNonNull(GraphQLInt),
     },
-    panel: {
-      type: new GraphQLNonNull(GraphQLInt),
-    },
     label: {
       type: GraphQLString,
     },
@@ -93,7 +90,6 @@ export const OutputGroupByOutputType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     index: { type: GraphQLInt },
-    panel: { type: GraphQLInt },
     label: { type: GraphQLString },
     fullLabel: { type: GraphQLString },
     autoManual: { type: AutoManual },
@@ -123,7 +119,6 @@ export const OutputCountAggregateOutputType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     index: { type: GraphQLInt },
-    panel: { type: GraphQLInt },
     label: { type: GraphQLInt },
     fullLabel: { type: GraphQLInt },
     autoManual: { type: GraphQLInt },
@@ -149,7 +144,6 @@ export const OutputAvgAggregateOutputType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLFloat },
     index: { type: GraphQLFloat },
-    panel: { type: GraphQLFloat },
     lowVoltage: { type: GraphQLFloat },
     highVoltage: { type: GraphQLFloat },
     pwmPeriod: { type: GraphQLFloat },
@@ -162,7 +156,6 @@ export const OutputSumAggregateOutputType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     index: { type: GraphQLInt },
-    panel: { type: GraphQLInt },
     lowVoltage: { type: GraphQLFloat },
     highVoltage: { type: GraphQLFloat },
     pwmPeriod: { type: GraphQLInt },
@@ -175,7 +168,6 @@ export const OutputMinAggregateOutputType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     index: { type: GraphQLInt },
-    panel: { type: GraphQLInt },
     label: { type: GraphQLString },
     fullLabel: { type: GraphQLString },
     autoManual: { type: AutoManual },
@@ -200,7 +192,6 @@ export const OutputMaxAggregateOutputType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     index: { type: GraphQLInt },
-    panel: { type: GraphQLInt },
     label: { type: GraphQLString },
     fullLabel: { type: GraphQLString },
     autoManual: { type: AutoManual },

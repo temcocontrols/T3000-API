@@ -84,6 +84,9 @@ export const Device = new GraphQLObjectType({
     room: {
       type: GraphQLString,
     },
+    panelId: {
+      type: GraphQLInt,
+    },
     buildingId: {
       type: GraphQLInt,
     },
@@ -229,6 +232,7 @@ export const DeviceGroupByOutputType = new GraphQLObjectType({
     networkId: { type: GraphQLInt },
     floor: { type: GraphQLString },
     room: { type: GraphQLString },
+    panelId: { type: GraphQLInt },
     buildingId: { type: GraphQLInt },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
@@ -265,6 +269,7 @@ export const DeviceCountAggregateOutputType = new GraphQLObjectType({
     networkId: { type: GraphQLInt },
     floor: { type: GraphQLInt },
     room: { type: GraphQLInt },
+    panelId: { type: GraphQLInt },
     buildingId: { type: GraphQLInt },
     createdAt: { type: GraphQLInt },
     updatedAt: { type: GraphQLInt },
@@ -278,6 +283,7 @@ export const DeviceAvgAggregateOutputType = new GraphQLObjectType({
     id: { type: GraphQLFloat },
     serialNumber: { type: GraphQLFloat },
     networkId: { type: GraphQLFloat },
+    panelId: { type: GraphQLFloat },
     buildingId: { type: GraphQLFloat },
   }),
 })
@@ -288,6 +294,7 @@ export const DeviceSumAggregateOutputType = new GraphQLObjectType({
     id: { type: GraphQLInt },
     serialNumber: { type: GraphQLInt },
     networkId: { type: GraphQLInt },
+    panelId: { type: GraphQLInt },
     buildingId: { type: GraphQLInt },
   }),
 })
@@ -303,6 +310,7 @@ export const DeviceMinAggregateOutputType = new GraphQLObjectType({
     networkId: { type: GraphQLInt },
     floor: { type: GraphQLString },
     room: { type: GraphQLString },
+    panelId: { type: GraphQLInt },
     buildingId: { type: GraphQLInt },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },
@@ -320,6 +328,7 @@ export const DeviceMaxAggregateOutputType = new GraphQLObjectType({
     networkId: { type: GraphQLInt },
     floor: { type: GraphQLString },
     room: { type: GraphQLString },
+    panelId: { type: GraphQLInt },
     buildingId: { type: GraphQLInt },
     createdAt: { type: GraphQLDateTime },
     updatedAt: { type: GraphQLDateTime },

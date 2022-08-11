@@ -20,9 +20,6 @@ export const Input = new GraphQLObjectType({
     index: {
       type: new GraphQLNonNull(GraphQLInt),
     },
-    panel: {
-      type: new GraphQLNonNull(GraphQLInt),
-    },
     label: {
       type: GraphQLString,
     },
@@ -93,7 +90,6 @@ export const InputGroupByOutputType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     index: { type: GraphQLInt },
-    panel: { type: GraphQLInt },
     label: { type: GraphQLString },
     fullLabel: { type: GraphQLString },
     autoManual: { type: AutoManual },
@@ -123,7 +119,6 @@ export const InputCountAggregateOutputType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     index: { type: GraphQLInt },
-    panel: { type: GraphQLInt },
     label: { type: GraphQLInt },
     fullLabel: { type: GraphQLInt },
     autoManual: { type: GraphQLInt },
@@ -149,7 +144,6 @@ export const InputAvgAggregateOutputType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLFloat },
     index: { type: GraphQLFloat },
-    panel: { type: GraphQLFloat },
     calibration: { type: GraphQLFloat },
     filter: { type: GraphQLFloat },
     deviceId: { type: GraphQLFloat },
@@ -161,7 +155,6 @@ export const InputSumAggregateOutputType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     index: { type: GraphQLInt },
-    panel: { type: GraphQLInt },
     calibration: { type: GraphQLFloat },
     filter: { type: GraphQLInt },
     deviceId: { type: GraphQLInt },
@@ -173,7 +166,6 @@ export const InputMinAggregateOutputType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     index: { type: GraphQLInt },
-    panel: { type: GraphQLInt },
     label: { type: GraphQLString },
     fullLabel: { type: GraphQLString },
     autoManual: { type: AutoManual },
@@ -198,7 +190,6 @@ export const InputMaxAggregateOutputType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     index: { type: GraphQLInt },
-    panel: { type: GraphQLInt },
     label: { type: GraphQLString },
     fullLabel: { type: GraphQLString },
     autoManual: { type: AutoManual },
