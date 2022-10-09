@@ -1,6 +1,6 @@
 # T3000 API
 
-T3000 API,This is the API for interacting with the building database. 
+T3000 API,This is the API for interacting with the building database, you will need to install it to run and use the [T3000 web client](https://github.com/temcocontrols/T3000_Client). 
 
 For the full documentation check [the web documentation](https://temcocontrols-app-lib-docs.netlify.app)
 
