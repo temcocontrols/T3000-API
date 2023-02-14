@@ -4,6 +4,16 @@ T3000 API,This is the API for interacting with the building database, you will n
 
 For the full documentation check [the web documentation](https://temcocontrols-t3000-api-docs.netlify.app/)
 
+The API by itself does not have any functionality, but it serves as a platform to run the web-based T3000 client. In other words, the API is utilized as a foundation for the T3000 client to perform its operations. The T3000 client leverages the API's framework to access the necessary resources and execute the functions required to achieve the intended goals. Thus, the API is a crucial component in the overall architecture of the T3000 client system.
+
+[https://github.com/temcocontrols/T3000_Client](https://github.com/temcocontrols/T3000_Client)
+
+
+## Important notes
+
+At the moment, the ongoing work does not involve any integration with the Bacnet stack or implementation of any T3000-specific functionality. However, we are working on incorporating more functions into the project as we move forward.
+
+
 ## Installation
 
 ### Server Requirements
