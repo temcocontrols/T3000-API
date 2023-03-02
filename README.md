@@ -50,11 +50,13 @@ sudo apt install curl git -y
 
 #### Installing Node JS
 
-Now we are going to install Node JS 16.x like this:
+Now we are going to install Node JS 16.x (or the current Node JS 18.x LTS) like this:
 
 ```
 cd ~
 curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
+or
+curl -sL https://deb.nodesource.com/setup_18.x -o /tmp/nodesource_setup.sh
 ```
 
 Refer to the [NodeSource documentation](https://github.com/nodesource/distributions/blob/master/README.md) for more information on the available versions.
@@ -86,6 +88,9 @@ node -v
 ```
 Output
 v16.15.0
+or 
+Output
+v18.14.2
 ```
 
 #### Installing PostgreSQL & creating/preparing the database
