@@ -7,6 +7,19 @@ const isProd = process.env.NODE_ENV === 'production'
 
 export default defineUserConfig({
   base: '/',
+  head: [
+    [
+      'script',
+      { id: 'scriptImporter' },
+      `
+    (function() { 
+    var script = document.createElement("script"); 
+    script.src = "https://identity.netlify.com/v1/netlify-identity-widget.js";
+    setTimeout(() => document.body.append(script))
+    })(); 
+`,
+    ],
+  ],
 
   // site-level locales config
   locales: {
