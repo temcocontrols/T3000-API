@@ -230,8 +230,9 @@ OBJS += ${SRCS:.c=.o}
 all: Makefile ${TARGET_BIN}
 
 ${TARGET_BIN}: ${OBJS}
-	${CC} ${PFLAGS} ${OBJS} ${LFLAGS} -o $@
-	size $@
+	mkdir -p bin
+	${CC} ${PFLAGS} ${OBJS} ${LFLAGS} -o bin/$@
+	size bin/$@
 #	cp $@ ./bin
 
 .c.o:
@@ -245,6 +246,7 @@ depend:
 .PHONY: clean
 clean:
 	rm -f core ${TARGET_BIN} ${OBJS} $(TARGET).map
+	rm -rf bin
 
 .PHONY: include
 include: .depend
