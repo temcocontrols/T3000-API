@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+import fs from"fs";
+import path from "path";
 import type { SidebarConfig } from '@vuepress/theme-default'
 
 export const en: SidebarConfig = {

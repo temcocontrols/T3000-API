@@ -1,8 +1,8 @@
 import { defaultTheme, defineUserConfig } from 'vuepress'
 import { sidebar } from './configs'
 
-const { searchPlugin } = require('@vuepress/plugin-search')
-const { shikiPlugin } = require('@vuepress/plugin-shiki')
+import { searchPlugin } from '@vuepress/plugin-search'
+import { shikiPlugin } from '@vuepress/plugin-shiki'
 const isProd = process.env.NODE_ENV === 'production'
 
 export default defineUserConfig({
@@ -62,7 +62,7 @@ export default defineUserConfig({
           ? {
               theme: 'dark-plus',
             }
-          : false,
+          : undefined,
       ),
     ],
   ],
