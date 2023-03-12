@@ -35,5 +35,5 @@
 ![make](docs/images/step3_make_output.png)
 ![run the binary](docs/images/step4_running_bin.png)
 ![get interface](docs/images/step5_get_interface.png)
-![export interface](docs/images/step5_export_interface.png)
+![export interface](docs/images/step5_export_iface.png)
 ![final output](docs/images/step5_final_output.png)
