@@ -1,12 +1,25 @@
 import { defaultTheme, defineUserConfig } from 'vuepress'
 import { sidebar } from './configs'
 
-const { searchPlugin } = require('@vuepress/plugin-search')
-const { shikiPlugin } = require('@vuepress/plugin-shiki')
+import { searchPlugin } from '@vuepress/plugin-search'
+import { shikiPlugin } from '@vuepress/plugin-shiki'
 const isProd = process.env.NODE_ENV === 'production'
 
 export default defineUserConfig({
   base: '/',
+  head: [
+    [
+      'script',
+      { id: 'scriptImporter' },
+      `
+    (function() { 
+    var script = document.createElement("script"); 
+    script.src = "https://identity.netlify.com/v1/netlify-identity-widget.js";
+    setTimeout(() => document.body.append(script))
+    })(); 
+`,
+    ],
+  ],
 
   // site-level locales config
   locales: {
@@ -62,7 +75,7 @@ export default defineUserConfig({
           ? {
               theme: 'dark-plus',
             }
-          : false,
+          : undefined,
       ),
     ],
   ],

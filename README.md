@@ -50,12 +50,10 @@ sudo apt install curl git -y
 
 #### Installing Node JS
 
-Now we are going to install Node JS 16.x (or the current Node JS 18.x LTS) like this:
+Now we are going to install Node JS 18.x like this:
 
 ```
 cd ~
-curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
-or
 curl -sL https://deb.nodesource.com/setup_18.x -o /tmp/nodesource_setup.sh
 ```
 
@@ -87,10 +85,7 @@ node -v
 
 ```
 Output
-v16.15.0
-or 
-Output
-v18.14.2
+v18.15.0
 ```
 
 #### Installing PostgreSQL & creating/preparing the database
@@ -256,7 +251,10 @@ You can watch this overview video to see how it works
 
 The Explorer provides a sandbox mode that doesn't require an Apollo account.
 You can use it with our API using this link
-[Apollo Studio Explorer](https://sandbox.apollo.dev/?endpoint=https://app-lib-api.temcocontrols.com/graphql)
+
+https://studio.apollographql.com/sandbox/explorer?endpoint=http://127.0.0.1:3000/graphql
+
+> "You can change the endpoint part to your own URL"
 
 The Getting Started tab within the Explorer helps you get up and running with core features.
  You can read more about Apollo Studio Explorer from its own documentation from [here](https://www.apollographql.com/docs/studio/explorer/explorer/)
