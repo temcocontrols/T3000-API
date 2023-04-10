@@ -124,7 +124,7 @@ We first clone the API repository like this:
 
 ```
 cd ~
-git clone git@github.com:temcocontrols/T3000_API.git
+git clone https://github.com/temcocontrols/T3000-API.git
 cd T3000_API
 ```
 
