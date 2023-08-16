@@ -6,3 +6,5 @@ dist
 .cache
 .psg.js
 /public
+
+/Cexample/build/*
