@@ -57,10 +57,11 @@ async function start() {
       console.log(`🚀 Server ready at:`)
       for (const key in interfaces) {
         if (Object.prototype.hasOwnProperty.call(interfaces, key)) {
+          const address = interfaces[key].find((i) => i.family === 'IPv4').address || interfaces[key][0].address
           console.log(
-            `http://${interfaces[key][0].address}:${
+            `http://${address}:${
               process.env.PORT || 3000
-            }/graphql`,
+            }/graphiql`,
           )
         }
       }
