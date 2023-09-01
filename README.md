@@ -7,7 +7,7 @@ The API by itself does not have any functionality, but it serves as a platform t
 [https://github.com/temcocontrols/T3000_Client](https://github.com/temcocontrols/T3000_Client)
 
 
-## Important notes
+## Important note
 
 At the moment, the ongoing work does not involve any integration with the Bacnet stack or implementation of any T3000-specific functionality. However, we are working on incorporating more functions into the project as we move forward.
 
@@ -23,7 +23,7 @@ The minimum server requirements to install this API are:
 - 64 bit Linux
 - A Ubuntu server with a minimum of 1 GB RAM
 
-### Installing the API on Rock Pi 4
+### Installing the API on Rock Pi 4 
 
 #### Rock Pi 4 Getting started
 
@@ -56,7 +56,34 @@ Check the official documentation for more:
 
 [https://wiki.radxa.com/Rockpi4/Ubuntu#Access_from_the_Host_PC.2FLaptop](https://wiki.radxa.com/Rockpi4/Ubuntu#Access_from_the_Host_PC.2FLaptop)
 
-### Installing the necessary packages
+**The rest of the steps can work on any Ubunto device not just on the Rock Pi**
+
+### Clone the API repository
+
+We first clone the API repository like this:
+
+```
+cd ~
+git clone https://github.com/temcocontrols/T3000-API.git
+cd T3000_API
+```
+
+### A. Install using the install script
+
+We have built a script to make it easy to install the API, you can just run it and it will take care of everything for you, just run the following on the terminal
+
+```
+sudo ./install.sh
+```
+
+If everything went well then you are ready to run the API check the [Starting the API section](#starting-the-api) below.
+
+
+You can also install the API manually if you don't want to use the install script by following the steps below.
+
+### B. Install the API manually ( if you don't want to use the install script )
+
+#### Installing the necessary packages
 
 After you get your Rock Pi connected to the internet run the following to install Git and Curl:
 
@@ -65,28 +92,22 @@ sudo apt update -y
 sudo apt install curl git -y
 ```
 
-### Installing Node JS
+#### Installing Node JS
 
-Now we are going to install Node JS 18.x like this:
+Now we are going to install Node JS 20.x like this:
 
 ```
 cd ~
-curl -sL https://deb.nodesource.com/setup_18.x -o /tmp/nodesource_setup.sh
+sudo apt-get install -y ca-certificates curl gnupg
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg -y
+NODE_MAJOR=20
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+sudo apt-get update
 ```
 
 Refer to the [NodeSource documentation](https://github.com/nodesource/distributions/blob/master/README.md) for more information on the available versions.
 
-Inspect the contents of the downloaded script with `nano` (or your preferred text editor):
-
-```
-nano /tmp/nodesource_setup.sh
-```
-
-When you are satisfied that the script is safe to run, exit your editor, then run the script with `sudo`:
-
-```
-sudo bash /tmp/nodesource_setup.sh
-```
 
 The PPA will be added to your configuration and your local package cache will be updated automatically. You can now install the Node.js package:
 
@@ -102,10 +123,10 @@ node -v
 
 ```
 Output
-v18.15.0
+v20.5.1
 ```
 
-### Installing PostgreSQL & creating/preparing the database
+#### Installing PostgreSQL & creating/preparing the database
 
 install the Postgres package along with a `-contrib` package that adds some additional utilities and functionality:
 
@@ -140,7 +161,7 @@ GRANT CONNECT ON DATABASE t3_api TO t3000;
 GRANT ALL PRIVILEGES ON DATABASE t3_api TO t3000;
 ```
 
-after you execute the above sql query, we can exit from the psql by writing `exit;` and enter and one more time write `exit` to go back to our normal ubuntu user:
+After you execute the above sql query, we can exit from the psql by writing `exit;` and press enter then write `exit` and press enter again to go back to our normal ubuntu user:
 
 ```
 exit;
@@ -148,14 +169,12 @@ exit;
 exit
 ```
 
-### Installing the API
+#### Installing the API
 
-We first clone the API repository like this:
+At first make sure you are on the right directory:
 
 ```
-cd ~
-git clone https://github.com/temcocontrols/T3000-API.git
-cd T3000_API
+cd ~/T3000_API
 ```
 
 Then we install & build the API:
@@ -197,7 +216,7 @@ PORT=3000
 
 When you finish press `CTRL` + `X` then `y` and press `Enter` twice to save the changes.
 
-### Creating the API tables in the database
+#### Creating the API tables in the database
 
 Use this command to auto create the required tables in the database
 
@@ -205,7 +224,7 @@ Use this command to auto create the required tables in the database
 npm run prisma:db-push
 ```
 
-### Starting the API
+#### Starting the API
 
 Now you can run the API like this:
 
@@ -213,7 +232,7 @@ Now you can run the API like this:
 npm start
 ```
 
-When the API start successfully, you will see your API URL like in the following example (Note that, the IP address might be different in your device ):
+When the API start successfully, you will see your API URL like in the following example (Note that, the IP addresses might be different in your device ):
 
 ```
 🚀 API ready at:
@@ -227,7 +246,21 @@ http://127.0.0.1:3000/graphiql
 
 As you see you will get multiple urls to use, the first one will work only on the Pi itself and the other/s depend on your local network, You can access the API from any device in the same network as your API Pi, just make sure that your device is connected to the same network as your API.
 
-## Architecture Overview
+## Exploring the GraphQL API Endpoint
+
+In the previous steps, we obtained the API GraphQL explorer endpoint, which is shown as follows (Note that, the IP addresses might be different in your device ):
+
+```
+🚀 API graphql explorer ready at:
+http://192.168.1.14:3000/graphiql
+http://127.0.0.1:3000/graphiql
+```
+
+Upon accessing this explorer through a web browser, you will be presented with the GraphiQL IDE. This browser-based interface allows interactive exploration of the GraphQL API's capabilities, enabling you to execute queries seamlessly against the API. for more info check the official documentation from here:
+
+[https://github.com/graphql/graphiql/blob/main/packages/graphiql/README.md](https://github.com/graphql/graphiql/blob/main/packages/graphiql/README.md)
+
+## API Architecture Overview
 
 This API will work as a middleware between the client and the controllers in your system so the client will interact with it to send commands to the controllers, The API is written in TypeScript. It maintains its state in a PostgreSQL database using Prisma ORM using GraphQL query language.
 
@@ -262,19 +295,6 @@ Response:
   }
 }
 ```
-
-## Exploring the GraphQL API Endpoint
-
-In the previous steps, we obtained the API GraphQL explorer endpoint, which is shown as follows:
-
-```
-🚀 API graphql explorer ready at:
-http://192.168.1.14:3000/graphiql
-http://127.0.0.1:3000/graphiql
-```
-
-Upon accessing this explorer through a web browser, you will be presented with the GraphiQL IDE. This browser-based interface allows interactive exploration of the GraphQL API's capabilities, enabling you to execute queries seamlessly against the API. for more info check the official documentation from here:
-[https://github.com/graphql/graphiql/blob/main/packages/graphiql/README.md](https://github.com/graphql/graphiql/blob/main/packages/graphiql/README.md)
 
 ## Full API documentation
 
