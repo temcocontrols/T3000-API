@@ -57,24 +57,20 @@ async function start() {
       console.log(`🚀 API ready at:`)
       for (const key in interfaces) {
         if (Object.prototype.hasOwnProperty.call(interfaces, key)) {
-          const address = interfaces[key].find((i) => i.family === 'IPv4').address || interfaces[key][0].address
-          console.log(
-            `http://${address}:${
-              process.env.PORT || 3000
-            }/graphql`,
-          )
+          const address = interfaces[key].find((i) => i.family === 'IPv4')
+            ?.address
+          if (!address) continue
+          console.log(`http://${address}:${process.env.PORT || 3000}/graphql`)
         }
       }
       console.log('')
       console.log(`🚀 API graphql explorer ready at:`)
       for (const key in interfaces) {
         if (Object.prototype.hasOwnProperty.call(interfaces, key)) {
-          const address = interfaces[key].find((i) => i.family === 'IPv4').address || interfaces[key][0].address
-          console.log(
-            `http://${address}:${
-              process.env.PORT || 3000
-            }/graphiql`,
-          )
+          const address = interfaces[key].find((i) => i.family === 'IPv4')
+            ?.address
+          if (!address) continue
+          console.log(`http://${address}:${process.env.PORT || 3000}/graphiql`)
         }
       }
     })
